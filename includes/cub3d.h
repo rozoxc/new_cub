@@ -1,0 +1,238 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/12 23:35:40 by ababdoul          #+#    #+#             */
+/*   Updated: 2025/08/26 23:02:24 by ababdoul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef CUB3D_H
+# define CUB3D_H
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <mlx.h>
+// #include "../minilibx-linux/mlx.h"
+# include <fcntl.h>
+#include <math.h>
+
+#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 600
+#define MAP_WIDTH 28
+#define MAP_HEIGHT 19
+#define TITLE_SIZE 8
+#define SPEED 5
+# define KEY_TAB 48
+# define KEY_ESC 53
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_UP 126
+# define KEY_LEFT 123
+# define KEY_DOWN 125
+# define KEY_RIGHT 124
+# define ROT_SPEED 0.05
+# define MOVE_SPEED 0.05
+
+#define MINI_MAP_HEIGHT 50
+#define MINI_MAP_WIDHT 50
+
+#define ERROR_MAP "Error to load map\n"
+#define ERROR_INIT "faild to initialize the game\n"
+
+typedef struct s_texture
+{
+    void    *img;
+    char    *addr;
+    int     bits_per_pixel;
+    int     line_length;
+    int     endian;
+    int     width;
+    int     height;
+} t_texture;
+
+// typedef struct s_player{
+//     double plan_x;
+//     double plan_y;
+//     double dir_x;
+//     double dir_y;
+//     double posX;
+//     double posY;
+// } t_player;
+
+typedef struct s_image
+{
+    void *img;
+    char *addr;
+    int bit_per_pixel;
+    int len_lenght;
+    int endian;
+} t_image;
+
+typedef struct s_map
+{
+    char **map;
+    int width;
+    int height;   
+}t_map;
+typedef struct s_ray_data
+{
+    int     mapX;
+    int     mapY;
+    double  sideDistX;
+    double  sideDistY;
+    double  deltaDistX;
+    double  deltaDistY;
+    int     stepX;
+    int     stepY;
+}   t_ray_data;
+typedef struct s_ray
+{
+    double perpWallDist;
+    int side;
+    int mapX;
+    int mapY;
+    double wallX;
+} t_ray;
+
+typedef struct s_keys
+{
+    int w;
+    int a;
+    int s;
+    int d;
+    int left;
+    int right;
+}t_keys;
+// typedef struct  s_game
+// {
+//     void        *mlx;
+//     void        *win;
+//     t_texture  *texture;
+//     t_player    *player;
+//     t_map       *map;
+//     t_image     *image;
+//     t_keys      *keys;
+//     int         height;
+//     int         weight;
+//     int         view_mode;
+// } t_game;
+
+
+
+
+
+
+
+
+// --------------------//
+
+typedef struct s_rgb
+{
+	int	r;
+	int	g;
+	int	b;
+}	t_rgb;
+
+
+typedef struct s_textures
+{
+	char	*north;
+	char	*south;
+	char	*west;
+	char	*east;
+	char	*door;
+    void    *img;
+    char    *addr;
+    int     bits_per_pixel;
+    int     line_length;
+    int     endian;
+    int     width;
+    int     height;
+}	t_textures;
+
+
+typedef struct s_player{
+    double plan_x;
+    double plan_y;
+    double dir_x;
+    double dir_y;
+    double posX;
+    double posY;
+	char		player_dir;
+} t_player;
+
+
+typedef struct s_vars
+{
+	t_textures	tex;
+	t_rgb		floor;
+	t_rgb		ceiling;
+	char		**map;		
+	size_t		map_h;	
+	size_t		map_w;	
+	int			fd;
+	
+}	t_vars;
+
+
+
+typedef struct  s_game
+{
+    void        *mlx;
+    void        *win;
+    t_textures  *texture;
+    t_player    *player;
+    t_map       *map;
+    t_image     *image;
+    t_keys      *keys;
+    int         height;
+    int         weight;
+    int         view_mode;
+    t_vars      *vars; // Add vars to the game structure
+} t_game;
+
+int			parser(char *file, t_game *game);
+int validate_path_and_open(char *path, t_vars *var);
+int parse_header(t_vars *var);
+int is_valid_rgb(char *str);
+int count_char(char *str, char c);
+int is_whitespace_only(char *str);
+void init_vars(t_vars *var);
+void	err(char *error);
+int parse_map(t_game *var);
+int is_valid_map_char(char c);
+int is_player_char(char c);
+
+
+static int		validate_map_walls(t_game *vars);
+static int	validate_map_walls(t_game *vars);
+
+
+//------------------//
+
+
+void     render_game(t_game *game);
+void draw_rectangle(t_game *game, int start_x, int start_y, int color);
+void draw_circle(t_game *game, int center_x, int center_y, int radius, int color);
+void draw_line(t_game *game, int x0, int y0, int x1, int y1, int color);
+void my_mlx_pixel_put(t_image *img, int x, int y, int color);
+int key_press(int keycode, t_game *game);
+int close_window(void);
+void render_3d(t_game *game);
+void init_keys(t_game *game);
+int key_release(int keycode, t_game *game);
+void player_mouvement(t_game *game);
+int game_loop(t_game *game);
+t_ray cast_ray(t_game *game, double ray_dirX, double ray_dirY);
+t_textures *load_texture(t_game *game, char *filename);
+int mouse_hook(int x, int y, t_game *game);
+void put_textures(t_game *game);
+unsigned int get_texture_pixel(t_textures *texture, int x, int y);
+#endif
