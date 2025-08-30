@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 03:17:15 by selbouka          #+#    #+#             */
-/*   Updated: 2025/08/18 23:31:20 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/08/30 10:38:10 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int set_texture(char **texture_ptr, char *path)
 {
     if (*texture_ptr != NULL)
         return (0);
-
+    // .xpm
+    printf ("%s|\n", path);
     int fd = open(path, O_RDONLY);
     
     if (fd < 0)
@@ -57,7 +58,8 @@ int set_color(t_rgb *color, char *rgb)
 
 int set_item(t_vars *var, char *key, char *value)
 {
-
+    if (!key || !value)
+        return (0);
     if (ft_strcmp(key, "NO") == 0)
         return (set_texture(&var->tex.north, value));
     else if (ft_strcmp(key, "SO") == 0)
@@ -77,6 +79,56 @@ int set_item(t_vars *var, char *key, char *value)
     return (0);
 }
 
+bool firstArg(char *key)
+{
+    if (!key)
+        return (NULL);
+    if (ft_strcmp(key, "NO") == 0)
+        return (true);
+    else if (ft_strcmp(key, "SO") == 0)
+        return (true);
+    else if (ft_strcmp(key, "WE") == 0)
+        return (true);
+    else if (ft_strcmp(key, "EA") == 0)
+        return (true);
+    else if (ft_strcmp(key, "DO") == 0)
+        return (true);
+    else if (ft_strcmp(key, "F") == 0)
+        return (true);
+    else if (ft_strcmp(key, "C") == 0)
+        return (true);
+    return (false);
+}
+
+char **splitarg(char *line)
+{
+    char **tokens;
+    int i;
+    int start;
+    int len;
+
+    i = 0;
+    tokens = ft_malloc(sizeof(char *) * 3, 1);
+    while (line[i] && line[i] == ' ')
+        i++;
+    start = i;
+    while (line[i] && line[i] != ' ' && (i - start) < 2)
+        i++;
+    len = i - start;
+    tokens[0] = ft_malloc(len + 1, 1);
+    ft_strlcpy(tokens[0], line + start, len + 1);
+    if (!firstArg(tokens[0]))
+        return (write(2, "Invalid line format", 20), NULL);
+    while (line[i] && line[i] == ' ')
+        i++;
+    tokens[1] = ft_strtrim(line + i);
+    tokens[2] = NULL;
+
+    return tokens;
+}
+
+
+
 int parse_header(t_vars *var)
 {
     char    *line;
@@ -95,12 +147,13 @@ int parse_header(t_vars *var)
         if (ft_strlen(line) == 0 || is_whitespace_only(line))
         {
             line = NULL;
-            continue;
+            continue ;
         }
-        if (line[ft_strlen(line) - 1] == '\n')
-            line[ft_strlen(line) - 1] = 0;
+        // if (line[ft_strlen(line) - 1] == '\n')
+        //     line[ft_strlen(line) - 1] = 0;
             
-        tokens = ft_split(line, ' ');
+        // tokens = ft_split(line, ' ');
+        tokens = splitarg(line);
         
         if (!tokens || !tokens[0] || !tokens[1] || tokens[2]) 
         {

@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:01:39 by selbouka          #+#    #+#             */
-/*   Updated: 2025/08/18 19:45:20 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/08/30 10:39:56 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	ft_strcmp(const char *s1, const char *s2);
 size_t	ft_strcpy(char *dst, const char *src);
 void	*ft_memset(void *str, int c, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
-char	*ft_strtrim(char const *s1, char const *set);
-
+char	*ft_strtrim(char const *s);
+size_t ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
 
 #endif
