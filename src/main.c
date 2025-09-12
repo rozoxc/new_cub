@@ -6,15 +6,11 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 14:41:47 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/08/29 15:20:41 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/09/12 10:09:48 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-void f()
-{
-    system("leaks cub3d");
-}
 
 t_image *init_image(t_game *game)
 {
@@ -35,7 +31,6 @@ t_image *init_image(t_game *game)
 
 int main(int ac, char **av)
 {
-    // atexit(f);
     t_game *game;
     game = malloc(sizeof(t_game));
     (void)ac;
@@ -63,3 +58,4 @@ int main(int ac, char **av)
     mlx_loop(game->mlx);
     mlx_destroy_window(game->mlx, game->win);
 }
+ 

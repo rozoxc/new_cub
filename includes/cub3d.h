@@ -6,7 +6,7 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:35:40 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/08/26 23:02:24 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/09/12 10:42:45 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <mlx.h>
-// #include "../minilibx-linux/mlx.h"
+#include "../libft/libft.h"
+#include "../libft/get_next_line.h"
+#include "../minilibx-linux/mlx.h"
+#include "../minilibx-linux/mlx_int.h"
 # include <fcntl.h>
 #include <math.h>
 
@@ -27,16 +29,15 @@
 #define MAP_HEIGHT 19
 #define TITLE_SIZE 8
 #define SPEED 5
-# define KEY_TAB 48
-# define KEY_ESC 53
-# define KEY_W 13
-# define KEY_A 0
-# define KEY_S 1
-# define KEY_D 2
-# define KEY_UP 126
-# define KEY_LEFT 123
-# define KEY_DOWN 125
-# define KEY_RIGHT 124
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_UP 65362
+# define KEY_DOWN 65364
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+# define KEY_ESC 65307
 # define ROT_SPEED 0.05
 # define MOVE_SPEED 0.05
 
@@ -222,7 +223,6 @@ void     render_game(t_game *game);
 void draw_rectangle(t_game *game, int start_x, int start_y, int color);
 void draw_circle(t_game *game, int center_x, int center_y, int radius, int color);
 void draw_line(t_game *game, int x0, int y0, int x1, int y1, int color);
-void my_mlx_pixel_put(t_image *img, int x, int y, int color);
 int key_press(int keycode, t_game *game);
 int close_window(void);
 void render_3d(t_game *game);
@@ -234,5 +234,11 @@ t_ray cast_ray(t_game *game, double ray_dirX, double ray_dirY);
 t_textures *load_texture(t_game *game, char *filename);
 int mouse_hook(int x, int y, t_game *game);
 void put_textures(t_game *game);
+
+
+
+// mlx function to replace
 unsigned int get_texture_pixel(t_textures *texture, int x, int y);
+void my_mlx_pixel_put(t_image *img, int x, int y, int color);
+
 #endif

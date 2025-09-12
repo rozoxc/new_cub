@@ -1,7 +1,8 @@
 NAME = cub3d
 CC = cc 
 FLAGS = -Wall -Werror -Wextra -fsanitize=address
-MLX_FLAG =  -lmlx -framework OpenGL -framework AppKit
+MLX_DIR = minilibx-linux
+MLX_FLAG =  -L$(MLX_DIR) -lXext -lX11 -lm
 INCLUDE = includes/cub3d.h
 SRC = src/main.c \
 	  rycasting/hooks.c  \
@@ -27,13 +28,17 @@ BONUS = bonus/main_bonus.c \
 HEADER = includes/cub3d.h get_next_line/get_next_line.h
 OBJ = $(SRC:.c=.o)
 OBJ_BONUS = $(BONUS:.c=.o)
+
 all : $(NAME)
+
 bonus : $(OBJ_BONUS)
-	$(CC) $(FLAGS) $(OBJ_BONUS) $(MLX_FLAG) libft/libft.a -o $(NAME)
+	$(CC) $(FLAGS) $(OBJ_BONUS) $(MLX_FLAG) libft/libft.a minilibx-linux/libmlx_Linux.a minilibx-linux/libmlx.a  -o $(NAME)
 
 
 $(NAME) : $(OBJ)
-	$(CC) $(FLAGS) $(OBJ) $(MLX_FLAG) libft/libft.a -o $(NAME)
+	$(CC) $(FLAGS) $(OBJ) $(MLX_FLAG) libft/libft.a minilibx-linux/libmlx_Linux.a minilibx-linux/libmlx.a -o $(NAME)
+
+
 %.o:%.c $(HEADER)
 	$(CC) $(FLAGS) -Iincludes -c $< -o $@
 
