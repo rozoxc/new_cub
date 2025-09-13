@@ -6,7 +6,7 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 00:11:36 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/08/05 13:58:16 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/09/13 23:06:13 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,16 @@ void render_2d(t_game *game) // i will use it after for minimap
     int dir_end_y;
 
     y = 0;
-    while (y < game->map->height)
+    while (y < game->vars->map_h)
     {
         x = 0;
-        while (x < game->map->width)
+        while (x < game->vars->map_w)
         {
-            if (game->map->map[y][x] == '1')
+            if (game->vars->map[y][x] == '1')
             {
                 draw_rectangle(game, x * TITLE_SIZE, y * TITLE_SIZE, 0x888888);
             }
-            else if (game->map->map[y][x] == '0' || game->map->map[y][x] == 'N')
+            else if (game->vars->map[y][x] == '0' || game->vars->map[y][x] == 'N')
             {
                 draw_rectangle(game, x * TITLE_SIZE, y * TITLE_SIZE, 0x222322);
             }

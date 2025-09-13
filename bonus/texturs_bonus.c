@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texturs.c                                          :+:      :+:    :+:   */
+/*   texturs_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 20:53:42 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/13 16:07:11 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/09/13 22:53:34 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,18 @@ int load_all_textures(t_game *game)
 // Get the correct texture filename based on wall direction and ray side
 t_texture *get_wall_texture(t_game *game, t_ray *ray, double rayDirX, double rayDirY)
 {
-    if (ray->side == 0) // vertical wall (NS walls)
+    if (ray->side == 0)
     {
         if (rayDirX > 0)
-            return (game->tex_west);   // hitting west wall
+            return (game->tex_west);
         else
-            return (game->tex_east);   // hitting east wall
+            return (game->tex_east);
     }
-    else // horizontal wall (EW walls)
+    else
     {
         if (rayDirY > 0)
-            return (game->tex_north);  // hitting north wall
+            return (game->tex_north);
         else
-            return (game->tex_south);  // hitting south wall
+            return (game->tex_south);
     }
 }

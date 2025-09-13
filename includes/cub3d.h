@@ -6,7 +6,7 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:35:40 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/13 16:07:00 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/09/13 22:41:52 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,5 +243,6 @@ int load_wall_texture(t_game *game, t_ray *ray, double rayDirX, double rayDirY);
 // mlx function to replace
 unsigned int get_texture_pixel(t_texture *texture, int x, int y);
 void my_mlx_pixel_put(t_image *img, int x, int y, int color);
+int mouse_hook(int x, int y, t_game *game);
 
 #endif

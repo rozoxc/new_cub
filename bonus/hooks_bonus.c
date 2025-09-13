@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   hooks_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:38:20 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/07/29 02:11:36 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/09/13 23:04:33 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ int key_release(int keycode, t_game *game)
 }
 int	is_valid_move(t_game *game, double new_x, double new_y)
 {
-	if (new_x >= 0 && new_x < game->map->width
-		&& new_y >= 0 && new_y < game->map->height
-		&& game->map->map[(int)new_y][(int)new_x] != '1')
+	if (new_x >= 0 && new_x < game->vars->map_w
+		&& new_y >= 0 && new_y < game->vars->map_h
+		&& game->vars->map[(int)new_y][(int)new_x] != '1')
 		return (1);
 	return (0);
 }

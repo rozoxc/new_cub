@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   utlis_rycast.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/13 00:11:36 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/12 14:53:46 by ababdoul         ###   ########.fr       */
+/*   Created: 2025/06/19 21:51:29 by ababdoul          #+#    #+#             */
+/*   Updated: 2025/09/13 22:16:56 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-void clear_image(t_game *game, int color)
+void my_mlx_pixel_put(t_image *img, int x, int y, int color)
 {
-    int x, y;
+    char *dst;
 
-    y = 0;
-    while (y < WINDOW_HEIGHT)
+    if (x >= 0 && x < WINDOW_WIDTH && y >= 0 && y < WINDOW_HEIGHT)
     {
-        x = 0;
-        while (x < WINDOW_WIDTH)
-        {
-            my_mlx_pixel_put(game->image, x, y, color);
-            x++;
-        }
-        y++;
+        dst = img->addr + (y * img->len_lenght + x * (img->bit_per_pixel / 8));
+        *(unsigned int*)dst = color;
     }
-}
-
-void render_game(t_game *game)
-{
-    render_3d(game);
-    mlx_put_image_to_window(game->mlx, game->win, game->image->img, 0, 0);
 }

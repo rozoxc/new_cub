@@ -6,11 +6,11 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:15:33 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/08/24 09:48:12 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/09/13 22:16:35 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 void draw_rectangle(t_game *game, int start_x, int start_y, int color)
 {

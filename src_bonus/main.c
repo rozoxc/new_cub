@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 14:41:47 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/13 22:19:35 by ababdoul         ###   ########.fr       */
+/*   Created: 2025/09/13 22:30:24 by ababdoul          #+#    #+#             */
+/*   Updated: 2025/09/13 22:43:13 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int main(int ac, char **av)
     mlx_hook(game->win, 02, 1L<<0, key_press, game);
     mlx_hook(game->win, 03, 1L<<1, key_release, game);
     mlx_loop_hook(game->mlx, game_loop, game);
+    mlx_mouse_hook(game->win, mouse_hook, game);
     mlx_loop(game->mlx);
     mlx_destroy_window(game->mlx, game->win);
 }
- 

@@ -6,11 +6,11 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 20:29:06 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/07/28 02:56:22 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/09/13 22:16:24 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	init_ray_data(t_game *game, double rayDirX, double rayDirY, t_ray_data *data)
 {
@@ -76,9 +76,9 @@ int	perform_dda(t_game *game, t_ray_data *data)
 			data->mapY += data->stepY;
 			side = 1;
 		}
-		if (data->mapX >= 0 && data->mapX < game->map->width
-			&& data->mapY >= 0 && data->mapY < game->map->height
-			&& game->map->map[data->mapY][data->mapX] == '1')
+		if (data->mapX >= 0 && data->mapX < game->vars->map_w
+			&& data->mapY >= 0 && data->mapY < game->vars->map_h
+			&& game->vars->map[data->mapY][data->mapX] == '1')
 			hit = 1;
 	}
 	return (side);
@@ -106,11 +106,11 @@ t_ray	cast_ray(t_game *game, double rayDirX, double rayDirY)
 	t_ray_data	data;
 	int			side;
 
-	init_ray_data(game, rayDirX, rayDirY, &data);
-	calculate_step_x(game, rayDirX, &data);
-	calculate_step_y(game, rayDirY, &data);
-	side = perform_dda(game, &data);
-	calculate_wall_distance(game, rayDirX, rayDirY, &data, &ray, side);
+	init_ray_data(game, rayDirX, rayDirY, &data);//initialize ray data
+	calculate_step_x(game, rayDirX, &data);// step and initial sideDist
+	calculate_step_y(game, rayDirY, &data);// step and initial sideDist
+	side = perform_dda(game, &data);//perform DDA
+	calculate_wall_distance(game, rayDirX, rayDirY, &data, &ray, side);//calculate distance projected on camera direction
 	ray.side = side;
 	ray.mapX = data.mapX;
 	ray.mapY = data.mapY;
