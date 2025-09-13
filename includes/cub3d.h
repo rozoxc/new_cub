@@ -6,7 +6,7 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:35:40 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/12 10:42:45 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/09/13 16:07:00 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,10 @@ typedef struct  s_game
 {
     void        *mlx;
     void        *win;
-    t_textures  *texture;
+    t_texture  *tex_north;
+    t_texture  *tex_south;
+    t_texture  *tex_east;
+    t_texture  *tex_west;
     t_player    *player;
     t_map       *map;
     t_image     *image;
@@ -234,11 +237,11 @@ t_ray cast_ray(t_game *game, double ray_dirX, double ray_dirY);
 t_textures *load_texture(t_game *game, char *filename);
 int mouse_hook(int x, int y, t_game *game);
 void put_textures(t_game *game);
-
-
-
+t_texture *get_wall_texture(t_game *game, t_ray *ray, double rayDirX, double rayDirY);
+int load_all_textures(t_game *game);
+int load_wall_texture(t_game *game, t_ray *ray, double rayDirX, double rayDirY);
 // mlx function to replace
-unsigned int get_texture_pixel(t_textures *texture, int x, int y);
+unsigned int get_texture_pixel(t_texture *texture, int x, int y);
 void my_mlx_pixel_put(t_image *img, int x, int y, int color);
 
 #endif
