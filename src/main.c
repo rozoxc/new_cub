@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 14:41:47 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/13 22:19:35 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/09/14 12:39:03 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ t_image *init_image(t_game *game)
 {
     t_image *img;
 
-    img = malloc(sizeof(t_image));
+    img = ft_malloc(sizeof(t_image), 1);
     if (!img)
         return NULL;
     img->img = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
     if (!img->img)
     {
-        free(img);
+        // free(img);
         return NULL;
     }
     img->addr = mlx_get_data_addr(img->img, &img->bit_per_pixel, &img->len_lenght, &img->endian);
@@ -32,13 +32,17 @@ t_image *init_image(t_game *game)
 int main(int ac, char **av)
 {
     t_game *game;
-    game = malloc(sizeof(t_game));
+    game = ft_malloc(sizeof(t_game), 1);
     (void)ac;
     (void)av;
 
-    if (!parser(av[1], game)) // kantsnaw selbouka 
+    if (!parser(av[1], game))
+    {
+        ft_malloc(0, 0);
         return(0);
-    
+    }
+    // printf ("%s\n", game->vars->tex.Hands);
+    // exit (0);
     game->mlx = mlx_init();
     if (!game->mlx)
         return (1);
@@ -55,6 +59,7 @@ int main(int ac, char **av)
     mlx_hook(game->win, 03, 1L<<1, key_release, game);
     mlx_loop_hook(game->mlx, game_loop, game);
     mlx_loop(game->mlx);
+    ft_malloc(0, 0); // +212 .
     mlx_destroy_window(game->mlx, game->win);
 }
  

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 00:11:36 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/13 22:16:41 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/09/14 14:10:18 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,5 @@ void render_game(t_game *game)
 {
     render_3d(game);
     mlx_put_image_to_window(game->mlx, game->win, game->image->img, 0, 0);
+    mlx_put_image_to_window(game->mlx, game->win, game->hands_tex->img,50, 250);
 }
