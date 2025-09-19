@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 10:13:54 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/19 14:38:53 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/19 15:16:40 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,12 +134,12 @@ void	render_3d(t_game *game)
 		static int j;
 		if (j & 1)
 		{
-			render_hand_with_transparency(game->shoot0_text, 100, 447, game);
+			render_hand_with_transparency(game->shoot0_text, WINDOW_WIDTH * 0.25, WINDOW_HEIGHT * 0.705, game);
 			
 		}
 		else
 		{
-			render_hand_with_transparency(game->shoot1_text, 100, 447, game);
+			render_hand_with_transparency(game->shoot1_text, WINDOW_WIDTH * 0.25, WINDOW_HEIGHT * 0.705, game);
 		}
 		j++;
 	}

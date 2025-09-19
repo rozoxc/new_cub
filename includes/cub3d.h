@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:35:40 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/19 14:53:16 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/19 16:01:12 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@
 #include "../minilibx-linux/mlx_int.h"
 # include <fcntl.h>
 #include <math.h>
-
-#define WINDOW_WIDTH 1000
-#define WINDOW_HEIGHT 800
+// x = 100 out of 1000 width = 0.1 (10%)
+// y = 447 out of 800 height = 0.55875 (55.875%)
+#define WINDOW_WIDTH 1700
+#define WINDOW_HEIGHT 1200
 #define MAP_WIDTH 28
 #define MAP_HEIGHT 19
 #define TITLE_SIZE 8
@@ -38,8 +39,8 @@
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 # define KEY_ESC 65307
-# define ROT_SPEED 0.05
-# define MOVE_SPEED 0.05
+# define ROT_SPEED 0.09
+# define MOVE_SPEED 0.14
 
 #define MINI_MAP_HEIGHT 50
 #define MINI_MAP_WIDHT 50
