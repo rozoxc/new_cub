@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rycast_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 10:13:54 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/13 22:53:28 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/09/19 14:38:53 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,19 @@ void	render_3d(t_game *game)
 		texX = calculate_tex_x(&ray, current_texture, rayDirX, rayDirY);//calculate texture x coordinate
 		draw_wall_column(game, &ray, x, texX, current_texture);//draw the wall column
 		x++;
+	}
+	if (game->weapon == 1)
+	{
+		static int j;
+		if (j & 1)
+		{
+			render_hand_with_transparency(game->shoot0_text, 100, 447, game);
+			
+		}
+		else
+		{
+			render_hand_with_transparency(game->shoot1_text, 100, 447, game);
+		}
+		j++;
 	}
 }
