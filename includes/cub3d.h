@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:35:40 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/14 12:09:46 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/14 17:04:29 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <fcntl.h>
 #include <math.h>
 
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
+#define WINDOW_WIDTH 1000
+#define WINDOW_HEIGHT 800
 #define MAP_WIDTH 28
 #define MAP_HEIGHT 19
 #define TITLE_SIZE 8
@@ -111,6 +111,9 @@ typedef struct s_keys
     int left;
     int right;
 }t_keys;
+
+
+
 // typedef struct  s_game
 // {
 //     void        *mlx;
