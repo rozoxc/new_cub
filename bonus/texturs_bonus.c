@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texturs_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 20:53:42 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/13 22:53:34 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/09/19 12:22:44 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_texture *load_single_texture(t_game *game, char *filename)
 
 int load_all_textures(t_game *game)
 {
+    // exit (0);
     game->tex_north = load_single_texture(game, game->vars->tex.north);
     if (!game->tex_north)
         return (0);
@@ -57,6 +58,18 @@ int load_all_textures(t_game *game)
         return (0);
     game->tex_west = load_single_texture(game, game->vars->tex.west);
     if (!game->tex_west)
+        return (0);
+    game->hands_tex = load_single_texture(game, game->vars->tex.Hands); //new
+    if (!game->hands_tex)
+        return (0);
+        // printf("*****************************%s\n", game->vars->tex.shoot0);
+        // printf("***********************%s\n", game->vars->tex.shoot1);
+    // exit(0);
+    game->shoot0_text = load_single_texture(game, game->vars->tex.shoot0); //new
+    if (!game->shoot0_text)
+        return (0);
+    game->shoot1_text = load_single_texture(game, game->vars->tex.shoot1); //new
+    if (!game->shoot1_text)
         return (0);
     return (1);
 }

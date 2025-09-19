@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 00:11:36 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/14 23:39:18 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/09/19 12:08:43 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,9 +237,44 @@ void	render_minimap(t_game *game)
 	draw_minimap_player(game, mini.center_x, mini.center_y);
 	draw_minimap_direction(game, mini.center_x, mini.center_y);
 }
+
+void render_hand_with_transparency(t_texture *image, int start_x, int start_y, t_game *game)
+{
+    int x, y;
+    unsigned int pixel_color;
+    unsigned int transparent_color = 0xFF00FF; // Magenta as transparent color (or use 0x000000 for black)
+    
+    if (!image || !image->addr)
+        return;
+    
+    for (y = 0; y < image->height; y++)
+    {
+        for (x = 0; x < image->width; x++)
+        {
+            // Get pixel from hand texture
+            pixel_color = get_texture_pixel(image, x, y);
+            
+            // Skip transparent pixels (you can adjust the color comparison)
+            if (pixel_color != transparent_color && pixel_color != 0x000000) // Skip black/transparent
+            {
+                // Only draw if within window bounds
+                if (start_x + x < WINDOW_WIDTH && start_y + y < WINDOW_HEIGHT &&
+                    start_x + x >= 0 && start_y + y >= 0)
+                {
+                    my_mlx_pixel_put(game->image, start_x + x, start_y + y, pixel_color);
+                }
+            }
+        }
+    }
+}
+
 void render_game(t_game *game)
 {
+	
     render_3d(game);
     render_minimap(game);
     mlx_put_image_to_window(game->mlx, game->win, game->image->img, 0, 0);
+	if (game->weapon == 0)
+		render_hand_with_transparency(game->hands_tex, 100, 447, game);
 }
+   

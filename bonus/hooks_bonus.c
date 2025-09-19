@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:38:20 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/14 11:38:30 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/19 13:01:31 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void init_keys(t_game * game)
     game->keys->w = 0;
     game->keys->left = 0;
     game->keys->right = 0;
+	game->weapon = 0;
 }
 int key_press(int keycode, t_game *game)
 {
@@ -44,6 +45,11 @@ int key_press(int keycode, t_game *game)
         game->keys->left = 1;
     else if (keycode == KEY_RIGHT)
         game->keys->right = 1;
+	else if (keycode == 101)
+	{
+		printf ("%d\n", game->weapon);
+		game->weapon = 1;
+	}
 	
     return (0);
 }
@@ -61,8 +67,28 @@ int key_release(int keycode, t_game *game)
         game->keys->left = 0;
     else if (keycode == KEY_RIGHT)
         game->keys->right = 0;
+	else if (keycode == 101)
+		game->weapon = 0;
     return (0);
 }
+
+int shoot(t_game *game)
+{
+	int j;
+
+	j = 0;
+	printf ("hahahahaha\n\n");
+	while (game->weapon == 1)
+	{
+		if (j & 1)
+			render_hand_with_transparency(game->shoot0_text, 100, 447, game);
+		else
+			render_hand_with_transparency(game->shoot1_text, 100, 447, game);
+		j++;
+	}
+	return 0;
+}
+
 int	is_valid_move(t_game *game, double new_x, double new_y)
 {
 	if (new_x >= 0 && new_x < game->vars->map_w
@@ -131,6 +157,8 @@ void	player_mouvement(t_game *game)
 		rotate_player(game, ROT_SPEED);
 	else if (game->keys->left)
 		rotate_player(game, -ROT_SPEED);
+	else if (game->weapon == 1)
+		shoot(game);
 }
 
 int game_loop(t_game *game)

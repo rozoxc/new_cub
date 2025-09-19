@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 02:57:35 by selbouka          #+#    #+#             */
-/*   Updated: 2025/09/14 12:34:49 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/19 12:21:07 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void init_vars(t_vars *var)
     var->tex.west = NULL;
     var->tex.east = NULL;
     var->tex.door = NULL;
-    var->tex.Hands = NULL;
+
     var->floor.r = -1;
     var->floor.g = -1;
     var->floor.b = -1;

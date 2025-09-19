@@ -63,9 +63,9 @@ int load_all_textures(t_game *game)
     game->tex_west = load_single_texture(game, game->vars->tex.west);
     if (!game->tex_west)
         return (0);
-    game->hands_tex = load_single_texture(game, game->vars->tex.Hands); //new
-        if (!game->hands_tex)
-            return (0);
+    // game->hands_tex = load_single_texture(game, game->vars->tex.Hands); //new
+    //     if (!game->hands_tex)
+    //         return (0);
     return (1);
 }
 

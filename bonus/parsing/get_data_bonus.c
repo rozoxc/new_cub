@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 03:17:15 by selbouka          #+#    #+#             */
-/*   Updated: 2025/09/14 12:17:28 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/19 12:47:31 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,16 @@ int set_color(t_rgb *color, char *rgb)
 
 int set_item(t_vars *var, char *key, char *value)
 {
+    // int static i;
     if (!key || !value)
         return (0);
+    // if (i == 0)
+    // {
+    //     set_texture(&var->tex.Hands, "./textures/hands.xpm"); // new
+    //     set_texture(&var->tex.shoot0, "./textures/shoot0.xpm"); // new
+    //     set_texture(&var->tex.shoot1, "./textures/shoot1.xpm"); // new // delete
+    //     i++;
+    // }
     if (ft_strcmp(key, "NO") == 0)
         return (set_texture(&var->tex.north, value));
     else if (ft_strcmp(key, "SO") == 0)
@@ -169,6 +177,10 @@ int parse_header(t_vars *var)
             return (err("Invalid or duplicate item"), 0);
         }
     }
-    set_texture(&var->tex.Hands, "textures/hands.xpm"); //check
+    set_texture(&var->tex.Hands, "textures/shoot0.xpm"); //check 
+    set_texture(&var->tex.shoot0, "textures/shoot0.xpm"); //check  
+    set_texture(&var->tex.shoot1, "textures/shoot1.xpm"); //check  
+
+    
     return (1);
 }

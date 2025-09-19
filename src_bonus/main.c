@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 22:30:24 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/19 10:23:16 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/09/19 11:45:45 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ t_image *init_image(t_game *game)
     img->addr = mlx_get_data_addr(img->img, &img->bit_per_pixel, &img->len_lenght, &img->endian);
     return (img);
 }
+
+
 
 int main(int ac, char **av)
 {
@@ -53,6 +55,9 @@ int main(int ac, char **av)
     init_keys(game);
     mlx_hook(game->win, 02, 1L<<0, key_press, game);
     mlx_hook(game->win, 03, 1L<<1, key_release, game);
+    
+    // mlx_hook(game->win, 02, 1L<<0, shoot, game);
+    
     // mlx_hook(game->win, 17, 1L << 17, handle_close, game);
     mlx_loop_hook(game->mlx, game_loop, game);
     mlx_hook(game->win, 6, 1L<<6, mouse_move_hook, game);

@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 02:57:35 by selbouka          #+#    #+#             */
-/*   Updated: 2025/09/14 12:33:42 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/19 12:19:53 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void init_vars(t_vars *var)
     var->tex.east = NULL;
     var->tex.door = NULL;
     var->tex.Hands = NULL; // new
+    var->tex.shoot0 = NULL;
+    var->tex.shoot1 = NULL;
     var->floor.r = -1;
     var->floor.g = -1;
     var->floor.b = -1;

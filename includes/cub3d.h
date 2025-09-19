@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:35:40 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/19 11:00:38 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/19 12:09:31 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,9 @@ typedef struct s_textures
 	char	*east;
 	char	*door;
     char    *Hands;
+    char    *shoot0;
+    char    *shoot1;
+
     
     void    *img;
     char    *addr;
@@ -238,6 +241,10 @@ typedef struct  s_game
     t_texture  *tex_east;
     t_texture  *tex_west;
     t_texture   *hands_tex;
+    t_texture   *shoot0_text;
+    t_texture   *shoot1_text;
+
+    
     t_player    *player;
     t_map       *map;
     t_image     *image;
@@ -246,6 +253,7 @@ typedef struct  s_game
     int         weight;
     int         view_mode;
     t_vars      *vars; // Add vars to the game structure
+    int weapon;
 } t_game;
 
 int			parser(char *file, t_game *game);
@@ -291,4 +299,6 @@ unsigned int get_texture_pixel(t_texture *texture, int x, int y);
 void my_mlx_pixel_put(t_image *img, int x, int y, int color);
 int mouse_hook(int x, int y, t_game *game);
 int	mouse_move_hook(int x, int y, t_game *game);
+int shoot(t_game *game);
+void render_hand_with_transparency(t_texture *image, int start_x, int start_y, t_game *game);
 #endif

@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:38:20 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/14 14:58:35 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/19 12:49:07 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,6 @@ void	player_mouvement(t_game *game)
 		rotate_player(game, ROT_SPEED);
 	else if (game->keys->left)
 		rotate_player(game, -ROT_SPEED);
-	// else if (game->keys.shoot)
 		
 }
 

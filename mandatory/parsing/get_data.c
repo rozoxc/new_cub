@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 03:17:15 by selbouka          #+#    #+#             */
-/*   Updated: 2025/09/14 12:38:53 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/19 12:21:35 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,13 @@ int set_item(t_vars *var, char *key, char *value)
 {
     static int i;
 
-    if (i == 0)
-    {
-        set_texture(&var->tex.Hands, "./textures/hands.xpm"); // new
-        i++;
-    }
+    // if (i == 0)
+    // {
+    //     set_texture(&var->tex.Hands, "./textures/hands.xpm"); // new
+    //     set_texture(&var->tex.shoot0, "./textures/shoot0.xpm"); // new
+    //     set_texture(&var->tex.shoot1, "./textures/shoot1.xpm"); // new
+    //     i++;
+    // }
     if (!key || !value)
         return (0);
     if (ft_strcmp(key, "NO") == 0)
