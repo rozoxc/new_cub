@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:35:40 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/14 17:04:29 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/19 11:00:38 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,48 @@
 #define MINI_MAP_HEIGHT 50
 #define MINI_MAP_WIDHT 50
 
+
+//<------------------------------>/
+#define MINIMAP_SIZE 100       // Make bigger/smaller
+#define MINIMAP_VIEW_RANGE 12   // Show more/less area around player
+#define MINIMAP_TILE_SIZE 10   // Zoom in/out
+#define MINIMAP_OFFSET_X 20     // Move minimap position
+#define MINIMAP_OFFSET_Y 20
+
+typedef struct s_line_data
+{
+	int	end_x;
+	int	end_y;
+	int	dx;
+	int	dy;
+	int	x;
+	int	y;
+	int	n;
+	int	x_inc;
+	int	y_inc;
+	int	error;
+}	t_line_data;
+
+typedef struct s_minimap_data
+{
+	int	center_x;
+	int	center_y;
+	int	start_x;
+	int	start_y;
+	int	end_x;
+	int	end_y;
+}	t_minimap_data;
+
+#define MINIMAP_WALL_COLOR 0xFFFFFF      // White walls
+#define MINIMAP_FLOOR_COLOR 0x333333     // Dark floor
+#define MINIMAP_PLAYER_COLOR 0xFF0000    // Red player
+#define MINIMAP_DIR_COLOR 0xFFFF00       // Yellow direction line
+#define MINIMAP_BG_COLOR 0x000000        // Black background
+//<----------------------------------->
 #define ERROR_MAP "Error to load map\n"
 #define ERROR_INIT "faild to initialize the game\n"
 
+#define MOUSE_SENSITIVITY 0.001
 typedef struct s_texture
 {
     void    *img;
@@ -251,5 +290,5 @@ int load_wall_texture(t_game *game, t_ray *ray, double rayDirX, double rayDirY);
 unsigned int get_texture_pixel(t_texture *texture, int x, int y);
 void my_mlx_pixel_put(t_image *img, int x, int y, int color);
 int mouse_hook(int x, int y, t_game *game);
-
+int	mouse_move_hook(int x, int y, t_game *game);
 #endif
