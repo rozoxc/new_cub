@@ -6,7 +6,7 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:35:40 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/15 00:54:51 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/09/19 10:22:28 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,8 @@ typedef struct s_textures
 	char	*west;
 	char	*east;
 	char	*door;
+    char    *Hands;
+    
     void    *img;
     char    *addr;
     int     bits_per_pixel;
@@ -195,6 +197,7 @@ typedef struct s_textures
     int     endian;
     int     width;
     int     height;
+    
 }	t_textures;
 
 
@@ -231,6 +234,7 @@ typedef struct  s_game
     t_texture  *tex_south;
     t_texture  *tex_east;
     t_texture  *tex_west;
+    t_texture   *hands_tex;
     t_player    *player;
     t_map       *map;
     t_image     *image;

@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 03:17:15 by selbouka          #+#    #+#             */
-/*   Updated: 2025/08/30 10:38:10 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/14 12:38:53 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int set_texture(char **texture_ptr, char *path)
         return (0);
     // .xpm
     printf ("%s|\n", path);
+    // exit (0);
     int fd = open(path, O_RDONLY);
     
     if (fd < 0)
@@ -58,6 +59,13 @@ int set_color(t_rgb *color, char *rgb)
 
 int set_item(t_vars *var, char *key, char *value)
 {
+    static int i;
+
+    if (i == 0)
+    {
+        set_texture(&var->tex.Hands, "./textures/hands.xpm"); // new
+        i++;
+    }
     if (!key || !value)
         return (0);
     if (ft_strcmp(key, "NO") == 0)
@@ -76,6 +84,8 @@ int set_item(t_vars *var, char *key, char *value)
     else if (ft_strcmp(key, "C") == 0)
         return (set_color(&var->ceiling, value));
     
+
+        
     return (0);
 }
 
@@ -135,6 +145,7 @@ int parse_header(t_vars *var)
     char    **tokens;
     int     items_found = 0;
     
+
     while (items_found < 7)
     {
         line = get_next_line(var->fd);
@@ -169,5 +180,6 @@ int parse_header(t_vars *var)
             return (err("Invalid or duplicate item"), 0);
         }
     }
+ 
     return (1);
 }

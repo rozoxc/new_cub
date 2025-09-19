@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:38:20 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/13 23:04:33 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/09/14 11:38:30 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int key_press(int keycode, t_game *game)
     if (keycode == KEY_ESC)
     {
         mlx_destroy_window(game->mlx, game->win);
+		ft_malloc(0, 0);
         exit(0);
     }
     else if (keycode == KEY_A)
@@ -43,6 +44,7 @@ int key_press(int keycode, t_game *game)
         game->keys->left = 1;
     else if (keycode == KEY_RIGHT)
         game->keys->right = 1;
+	
     return (0);
 }
 int key_release(int keycode, t_game *game)

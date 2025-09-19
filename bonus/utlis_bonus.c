@@ -6,7 +6,7 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:51:29 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/15 00:53:44 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/09/15 15:51:36 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,4 +109,11 @@ int	mouse_move_hook(int x, int y, t_game *game)
 	}
 	
 	return (0);
+}
+
+int handle_close(t_game  *game)
+{
+    //clean_game(game); --> free all ressources
+    exit(1);
+    return (0);
 }

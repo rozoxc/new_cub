@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texturs.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 20:53:42 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/13 22:16:50 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/ 09/14 11:31:19 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,26 @@ unsigned int get_texture_pixel(t_texture *texture, int x, int y)
     
     if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
         return (0);
-    
+
     dst = texture->addr + (y * texture->line_length + x * (texture->bits_per_pixel / 8));
     return (*(unsigned int*)dst);
+
 }
 
 t_texture *load_single_texture(t_game *game, char *filename)
 {
     t_texture *texture;
 
-    texture  = malloc(sizeof(texture));
+
+    texture  = ft_malloc(sizeof(texture), 1);
     if (!texture)
         return (NULL);
+    printf ("\n---> %s\n\n", filename);
     texture->img = mlx_xpm_file_to_image(game->mlx, filename, &texture->width, &texture->height);
     if (!texture->img)
     {
         perror("faild to load image!!\n");
-        free(texture);
+        // free(texture);
         return (NULL);
     }
     texture->addr = mlx_get_data_addr(texture->img, &texture->bits_per_pixel,
@@ -46,6 +49,8 @@ t_texture *load_single_texture(t_game *game, char *filename)
 
 int load_all_textures(t_game *game)
 {
+                // printf ("-- > %s\n", game->vars->tex.Hands);
+            // exit(0);
     game->tex_north = load_single_texture(game, game->vars->tex.north);
     if (!game->tex_north)
         return (0);
@@ -58,11 +63,15 @@ int load_all_textures(t_game *game)
     game->tex_west = load_single_texture(game, game->vars->tex.west);
     if (!game->tex_west)
         return (0);
+    game->hands_tex = load_single_texture(game, game->vars->tex.Hands); //new
+        if (!game->hands_tex)
+            return (0);
     return (1);
 }
 
 // Get the correct texture filename based on wall direction and ray side
-t_texture *get_wall_texture(t_game *game, t_ray *ray, double rayDirX, double rayDirY)
+
+t_texture *get_wall_texture(t_game *game, t_ray *ray, double rayDirX, double rayDirY) 
 {
     if (ray->side == 0)
     {
