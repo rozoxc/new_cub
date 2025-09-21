@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:35:40 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/21 11:59:50 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/21 13:56:02 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define KEY_RIGHT 65363
 # define KEY_ESC 65307
 # define ROT_SPEED 0.08
-# define MOVE_SPEED 0.4
+# define MOVE_SPEED 0.08
 
 #define MINI_MAP_HEIGHT 50
 #define MINI_MAP_WIDHT 50

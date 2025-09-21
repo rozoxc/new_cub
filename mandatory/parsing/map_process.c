@@ -6,11 +6,13 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:15:52 by selbouka          #+#    #+#             */
-/*   Updated: 2025/09/21 12:12:05 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/21 13:40:56 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+
 
 void	init_player_direction(t_player *player, char dir)
 {
@@ -46,7 +48,7 @@ void	init_player_direction(t_player *player, char dir)
 
 int	is_valid_map_char(char c)
 {
-	return (c == '0' || c == '1' || c == ' ' || c == 'D' ||
+	return (c == '0' || c == '1' || c == ' ' ||
 			c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }
 
