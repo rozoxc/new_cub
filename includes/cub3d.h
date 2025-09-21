@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:35:40 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/21 09:52:35 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/21 10:05:35 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,7 +257,7 @@ typedef struct s_vars
 
 
 // Add to the key definitions section
-#define KEY_SPACE 32      // Space key for door interaction
+#define KEY_SPACE 32     // Space key for door interaction
 
 // Add to the t_keys structure (update your existing structure)
 
@@ -353,6 +353,16 @@ t_ray	cast_ray_with_doors(t_game *game, double rayDirX, double rayDirY);
 t_texture	*get_wall_texture_with_doors(t_game *game, t_ray *ray, double rayDirX, double rayDirY);
 int		is_valid_move_with_doors(t_game *game, double new_x, double new_y);
 
+// DDA Algorithm functions
+void    init_ray_data(t_game *game, double rayDirX, double rayDirY, t_ray_data *data);
+void    calculate_step_x(t_game *game, double rayDirX, t_ray_data *data);
+void    calculate_step_y(t_game *game, double rayDirY, t_ray_data *data);
+int     perform_dda(t_game *game, t_ray_data *data);
+void    calculate_wall_distance(t_game *game, double rayDirX, double rayDirY,
+                               t_ray_data *data, t_ray *ray, int side);
 
+// Door helper functions  
+int     find_nearest_door(t_game *game, int *door_x, int *door_y);
+void    update_door_system(t_game *game);
 
 #endif

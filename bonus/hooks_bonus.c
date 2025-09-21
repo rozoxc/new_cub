@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:38:20 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/21 09:50:06 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/21 09:59:08 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,17 +146,18 @@ void	rotate_player(t_game *game, double angle)
 
 void update_door_system(t_game *game)
 {
-	static int space_cooldown = 0;
-	
-	// Prevent rapid door toggling
-	if (space_cooldown > 0)
-		space_cooldown--;
-	
-	if (game->keys->space && space_cooldown == 0)
-	{
-		handle_door_interaction(game);
-		space_cooldown = 15; // 15 frame cooldown
-	}
+    static int space_cooldown = 0;
+    
+    // Decrease cooldown
+    if (space_cooldown > 0)
+        space_cooldown--;
+    
+    // Only handle space press when cooldown is 0
+    if (game->keys->space && space_cooldown == 0)
+    {
+        handle_door_interaction(game);
+        space_cooldown = 10; // 10 frame cooldown (about 1/6 second at 60fps)
+    }
 }
 // void	player_mouvement(t_game *game)
 // {
@@ -176,37 +177,33 @@ void update_door_system(t_game *game)
 // 		game->weapon = 1;
 // }
 
-void	player_mouvement(t_game *game)
+void player_mouvement(t_game *game)
 {
-    static int space_pressed = 0;  // To prevent multiple door toggles
-    
+    // Handle movement
     if (game->keys->w)
         move_forward_backward(game, 1);
-    else if (game->keys->s)
+    if (game->keys->s)
         move_forward_backward(game, -1);
-    else if (game->keys->a)
+    if (game->keys->a)
         move_left_right(game, -1);
-    else if (game->keys->d)
+    if (game->keys->d)
         move_left_right(game, 1);
-    else if (game->keys->right)
+    if (game->keys->right)
         rotate_player(game, ROT_SPEED);
-    else if (game->keys->left)
+    if (game->keys->left)
         rotate_player(game, -ROT_SPEED);
-    else if (game->weapon)
+    if (game->weapon)
         game->weapon = 1;
     
-    // Handle door interaction with space key
-    if (game->keys->space && !space_pressed)
-    {
-        handle_door_interaction(game);
-        space_pressed = 1;
-    }
-    else if (!game->keys->space)
-    {
-        space_pressed = 0;
-    }
-	 update_door_system(game);
+    // Handle door interaction with proper debouncing
+    update_door_system(game);  // This handles space key properly
+    
+    // REMOVE the duplicate door handling code that was here before
+    // The old code with space_pressed static variable should be deleted
 }
+
+// Make sure your update_door_system function looks like this:
+
 int game_loop(t_game *game)
 {
     player_mouvement(game);

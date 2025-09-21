@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:15:52 by selbouka          #+#    #+#             */
-/*   Updated: 2025/09/21 09:32:40 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/21 10:00:26 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -332,32 +332,96 @@ static int	validate_map_walls_optimized(t_game *game)
 		return (1);
 	}
 
-int	parse_map(t_game *game)
+static int validate_door_placement(char **map, int x, int y, int map_w, int map_h)
 {
-	char	**tmp_lines;
-	
-	tmp_lines = read_map_lines(game->vars, &game->vars->map_h, &game->vars->map_w);
-	if (!tmp_lines)
-	return (0);
-	
-	if (!create_padded_map(game->vars, tmp_lines))
-	{
-		return (err("Map creation failed.\n"), 0);
-	}
-	
-	if (!process_map_content(game))
-	return (0);
-	
-	if (!validate_map_walls_optimized(game))
-	return (0);
-
-	
-
-	game->vars->map[(int)game->player->posX][(int)game->player->posY] = '0';
-	return (1);
+    // Check boundaries - doors can't be on the edges
+    if (x <= 0 || x >= map_w - 1 || y <= 0 || y >= map_h - 1)
+    {
+        printf("❌ Door at (%d, %d) cannot be on map boundary\n", x, y);
+        return (0);
+    }
+    
+    // Check if door is between two walls horizontally OR vertically
+    int horizontal_walls = (map[y][x-1] == '1' && map[y][x+1] == '1');
+    int vertical_walls = (map[y-1][x] == '1' && map[y+1][x] == '1');
+    
+    // Door must be between walls in exactly one direction
+    if (!horizontal_walls && !vertical_walls)
+    {
+        printf("❌ Door at (%d, %d) is not between two walls\n", x, y);
+        return (0);
+    }
+    
+    // Make sure door is not in a corner or surrounded by walls
+    if (horizontal_walls && vertical_walls)
+    {
+        printf("❌ Door at (%d, %d) is surrounded by walls (invalid placement)\n", x, y);
+        return (0);
+    }
+    
+    return (1);
 }
 
+// Add door validation to your existing validation function
+static int validate_all_doors(t_game *game)
+{
+    int x, y;
+    int door_count = 0;
+    
+    for (y = 0; y < game->vars->map_h; y++)
+    {
+        for (x = 0; x < game->vars->map_w; x++)
+        {
+            char cell = game->vars->map[y][x];
+            if (cell == 'D' || cell == 'd')
+            {
+                if (!validate_door_placement(game->vars->map, x, y, 
+                                           game->vars->map_w, game->vars->map_h))
+                {
+                    return (0);
+                }
+                door_count++;
+            }
+        }
+    }
+    
+    if (door_count > 0)
+        printf("✅ Found %d valid doors in map\n", door_count);
+    
+    return (1);
+}
 
+// Update your existing parse_map function by adding door validation
+// Add this call after validate_map_walls_optimized(game) and before the final return:
+
+int parse_map(t_game *game)
+{
+    char **tmp_lines;
+    
+    tmp_lines = read_map_lines(game->vars, &game->vars->map_h, &game->vars->map_w);
+    if (!tmp_lines)
+        return (0);
+    
+    if (!create_padded_map(game->vars, tmp_lines))
+    {
+        return (err("Map creation failed.\n"), 0);
+    }
+    
+    if (!process_map_content(game))
+        return (0);
+    
+    if (!validate_map_walls_optimized(game))
+        return (0);
+	if (!validate_all_doors(game))
+   		return (err("Invalid door placement detected.\n"), 0);
+
+    // ADD THIS LINE - Validate door placements
+    if (!validate_all_doors(game))
+        return (err("Invalid door placement detected.\n"), 0);
+
+    game->vars->map[(int)game->player->posX][(int)game->player->posY] = '0';
+    return (1);
+}
 
 
 
