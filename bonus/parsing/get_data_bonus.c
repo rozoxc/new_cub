@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_data_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 03:17:15 by selbouka          #+#    #+#             */
-/*   Updated: 2025/09/19 15:16:34 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/09/21 18:23:43 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ int parse_header(t_vars *var)
             items_found++;
         else
         {
-            // printf  ("\n(%s)          |      {%s}\n", tokens[0], tokens[1]);
+            printf  ("\n(%s)          |      {%s}\n", tokens[0], tokens[1]);
             return (err("Invalid or duplicate item"), 0);
         }
     }

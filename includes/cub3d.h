@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:35:40 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/21 15:17:54 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/09/21 18:24:01 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 # define KEY_ESC 65307
-# define ROT_SPEED 0.08
-# define MOVE_SPEED 0.08
+# define ROT_SPEED 0.1
+# define MOVE_SPEED 0.1
 
 #define MINI_MAP_HEIGHT 50
 #define MINI_MAP_WIDHT 50

@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 00:11:36 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/21 09:30:11 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/21 18:07:28 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,6 +286,6 @@ void render_game(t_game *game)
     render_minimap(game);
     mlx_put_image_to_window(game->mlx, game->win, game->image->img, 0, 0);
 	if (game->weapon == 0)
-		render_hand_with_transparency(game->hands_tex, WINDOW_WIDTH * 0.25, WINDOW_HEIGHT * 0.705 , game);
+		render_hand_with_transparency(game->hands_tex, WINDOW_WIDTH * 0.25, WINDOW_HEIGHT * 0.705 , game); //  still problem
 }
    
