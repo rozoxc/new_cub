@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:38:20 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/19 12:49:07 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/21 08:40:08 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void init_keys(t_game * game)
 {
-    game->keys = malloc(sizeof(t_keys));
+    game->keys = ft_malloc(sizeof(t_keys), 1);
     if (!game->keys)
         return ;
     game->keys->a = 0;
@@ -29,6 +29,7 @@ int key_press(int keycode, t_game *game)
     if (keycode == KEY_ESC)
     {
         mlx_destroy_window(game->mlx, game->win);
+		ft_malloc (0, 0);
         exit(0);
     }
     else if (keycode == KEY_A)

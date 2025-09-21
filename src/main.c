@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 14:41:47 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/14 12:39:03 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/21 08:33:25 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ int main(int ac, char **av)
         ft_malloc(0, 0);
         return(0);
     }
-    // printf ("%s\n", game->vars->tex.Hands);
-    // exit (0);
     game->mlx = mlx_init();
     if (!game->mlx)
         return (1);
@@ -59,7 +57,6 @@ int main(int ac, char **av)
     mlx_hook(game->win, 03, 1L<<1, key_release, game);
     mlx_loop_hook(game->mlx, game_loop, game);
     mlx_loop(game->mlx);
-    ft_malloc(0, 0); // +212 .
+    ft_malloc(0, 0);
     mlx_destroy_window(game->mlx, game->win);
 }
- 

@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 22:30:24 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/19 11:45:45 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/21 08:35:19 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_image *init_image(t_game *game)
 {
     t_image *img;
 
-    img = malloc(sizeof(t_image));
+    img = ft_malloc(sizeof(t_image), 1);
     if (!img)
         return NULL;
     img->img = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -34,11 +34,11 @@ t_image *init_image(t_game *game)
 int main(int ac, char **av)
 {
     t_game *game;
-    game = malloc(sizeof(t_game));
+    game = ft_malloc(sizeof(t_game), 1);
     (void)ac;
     (void)av;
 
-    if (!parser(av[1], game)) // kantsnaw selbouka 
+    if (!parser(av[1], game))
         return(0);
     
     game->mlx = mlx_init();

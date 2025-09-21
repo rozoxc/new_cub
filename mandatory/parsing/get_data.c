@@ -6,26 +6,22 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 03:17:15 by selbouka          #+#    #+#             */
-/*   Updated: 2025/09/19 12:21:35 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/21 08:30:55 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-
 int set_texture(char **texture_ptr, char *path)
 {
     if (*texture_ptr != NULL)
         return (0);
-    // .xpm
     printf ("%s|\n", path);
-    // exit (0);
     int fd = open(path, O_RDONLY);
     
     if (fd < 0)
         return (0);
     close(fd);
-
     *texture_ptr = ft_strdup(path);
     return (*texture_ptr != NULL);
 }
@@ -36,15 +32,12 @@ int set_color(t_rgb *color, char *rgb)
     
     if (color->r != -1)
         return (0);
-    
     if (count_char(rgb, ',') != 2)
         return (0);
-    
     rgb_tokens = ft_split(rgb, ',');
     if (!rgb_tokens || !rgb_tokens[0] || !rgb_tokens[1] || !rgb_tokens[2] || rgb_tokens[3])
         return (0);
     
-    // Validate and convert RGB values
     if (!is_valid_rgb(rgb_tokens[0]) || 
         !is_valid_rgb(rgb_tokens[1]) || 
         !is_valid_rgb(rgb_tokens[2]))
@@ -59,15 +52,6 @@ int set_color(t_rgb *color, char *rgb)
 
 int set_item(t_vars *var, char *key, char *value)
 {
-    static int i;
-
-    // if (i == 0)
-    // {
-    //     set_texture(&var->tex.Hands, "./textures/hands.xpm"); // new
-    //     set_texture(&var->tex.shoot0, "./textures/shoot0.xpm"); // new
-    //     set_texture(&var->tex.shoot1, "./textures/shoot1.xpm"); // new
-    //     i++;
-    // }
     if (!key || !value)
         return (0);
     if (ft_strcmp(key, "NO") == 0)
@@ -80,14 +64,10 @@ int set_item(t_vars *var, char *key, char *value)
         return (set_texture(&var->tex.east, value));
     else if (ft_strcmp(key, "DO") == 0)
         return (set_texture(&var->tex.door, value));
-// color
     else if (ft_strcmp(key, "F") == 0)
         return (set_color(&var->floor, value));
     else if (ft_strcmp(key, "C") == 0)
         return (set_color(&var->ceiling, value));
-    
-
-        
     return (0);
 }
 
@@ -139,49 +119,29 @@ char **splitarg(char *line)
     return tokens;
 }
 
-
-
 int parse_header(t_vars *var)
 {
     char    *line;
     char    **tokens;
     int     items_found = 0;
-    
 
     while (items_found < 7)
     {
         line = get_next_line(var->fd);
-        // printf ("%s\n", line);
         if (!line)
-        {
-            err("Missing header items");
-            return (0);
-        }
+            return (err("Missing header items"), 0);
         if (ft_strlen(line) == 0 || is_whitespace_only(line))
         {
             line = NULL;
             continue ;
         }
-        // if (line[ft_strlen(line) - 1] == '\n')
-        //     line[ft_strlen(line) - 1] = 0;
-            
-        // tokens = ft_split(line, ' ');
         tokens = splitarg(line);
-        
         if (!tokens || !tokens[0] || !tokens[1] || tokens[2]) 
-        {
-            // printf ("{%s} | {%s} | {|%s|} \n", tokens[0], tokens[1], tokens[2]);
             return (err("Invalid line format"), 0);
-        }
-        
         if (set_item(var, tokens[0], tokens[1]))
             items_found++;
         else
-        {
-            // printf  ("\n(%s)          |      {%s}\n", tokens[0], tokens[1]);
             return (err("Invalid or duplicate item"), 0);
-        }
     }
- 
     return (1);
 }

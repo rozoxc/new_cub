@@ -32,7 +32,6 @@ t_texture *load_single_texture(t_game *game, char *filename)
     texture  = ft_malloc(sizeof(texture), 1);
     if (!texture)
         return (NULL);
-    printf ("\n---> %s\n\n", filename);
     texture->img = mlx_xpm_file_to_image(game->mlx, filename, &texture->width, &texture->height);
     if (!texture->img)
     {
@@ -49,8 +48,6 @@ t_texture *load_single_texture(t_game *game, char *filename)
 
 int load_all_textures(t_game *game)
 {
-                // printf ("-- > %s\n", game->vars->tex.Hands);
-            // exit(0);
     game->tex_north = load_single_texture(game, game->vars->tex.north);
     if (!game->tex_north)
         return (0);
@@ -63,13 +60,8 @@ int load_all_textures(t_game *game)
     game->tex_west = load_single_texture(game, game->vars->tex.west);
     if (!game->tex_west)
         return (0);
-    // game->hands_tex = load_single_texture(game, game->vars->tex.Hands); //new
-    //     if (!game->hands_tex)
-    //         return (0);
     return (1);
 }
-
-// Get the correct texture filename based on wall direction and ray side
 
 t_texture *get_wall_texture(t_game *game, t_ray *ray, double rayDirX, double rayDirY) 
 {

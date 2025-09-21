@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 20:53:42 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/19 12:22:44 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/21 08:42:27 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_texture *load_single_texture(t_game *game, char *filename)
 {
     t_texture *texture;
 
-    texture  = malloc(sizeof(texture));
+    texture  = ft_malloc(sizeof(texture), 1);
     if (!texture)
         return (NULL);
     texture->img = mlx_xpm_file_to_image(game->mlx, filename, &texture->width, &texture->height);

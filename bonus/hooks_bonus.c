@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:38:20 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/19 14:38:27 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/21 08:42:18 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void init_keys(t_game * game)
 {
-    game->keys = malloc(sizeof(t_keys));
+    game->keys = ft_malloc(sizeof(t_keys), 1);
     if (!game->keys)
         return ;
     game->keys->a = 0;
