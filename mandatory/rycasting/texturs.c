@@ -29,7 +29,7 @@ t_texture *load_single_texture(t_game *game, char *filename)
     t_texture *texture;
 
 
-    texture  = ft_malloc(sizeof(texture), 1);
+    texture  = ft_malloc(sizeof(*texture), 1);
     if (!texture)
         return (NULL);
     texture->img = mlx_xpm_file_to_image(game->mlx, filename, &texture->width, &texture->height);
