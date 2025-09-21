@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 10:13:54 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/19 15:16:40 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/21 09:29:23 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	draw_wall_column(t_game *game, t_ray *ray, int x, int texX, t_texture *text
 		y++;
 	}
 }
-
 void	render_3d(t_game *game)
 {
 	int		x;
@@ -120,22 +119,27 @@ void	render_3d(t_game *game)
 	x = 0;
 	while (x < WINDOW_WIDTH)
 	{
-		cameraX = 2 * x / (double)WINDOW_WIDTH - 1;// x-coordinate in camera space
-		rayDirX = game->player->dir_x + game->player->plan_x * cameraX;//ray direction
-		rayDirY = game->player->dir_y + game->player->plan_y * cameraX;//ray direction
-		ray = cast_ray(game, rayDirX, rayDirY);//perform DDA and get ray info
-		current_texture = get_wall_texture(game, &ray, rayDirX, rayDirY);
-		texX = calculate_tex_x(&ray, current_texture, rayDirX, rayDirY);//calculate texture x coordinate
-		draw_wall_column(game, &ray, x, texX, current_texture);//draw the wall column
+		cameraX = 2 * x / (double)WINDOW_WIDTH - 1;
+		rayDirX = game->player->dir_x + game->player->plan_x * cameraX;
+		rayDirY = game->player->dir_y + game->player->plan_y * cameraX;
+		
+		// Use door-aware raycasting
+		ray = cast_ray_with_doors(game, rayDirX, rayDirY);
+		
+		// Get appropriate texture (including doors)
+		current_texture = get_wall_texture_with_doors(game, &ray, rayDirX, rayDirY);
+		
+		texX = calculate_tex_x(&ray, current_texture, rayDirX, rayDirY);
+		draw_wall_column(game, &ray, x, texX, current_texture);
 		x++;
 	}
+	
 	if (game->weapon == 1)
 	{
 		static int j;
 		if (j & 1)
 		{
 			render_hand_with_transparency(game->shoot0_text, WINDOW_WIDTH * 0.25, WINDOW_HEIGHT * 0.705, game);
-			
 		}
 		else
 		{

@@ -28,7 +28,9 @@ BONUS = src_bonus/main.c \
 		bonus/parsing/utils_bonus.c\
 		bonus/parsing/get_data_bonus.c\
 		bonus/parsing/parse_bonus.c\
-		bonus/parsing/validate_file_bonus.c
+		bonus/parsing/validate_file_bonus.c\
+		bonus/doors.c
+
 
 
 

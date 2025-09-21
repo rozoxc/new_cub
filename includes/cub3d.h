@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:35:40 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/19 16:01:12 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/21 09:25:15 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,8 @@ typedef struct s_keys
     int d;
     int left;
     int right;
+    int space;    // Add space key for door interaction
 }t_keys;
-
 
 
 // typedef struct  s_game
@@ -233,6 +233,13 @@ typedef struct s_vars
 
 
 
+// Add to the key definitions section
+#define KEY_SPACE 32      // Space key for door interaction
+
+// Add to the t_keys structure (update your existing structure)
+
+
+// Add to the t_game structure (add this member)
 typedef struct  s_game
 {
     void        *mlx;
@@ -241,11 +248,11 @@ typedef struct  s_game
     t_texture  *tex_south;
     t_texture  *tex_east;
     t_texture  *tex_west;
+    t_texture  *tex_door;      // Add door texture
     t_texture   *hands_tex;
     t_texture   *shoot0_text;
     t_texture   *shoot1_text;
 
-    
     t_player    *player;
     t_map       *map;
     t_image     *image;
@@ -253,7 +260,7 @@ typedef struct  s_game
     int         height;
     int         weight;
     int         view_mode;
-    t_vars      *vars; // Add vars to the game structure
+    t_vars      *vars;
     int weapon;
 } t_game;
 
@@ -302,4 +309,27 @@ int mouse_hook(int x, int y, t_game *game);
 int	mouse_move_hook(int x, int y, t_game *game);
 int shoot(t_game *game);
 void render_hand_with_transparency(t_texture *image, int start_x, int start_y, t_game *game);
+
+
+
+
+
+
+
+
+
+
+
+
+int		is_door_at_position(t_game *game, int x, int y);
+int		is_door_open(t_game *game, int x, int y);
+void	toggle_door(t_game *game, int x, int y);
+void	handle_door_interaction(t_game *game);
+int		perform_dda_with_doors(t_game *game, t_ray_data *data);
+t_ray	cast_ray_with_doors(t_game *game, double rayDirX, double rayDirY);
+t_texture	*get_wall_texture_with_doors(t_game *game, t_ray *ray, double rayDirX, double rayDirY);
+int		is_valid_move_with_doors(t_game *game, double new_x, double new_y);
+
+
+
 #endif

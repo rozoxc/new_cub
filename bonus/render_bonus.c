@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 00:11:36 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/19 15:16:16 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/21 09:30:11 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,10 +183,13 @@ void	draw_minimap_direction(t_game *game, int center_x, int center_y)
 	}
 }
 
+#define MINIMAP_DOOR_CLOSED_COLOR 0x8B4513    // Brown for closed doors
+#define MINIMAP_DOOR_OPEN_COLOR 0x90EE90      // Light green for open doors
+
 int	is_valid_map_tile(char tile)
 {
 	return (tile == '0' || tile == 'N' || tile == 'S'
-		|| tile == 'E' || tile == 'W');
+		|| tile == 'E' || tile == 'W' || tile == 'd');  // Include open doors
 }
 
 void	draw_map_tiles(t_game *game, t_minimap_data *mini)
@@ -195,6 +198,7 @@ void	draw_map_tiles(t_game *game, t_minimap_data *mini)
 	int	map_y;
 	int	screen_x;
 	int	screen_y;
+	char map_tile;
 
 	map_y = mini->start_y;
 	while (map_y < mini->end_y)
@@ -209,10 +213,17 @@ void	draw_map_tiles(t_game *game, t_minimap_data *mini)
 			if (map_x >= 0 && map_x < game->vars->map_w && map_y >= 0
 				&& map_y < game->vars->map_h)
 			{
-				if (game->vars->map[map_y][map_x] == '1')
+				map_tile = game->vars->map[map_y][map_x];
+				if (map_tile == '1')
 					draw_minimap_tile(game, screen_x, screen_y,
 						MINIMAP_WALL_COLOR);
-				else if (is_valid_map_tile(game->vars->map[map_y][map_x]))
+				else if (map_tile == 'D')  // Closed door
+					draw_minimap_tile(game, screen_x, screen_y,
+						MINIMAP_DOOR_CLOSED_COLOR);
+				else if (map_tile == 'd')  // Open door
+					draw_minimap_tile(game, screen_x, screen_y,
+						MINIMAP_DOOR_OPEN_COLOR);
+				else if (is_valid_map_tile(map_tile))
 					draw_minimap_tile(game, screen_x, screen_y,
 						MINIMAP_FLOOR_COLOR);
 			}
