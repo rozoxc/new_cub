@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_data_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 03:17:15 by selbouka          #+#    #+#             */
-/*   Updated: 2025/09/19 14:05:09 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/19 15:16:34 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,7 @@ int parse_header(t_vars *var)
     set_texture(&var->tex.Hands, "textures/hands.xpm"); //check 
     set_texture(&var->tex.shoot0, "textures/shoot0.xpm"); //check  
     set_texture(&var->tex.shoot1, "textures/shoot1.xpm"); //check  
-
+    set_texture(&var->tex.door, "textures/doors.xpm");
     
     return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utlis_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:51:29 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/21 09:12:46 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/21 15:36:41 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,42 +41,16 @@ void	rotate_player_mouse(t_game *game, double angle)
 		+ game->player->plan_y * cos(angle);
 }
 
-int	mouse_hook(int x, int y, t_game *game)
-{
-	static int	prev_x = -1;
-	static int	initialized = 0;
-	int			delta_x;
-	double		rotation_angle;
-
-	(void)y;
-	if (!initialized)
-	{
-		prev_x = x;
-		initialized = 1;
-		return (0);
-	}
-	
-	delta_x = x - prev_x;
-	if (abs(delta_x) > 0)
-	{
-		rotation_angle = delta_x * MOUSE_SENSITIVITY;
-		rotate_player_mouse(game, rotation_angle);
-	}
-	
-	prev_x = x;
-	return (0);
-}
-
 int	mouse_move_hook(int x, int y, t_game *game)
 {
-	static int	prev_x = -1;
-	static int	initialized = 0;
-	int			delta_x;
-	double		rotation_angle;
-	int			center_x;
+	static int		prev_x = -1;
+	static int		initialized = 0;
+	static double	accumulated_rotation = 0.0;
+	int				delta_x;
+	double			raw_rotation;
+	double			final_rotation;
 
 	(void)y;
-	center_x = WINDOW_WIDTH / 2;
 	
 	if (!initialized)
 	{
@@ -89,14 +63,16 @@ int	mouse_move_hook(int x, int y, t_game *game)
 	
 	if (abs(delta_x) > 0)
 	{
-		rotation_angle = delta_x * MOUSE_SENSITIVITY;
-		rotate_player_mouse(game, rotation_angle);
+		raw_rotation = -delta_x * MOUSE_SENSITIVITY;
+		accumulated_rotation += raw_rotation;
+		if (fabs(accumulated_rotation) > 0.01)
+		{
+			final_rotation = accumulated_rotation;
+			rotate_player_mouse(game, final_rotation);
+			accumulated_rotation = 0.0;
+		}
 	}
-	else
-	{
-		prev_x = x;
-	}
-	
+	prev_x = x;
 	return (0);
 }
 

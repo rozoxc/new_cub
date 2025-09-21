@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:35:40 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/21 13:56:02 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/21 15:17:54 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef struct s_minimap_data
 #define ERROR_MAP "Error to load map\n"
 #define ERROR_INIT "faild to initialize the game\n"
 
-#define MOUSE_SENSITIVITY 0.001
+#define MOUSE_SENSITIVITY 0.003
 typedef struct s_texture
 {
     void    *img;
