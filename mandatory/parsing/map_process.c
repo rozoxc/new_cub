@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:15:52 by selbouka          #+#    #+#             */
-/*   Updated: 2025/09/21 08:29:21 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/21 09:07:31 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ static char	**read_map_lines(t_vars *vars, size_t *line_count, size_t *max_width
 {
 	char	*line;
 	char	**lines;
+	char	**new_lines;
 	size_t	capacity;
-    size_t  len;
+	size_t	len;
+	size_t	i;
 
 	capacity = 16;
 	lines = ft_malloc(sizeof(char *) * capacity, 1);
@@ -46,26 +48,40 @@ static char	**read_map_lines(t_vars *vars, size_t *line_count, size_t *max_width
 		}
 		if (*line_count > 0 && (is_whitespace_only(line) || *line == '\n'))
 		{
-			while ((*line_count)-- > 0) free(lines[*line_count]);
-			free(lines);
-			free(line);
+			ft_malloc(0, 0);
 			return (err("Empty line inside map is forbidden\n"), NULL);
 		}
+		
+
 		if (*line_count >= capacity)
 		{
-			// I need to implement it
+			capacity *= 2; 
+			new_lines = ft_malloc(sizeof(char *) * capacity, 1);
+			if (!new_lines)
+			{
+				ft_malloc(0, 0);
+				return (err("Memory reallocation failed\n"), NULL);
+			}
+			i = 0;
+			while (i < *line_count)
+			{
+				new_lines[i] = lines[i];
+				i++;
+			}
+			lines = new_lines;
 		}
-        len = ft_strlen(line);
-        if (len > 0 && line[len - 1] == '\n')
-            line[len - 1] = '\0';
+		
+		len = ft_strlen(line);
+		if (len > 0 && line[len - 1] == '\n')
+			line[len - 1] = '\0';
 		lines[*line_count] = ft_strdup(line); 
-        
+		
 		if (ft_strlen(lines[*line_count]) > *max_width)
 			*max_width = ft_strlen(lines[*line_count]);
 		(*line_count)++;
 	}
 	if (*line_count == 0)
-		return (err("Map not found in file\n"), free(lines), NULL);
+		return (err("Map not found in file\n"), ft_malloc(0, 0), NULL);
 	return (lines);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utlis_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:51:29 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/15 15:51:36 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/09/21 09:12:46 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ int	mouse_hook(int x, int y, t_game *game)
 	double		rotation_angle;
 
 	(void)y;
-	
-	// Skip the first mouse event to initialize prev_x properly
 	if (!initialized)
 	{
 		prev_x = x;
@@ -59,8 +57,6 @@ int	mouse_hook(int x, int y, t_game *game)
 	}
 	
 	delta_x = x - prev_x;
-	
-	// Only rotate if there's significant mouse movement
 	if (abs(delta_x) > 0)
 	{
 		rotation_angle = delta_x * MOUSE_SENSITIVITY;
@@ -71,7 +67,6 @@ int	mouse_hook(int x, int y, t_game *game)
 	return (0);
 }
 
-// Alternative: Mouse move hook (more responsive)
 int	mouse_move_hook(int x, int y, t_game *game)
 {
 	static int	prev_x = -1;
@@ -83,7 +78,6 @@ int	mouse_move_hook(int x, int y, t_game *game)
 	(void)y;
 	center_x = WINDOW_WIDTH / 2;
 	
-	// Skip the first mouse event
 	if (!initialized)
 	{
 		prev_x = x;
@@ -93,15 +87,10 @@ int	mouse_move_hook(int x, int y, t_game *game)
 	
 	delta_x = x - prev_x;
 	
-	// Only rotate if there's significant mouse movement
 	if (abs(delta_x) > 0)
 	{
 		rotation_angle = delta_x * MOUSE_SENSITIVITY;
 		rotate_player_mouse(game, rotation_angle);
-		
-		// Optional: Re-center mouse cursor for continuous rotation
-		// mlx_mouse_move(game->mlx, game->win, center_x, WINDOW_HEIGHT / 2);
-		// prev_x = center_x;
 	}
 	else
 	{
@@ -114,6 +103,7 @@ int	mouse_move_hook(int x, int y, t_game *game)
 int handle_close(t_game  *game)
 {
     //clean_game(game); --> free all ressources
+	ft_malloc(0, 0);
     exit(1);
     return (0);
 }
