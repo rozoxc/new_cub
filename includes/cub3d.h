@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:35:40 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/21 10:05:35 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/21 11:59:50 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 # define KEY_ESC 65307
-# define ROT_SPEED 0.09
-# define MOVE_SPEED 0.14
+# define ROT_SPEED 0.08
+# define MOVE_SPEED 0.4
 
 #define MINI_MAP_HEIGHT 50
 #define MINI_MAP_WIDHT 50
@@ -66,6 +66,8 @@ typedef struct s_line_data
 	int	y_inc;
 	int	error;
 }	t_line_data;
+
+
 
 typedef struct s_minimap_data
 {
@@ -132,6 +134,7 @@ typedef struct s_ray_data
     double  deltaDistY;
     int     stepX;
     int     stepY;
+    int max_distance;
 }   t_ray_data;
 typedef struct s_ray
 {
@@ -140,6 +143,7 @@ typedef struct s_ray
     int mapX;
     int mapY;
     double wallX;
+    
 } t_ray;
 
 typedef struct s_keys
@@ -341,7 +345,7 @@ void render_hand_with_transparency(t_texture *image, int start_x, int start_y, t
 
 
 
-
+#define MAX_RAY_DISTANCE 50 
 
 
 int		is_door_at_position(t_game *game, int x, int y);

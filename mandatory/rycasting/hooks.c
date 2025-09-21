@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:38:20 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/21 08:40:08 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/21 11:22:49 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ int game_loop(t_game *game)
 {
     player_mouvement(game);
     render_game(game);
+	
     return (0);
 }
 int close_window()
