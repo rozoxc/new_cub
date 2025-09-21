@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:38:20 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/21 09:31:10 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/21 09:50:06 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,9 +144,23 @@ void	rotate_player(t_game *game, double angle)
 		+ game->player->plan_y * cos(angle);
 }
 
+void update_door_system(t_game *game)
+{
+	static int space_cooldown = 0;
+	
+	// Prevent rapid door toggling
+	if (space_cooldown > 0)
+		space_cooldown--;
+	
+	if (game->keys->space && space_cooldown == 0)
+	{
+		handle_door_interaction(game);
+		space_cooldown = 15; // 15 frame cooldown
+	}
+}
 // void	player_mouvement(t_game *game)
 // {
-// 	if (game->keys->w)
+	// 	if (game->keys->w)
 // 		move_forward_backward(game, 1);
 // 	else if (game->keys->s)
 // 		move_forward_backward(game, -1);
@@ -191,6 +205,7 @@ void	player_mouvement(t_game *game)
     {
         space_pressed = 0;
     }
+	 update_door_system(game);
 }
 int game_loop(t_game *game)
 {

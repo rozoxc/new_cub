@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:35:40 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/21 09:25:15 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/21 09:52:35 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,30 @@ typedef struct s_keys
 //     int         view_mode;
 // } t_game;
 
+typedef struct s_door
+{
+    int x;
+    int y;
+    char state;           // 'D' = closed, 'd' = open, 'O' = opening, 'C' = closing
+    float animation_progress; // 0.0 to 1.0
+    int animation_frames;     // For smooth animation
+} t_door;
 
+typedef enum e_door_type
+{
+    DOOR_WOODEN,
+    DOOR_METAL,
+    DOOR_LOCKED,
+    DOOR_AUTO     // Automatic doors that open when player approaches
+} t_door_type;
+
+// Advanced door management system
+typedef struct s_door_manager
+{
+    t_door *doors;
+    int door_count;
+    int max_doors;
+} t_door_manager;
 
 
 

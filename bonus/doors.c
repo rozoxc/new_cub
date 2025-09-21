@@ -42,40 +42,76 @@ void	toggle_door(t_game *game, int x, int y)
 	}
 }
 
-void	handle_door_interaction(t_game *game)
+int find_nearest_door(t_game *game, int *door_x, int *door_y)
 {
-	int	check_x;
-	int	check_y;
-	int	found_door;
-	double	check_dist;
+    double ray_x, ray_y;
+    double step_x, step_y;
+    int map_x, map_y;
+    double max_distance = 2.0; // Maximum interaction distance
+    
+    // Cast a ray in the direction player is facing
+    ray_x = game->player->posX;
+    ray_y = game->player->posY;
+    step_x = game->player->dir_x * 0.1;
+    step_y = game->player->dir_y * 0.1;
+    
+    for (int i = 0; i < (int)(max_distance / 0.1); i++)
+    {
+        ray_x += step_x;
+        ray_y += step_y;
+        map_x = (int)ray_x;
+        map_y = (int)ray_y;
+        
+        if (map_x >= 0 && map_x < game->vars->map_w && 
+            map_y >= 0 && map_y < game->vars->map_h)
+        {
+            char cell = game->vars->map[map_y][map_x];
+            if (cell == 'D' || cell == 'd')
+            {
+                *door_x = map_x;
+                *door_y = map_y;
+                return (1);
+            }
+            // Stop if we hit a wall
+            if (cell == '1')
+                break;
+        }
+    }
+    return (0);
+}
 
-	found_door = 0;
-	
-	// Check positions around the player (in a small radius)
-	for (int dy = -2; dy <= 2 && !found_door; dy++)
-	{
-		for (int dx = -2; dx <= 2 && !found_door; dx++)
-		{
-			check_x = (int)(game->player->posX) + dx;
-			check_y = (int)(game->player->posY) + dy;
-			
-			if (is_door_at_position(game, check_x, check_y))
-			{
-				// Check if door is close enough to interact with
-				check_dist = sqrt(pow(check_x + 0.5 - game->player->posX, 2) + 
-								pow(check_y + 0.5 - game->player->posY, 2));
-				
-				if (check_dist <= 1.5)  // Within interaction range
-				{
-					toggle_door(game, check_x, check_y);
-					found_door = 1;
-				}
-			}
-		}
-	}
-	
-	if (!found_door)
-		printf("No door nearby to interact with\n");
+void handle_door_interaction(t_game *game)
+{
+    int door_x, door_y;
+    
+    if (find_nearest_door(game, &door_x, &door_y))
+    {
+        char current_state = game->vars->map[door_y][door_x];
+        
+        if (current_state == 'D')
+        {
+            game->vars->map[door_y][door_x] = 'd';
+            printf("🚪 Door opened at (%d, %d)\n", door_x, door_y);
+        }
+        else if (current_state == 'd')
+        {
+            // Check if player would be trapped inside door
+            if (!((int)game->player->posX == door_x && 
+                  (int)game->player->posY == door_y))
+            {
+                game->vars->map[door_y][door_x] = 'D';
+                printf("🚪 Door closed at (%d, %d)\n", door_x, door_y);
+            }
+            else
+            {
+                printf("❌ Cannot close door - you're standing in it!\n");
+            }
+        }
+    }
+    else
+    {
+        printf("❓ No door in front of you\n");
+    }
 }
 
 // Modified DDA algorithm to handle doors
