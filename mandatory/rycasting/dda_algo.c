@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 20:29:06 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/21 11:59:44 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/21 12:10:16 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,16 @@ int	perform_dda(t_game *game, t_ray_data *data)
 	int	hit;
 	int	side;
 	int	i;
+	int	max_distance;
 
 	hit = 0;
 	i = 0;
-	while (hit == 0 && i < 1000)  // Safety limit to prevent infinite loops
+	// Calculate maximum reasonable distance based on map size
+	max_distance = game->vars->map_w + game->vars->map_h;
+	if (max_distance > 2000)
+		max_distance = 2000;
+	
+	while (hit == 0 && i < max_distance)
 	{
 		if (data->sideDistX < data->sideDistY)
 		{
@@ -99,24 +105,29 @@ int	perform_dda(t_game *game, t_ray_data *data)
 			side = 1;  // NS side
 		}
 		
-		// Check bounds and wall collision
-		if (data->mapX >= 0 && data->mapX < game->vars->map_w
-			&& data->mapY >= 0 && data->mapY < game->vars->map_h)
+		// Enhanced bounds checking
+		if (data->mapX < 0 || data->mapX >= (int)game->vars->map_w ||
+			data->mapY < 0 || data->mapY >= (int)game->vars->map_h)
 		{
-			// Check for walls
-			if (game->vars->map[data->mapY][data->mapX] == '1')
-				hit = 1;
-			// Check for doors if door system is implemented
-			else if (game->vars->map[data->mapY][data->mapX] == 'D')
-				hit = 1;  // Treat closed doors as walls
+			hit = 1;  // Hit boundary - treat as wall
 		}
 		else
 		{
-			// Hit boundary
-			hit = 1;
+			char cell = game->vars->map[data->mapY][data->mapX];
+			// Check for walls and closed doors
+			if (cell == '1' || cell == 'D')
+				hit = 1;
 		}
 		i++;
 	}
+	
+	// If we exceeded max distance, force a hit to prevent infinite loops
+	if (i >= max_distance)
+	{
+		hit = 1;
+		side = (data->sideDistX < data->sideDistY) ? 0 : 1;
+	}
+	
 	return (side);
 }
 

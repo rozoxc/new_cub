@@ -6,13 +6,43 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:15:52 by selbouka          #+#    #+#             */
-/*   Updated: 2025/09/21 09:07:31 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/21 12:12:05 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-
+void	init_player_direction(t_player *player, char dir)
+{
+	if (dir == 'N')
+	{
+		player->dir_x = 0;
+		player->dir_y = -1;
+		player->plan_x = 0.66;
+		player->plan_y = 0;
+	}
+	else if (dir == 'S')
+	{
+		player->dir_x = 0;
+		player->dir_y = 1;
+		player->plan_x = -0.66;
+		player->plan_y = 0;
+	}
+	else if (dir == 'E')
+	{
+		player->dir_x = 1;
+		player->dir_y = 0;
+		player->plan_x = 0;
+		player->plan_y = 0.66;
+	}
+	else if (dir == 'W')
+	{
+		player->dir_x = -1;
+		player->dir_y = 0;
+		player->plan_x = 0;
+		player->plan_y = -0.66;
+	}
+}
 
 int	is_valid_map_char(char c)
 {
@@ -132,12 +162,12 @@ static int	process_map_content(t_game *vars)
 			{
 				if (player_count > 0)
 					return (err("Multiple player positions found.\n"), 0);
-				vars->player->posX = y + 0.5;
-				vars->player->posY = x + 0.5;
-				vars->player->plan_x = 0.60;
-				vars->player->plan_y = 0;
+				vars->player->posX = x + 0.5;
+				vars->player->posY = y + 0.5;
+				init_player_direction(vars->player, vars->vars->map[y][x]);
 				vars->player->player_dir = vars->vars->map[y][x];
 				player_count = 1;
+				vars->vars->map[y][x] = '0';
 			}
 		}
 	}
@@ -265,6 +295,6 @@ int	parse_map(t_game *game)
 		return (0);
 	if (!validate_map_walls_optimized(game))
 		return (0);
-	game->vars->map[(int)game->player->posX][(int)game->player->posY] = '0';
+	// game->vars->map[(int)game->player->posX][(int)game->player->posY] = '0';
 	return (1);
 }

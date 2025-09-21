@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:38:20 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/21 11:22:49 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/21 12:10:56 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,22 +64,41 @@ int key_release(int keycode, t_game *game)
 }
 int	is_valid_move(t_game *game, double new_x, double new_y)
 {
-	if (new_x >= 0 && new_x < game->vars->map_w
-		&& new_y >= 0 && new_y < game->vars->map_h
-		&& game->vars->map[(int)new_y][(int)new_x] != '1')
-		return (1);
-	return (0);
+	int map_x, map_y;
+	
+	// Convert world coordinates to map coordinates
+	map_x = (int)new_x;
+	map_y = (int)new_y;
+	
+	// Check bounds
+	if (map_x < 0 || map_x >= (int)game->vars->map_w ||
+		map_y < 0 || map_y >= (int)game->vars->map_h)
+		return (0);
+	
+	// Check if the cell is walkable
+	char cell = game->vars->map[map_y][map_x];
+	if (cell == '1' || cell == 'D')  // Wall or closed door
+		return (0);
+		
+	return (1);
 }
 
 void	move_forward_backward(t_game *game, int direction)
 {
 	double	new_x;
 	double	new_y;
+	double	move_step = MOVE_SPEED * direction;
 
-	// printf("dirx: %.2f, diry: %.2f\n", game->player->dir_x, game->player->dir_y);
-	new_x = game->player->posX + (direction * game->player->dir_x * MOVE_SPEED);
-	new_y = game->player->posY + (direction * game->player->dir_y * MOVE_SPEED);
-	if (is_valid_move(game, new_x, new_y))
+	// Calculate new position
+	new_x = game->player->posX + (game->player->dir_x * move_step);
+	new_y = game->player->posY + (game->player->dir_y * move_step);
+	
+	// Validate movement with some collision margin
+	double margin = 0.1;
+	if (is_valid_move(game, new_x + margin, new_y + margin) &&
+		is_valid_move(game, new_x - margin, new_y + margin) &&
+		is_valid_move(game, new_x + margin, new_y - margin) &&
+		is_valid_move(game, new_x - margin, new_y - margin))
 	{
 		game->player->posX = new_x;
 		game->player->posY = new_y;
@@ -90,10 +109,18 @@ void	move_left_right(t_game *game, int direction)
 {
 	double	new_x;
 	double	new_y;
+	double	move_step = MOVE_SPEED * direction;
 
-	new_x = game->player->posX + (direction * game->player->plan_x * MOVE_SPEED);
-	new_y = game->player->posY + (direction * game->player->plan_y * MOVE_SPEED);
-	if (is_valid_move(game, new_x, new_y))
+	// Calculate new position using camera plane (perpendicular to direction)
+	new_x = game->player->posX + (game->player->plan_x * move_step);
+	new_y = game->player->posY + (game->player->plan_y * move_step);
+	
+	// Validate movement with some collision margin
+	double margin = 0.1;
+	if (is_valid_move(game, new_x + margin, new_y + margin) &&
+		is_valid_move(game, new_x - margin, new_y + margin) &&
+		is_valid_move(game, new_x + margin, new_y - margin) &&
+		is_valid_move(game, new_x - margin, new_y - margin))
 	{
 		game->player->posX = new_x;
 		game->player->posY = new_y;
