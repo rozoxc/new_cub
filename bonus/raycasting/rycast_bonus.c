@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 10:13:54 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/22 09:35:15 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/22 11:09:29 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	draw_sky(t_game *game)
 		pj = 0;
 		while (pj < WINDOW_WIDTH)
 		{
-			my_mlx_pixel_put(game->image, pj, i, 986649); //game->vars->ceiling;
+			my_mlx_pixel_put(game->image, pj, i, game->vars->sky.rgb); //game->vars->ceiling;
 			pj++;
 		}
 		i++;
@@ -41,7 +41,7 @@ void	draw_floor(t_game *game)
 		pj = 0;
 		while (pj < WINDOW_WIDTH)
 		{
-			my_mlx_pixel_put(game->image, pj, j, 1645086);
+			my_mlx_pixel_put(game->image, pj, j, game->vars->floor.rgb);
 			pj++;
 		}
 		j++;

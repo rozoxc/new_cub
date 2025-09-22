@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:38:20 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/21 15:03:10 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/09/22 11:00:14 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,6 @@ void	rotate_player(t_game *game, double angle)
 
 void	player_mouvement(t_game *game)
 {
-	// printf("Player Position: X: %.2f, Y: %.2f\n", game->player->posX, game->player->posY);
 	if (game->keys->w)
 		move_forward_backward(game, 1);
 	if (game->keys->s)

@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 01:21:15 by selbouka          #+#    #+#             */
-/*   Updated: 2025/09/22 09:35:15 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/22 11:11:01 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int parser(char *file, t_game *game)
             close(game->vars->fd);
             return (0);
     }
-
+    rgb_to_mlx_color(&game->vars->floor);
+    rgb_to_mlx_color(&game->vars->sky);
     close(game->vars->fd);
     printf("Parsing successful!\n"); 
     return (1);

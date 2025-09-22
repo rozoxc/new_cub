@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rycast.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 10:13:54 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/19 12:18:19 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/09/22 11:06:15 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	draw_sky(t_game *game)
 		pj = 0;
 		while (pj < WINDOW_WIDTH)
 		{
-			my_mlx_pixel_put(game->image, pj, i, 2201000); //game->vars->ceiling;
+			my_mlx_pixel_put(game->image, pj, i, game->vars->sky.rgb);
 			pj++;
 		}
 		i++;
@@ -41,7 +41,7 @@ void	draw_floor(t_game *game)
 		pj = 0;
 		while (pj < WINDOW_WIDTH)
 		{
-			my_mlx_pixel_put(game->image, pj, j, 225300);
+			my_mlx_pixel_put(game->image, pj, j, game->vars->floor.rgb);
 			pj++;
 		}
 		j++;

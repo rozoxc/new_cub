@@ -6,11 +6,16 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 03:17:15 by selbouka          #+#    #+#             */
-/*   Updated: 2025/09/22 09:35:15 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/22 11:22:40 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void rgb_to_mlx_color(t_rgb *rgb)
+{
+    rgb->rgb = ((rgb->r << 16) | (rgb->g << 8) | rgb->b);
+}
 
 
 int set_texture(char **texture_ptr, char *path)
@@ -43,7 +48,6 @@ int set_color(t_rgb *color, char *rgb)
     if (!rgb_tokens || !rgb_tokens[0] || !rgb_tokens[1] || !rgb_tokens[2] || rgb_tokens[3])
         return (0);
     
-    // Validate and convert RGB values
     if (!is_valid_rgb(rgb_tokens[0]) || 
         !is_valid_rgb(rgb_tokens[1]) || 
         !is_valid_rgb(rgb_tokens[2]))
@@ -58,16 +62,8 @@ int set_color(t_rgb *color, char *rgb)
 
 int set_item(t_vars *var, char *key, char *value)
 {
-    // int static i;
     if (!key || !value)
         return (0);
-    // if (i == 0)
-    // {
-    //     set_texture(&var->tex.Hands, "./textures/hands.xpm"); // new
-    //     set_texture(&var->tex.shoot0, "./textures/shoot0.xpm"); // new
-    //     set_texture(&var->tex.shoot1, "./textures/shoot1.xpm"); // new // delete
-    //     i++;
-    // }
     if (ft_strcmp(key, "NO") == 0)
         return (set_texture(&var->tex.north, value));
     else if (ft_strcmp(key, "SO") == 0)
@@ -78,11 +74,10 @@ int set_item(t_vars *var, char *key, char *value)
         return (set_texture(&var->tex.east, value));
     else if (ft_strcmp(key, "DO") == 0)
         return (set_texture(&var->tex.door, value));
-// color
     else if (ft_strcmp(key, "F") == 0)
         return (set_color(&var->floor, value));
     else if (ft_strcmp(key, "C") == 0)
-        return (set_color(&var->ceiling, value));
+        return (set_color(&var->sky, value));
     
     return (0);
 }
@@ -114,7 +109,7 @@ char **splitarg(char *line)
     int i;
     int start;
     int len;
-
+    printf ("%s\n", line);
     i = 0;
     tokens = ft_malloc(sizeof(char *) * 3, 1);
     while (line[i] && line[i] == ' ')
@@ -126,7 +121,7 @@ char **splitarg(char *line)
     tokens[0] = ft_malloc(len + 1, 1);
     ft_strlcpy(tokens[0], line + start, len + 1);
     if (!firstArg(tokens[0]))
-        return (write(2, "Invalid line format", 20), NULL);
+        return (NULL);
     while (line[i] && line[i] == ' ')
         i++;
     tokens[1] = ft_strtrim(line + i);
@@ -146,7 +141,6 @@ int parse_header(t_vars *var)
     while (items_found < 7)
     {
         line = get_next_line(var->fd);
-        // printf ("%s\n", line);
         if (!line)
         {
             err("Missing header items");
@@ -157,25 +151,13 @@ int parse_header(t_vars *var)
             line = NULL;
             continue ;
         }
-        // if (line[ft_strlen(line) - 1] == '\n')
-        //     line[ft_strlen(line) - 1] = 0;
-            
-        // tokens = ft_split(line, ' ');
         tokens = splitarg(line);
-        
         if (!tokens || !tokens[0] || !tokens[1] || tokens[2]) 
-        {
-            // printf ("{%s} | {%s} | {|%s|} \n", tokens[0], tokens[1], tokens[2]);
             return (err("Invalid line format"), 0);
-        }
-        
         if (set_item(var, tokens[0], tokens[1]))
             items_found++;
         else
-        {
-            printf  ("\n(%s)          |      {%s}\n", tokens[0], tokens[1]);
             return (err("Invalid or duplicate item"), 0);
-        }
     }
     set_texture(&var->tex.Hands, "textures/hands.xpm"); //check 
     set_texture(&var->tex.shoot0, "textures/shoot0.xpm"); //check  

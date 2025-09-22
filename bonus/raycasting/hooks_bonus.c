@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:38:20 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/22 09:35:15 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/22 11:08:28 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void init_keys(t_game * game)
     game->keys->w = 0;
     game->keys->left = 0;
     game->keys->right = 0;
-    game->keys->space = 0;  // Initialize space key
+    game->keys->space = 0;
     game->weapon = 0;
 }
 
@@ -48,14 +48,10 @@ int key_press(int keycode, t_game *game)
         game->keys->left = 1;
     else if (keycode == KEY_RIGHT)
         game->keys->right = 1;
-    else if (keycode == KEY_SPACE)  // Handle space key press
+    else if (keycode == KEY_SPACE)
         game->keys->space = 1;
     else if (keycode == 101)
-    {
-        printf ("gun loaded\n");
         game->weapon = 1;
-    }
-    
     return (0);
 }
 
@@ -73,30 +69,18 @@ int key_release(int keycode, t_game *game)
         game->keys->left = 0;
     else if (keycode == KEY_RIGHT)
         game->keys->right = 0;
-    else if (keycode == KEY_SPACE)  // Handle space key release
+    else if (keycode == KEY_SPACE)
         game->keys->space = 0;
     else if (keycode == 101)
         game->weapon = 0;
     return (0);
 }
 
-// Updated movement validation function
 int	is_valid_move(t_game *game, double new_x, double new_y)
 {
     return is_valid_move_with_doors(game, new_x, new_y);
 }
 
-// Updated player movement to handle door interaction
-
-
-// int	is_valid_move(t_game *game, double new_x, double new_y)
-// {
-// 	if (new_x >= 0 && new_x < game->vars->map_w
-// 		&& new_y >= 0 && new_y < game->vars->map_h
-// 		&& game->vars->map[(int)new_y][(int)new_x] != '1')
-// 		return (1);
-// 	return (0);
-// }
 
 void	move_forward_backward(t_game *game, int direction)
 {
@@ -147,34 +131,15 @@ void update_door_system(t_game *game)
 {
     static int space_cooldown = 0;
     
-    // Decrease cooldown
     if (space_cooldown > 0)
         space_cooldown--;
-    
-    // Only handle space press when cooldown is 0
+
     if (game->keys->space && space_cooldown == 0)
     {
         handle_door_interaction(game);
-        space_cooldown = 10; // 10 frame cooldown (about 1/6 second at 60fps)
+        space_cooldown = 10;
     }
 }
-// void	player_mouvement(t_game *game)
-// {
-	// 	if (game->keys->w)
-// 		move_forward_backward(game, 1);
-// 	else if (game->keys->s)
-// 		move_forward_backward(game, -1);
-// 	else if (game->keys->a)
-// 		move_left_right(game, -1);
-// 	else if (game->keys->d)
-// 		move_left_right(game, 1);
-// 	else if (game->keys->right)
-// 		rotate_player(game, ROT_SPEED);
-// 	else if (game->keys->left)
-// 		rotate_player(game, -ROT_SPEED);
-// 	else if (game->weapon)
-// 		game->weapon = 1;
-// }
 
 void player_mouvement(t_game *game)
 {
@@ -194,14 +159,9 @@ void player_mouvement(t_game *game)
     if (game->weapon)
         game->weapon = 1;
     
-    // Handle door interaction with proper debouncing
-    update_door_system(game);  // This handles space key properly
+    update_door_system(game); 
     
-    // REMOVE the duplicate door handling code that was here before
-    // The old code with space_pressed static variable should be deleted
 }
-
-// Make sure your update_door_system function looks like this:
 
 int game_loop(t_game *game)
 {

@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:15:52 by selbouka          #+#    #+#             */
-/*   Updated: 2025/09/22 09:20:44 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/22 10:26:29 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,6 +297,5 @@ int	parse_map(t_game *game)
 		return (0);
 	if (!validate_map_walls_optimized(game))
 		return (0);
-	// game->vars->map[(int)game->player->posX][(int)game->player->posY] = '0';
 	return (1);
 }

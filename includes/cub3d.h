@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 09:27:20 by selbouka          #+#    #+#             */
-/*   Updated: 2025/09/22 09:38:03 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/22 10:55:35 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,14 +103,6 @@ typedef struct s_texture
     int     height;
 } t_texture;
 
-// typedef struct s_player{
-//     double plan_x;
-//     double plan_y;
-//     double dir_x;
-//     double dir_y;
-//     double posX;
-//     double posY;
-// } t_player;
 
 typedef struct s_image
 {
@@ -127,6 +119,7 @@ typedef struct s_map
     int width;
     int height;   
 }t_map;
+
 typedef struct s_ray_data
 {
     int     mapX;
@@ -139,6 +132,7 @@ typedef struct s_ray_data
     int     stepY;
     int max_distance;
 }   t_ray_data;
+
 typedef struct s_ray
 {
     double perpWallDist;
@@ -212,6 +206,7 @@ typedef struct s_rgb
 	int	r;
 	int	g;
 	int	b;
+    int rgb;
 }	t_rgb;
 
 
@@ -253,7 +248,7 @@ typedef struct s_vars
 {
 	t_textures	tex;
 	t_rgb		floor;
-	t_rgb		ceiling;
+	t_rgb		sky;
 	char		**map;		
 	size_t		map_h;	
 	size_t		map_w;	
@@ -371,5 +366,5 @@ void    calculate_wall_distance(t_game *game, double rayDirX, double rayDirY,
 // Door helper functions  
 int     find_nearest_door(t_game *game, int *door_x, int *door_y);
 void    update_door_system(t_game *game);
-
+void rgb_to_mlx_color(t_rgb *rgb);
 #endif

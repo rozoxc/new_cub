@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 02:57:35 by selbouka          #+#    #+#             */
-/*   Updated: 2025/09/22 09:20:44 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/22 10:59:26 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ void init_vars(t_vars *var)
     var->floor.r = -1;
     var->floor.g = -1;
     var->floor.b = -1;
-    var->ceiling.r = -1;
-    var->ceiling.g = -1;
-    var->ceiling.b = -1;
+    var->sky.r = -1;
+    var->sky.g = -1;
+    var->sky.b = -1;
     var->map = NULL;
     var->fd = -1;
 }

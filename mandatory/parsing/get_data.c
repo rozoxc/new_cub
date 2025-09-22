@@ -6,11 +6,17 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 03:17:15 by selbouka          #+#    #+#             */
-/*   Updated: 2025/09/22 09:20:44 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/22 11:41:33 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
+
+
+void rgb_to_mlx_color(t_rgb *rgb)
+{
+    rgb->rgb = ((rgb->r << 16) | (rgb->g << 8) | rgb->b);
+}
 
 int set_texture(char **texture_ptr, char *path)
 {
@@ -43,7 +49,7 @@ int set_color(t_rgb *color, char *rgb)
         !is_valid_rgb(rgb_tokens[2]))
     {
         return (0);
-    }
+    }                                               
     color->r = ft_atoi(rgb_tokens[0]);
     color->g = ft_atoi(rgb_tokens[1]);
     color->b = ft_atoi(rgb_tokens[2]);
@@ -62,12 +68,10 @@ int set_item(t_vars *var, char *key, char *value)
         return (set_texture(&var->tex.west, value));
     else if (ft_strcmp(key, "EA") == 0)
         return (set_texture(&var->tex.east, value));
-    else if (ft_strcmp(key, "DO") == 0)
-        return (set_texture(&var->tex.door, value));
     else if (ft_strcmp(key, "F") == 0)
         return (set_color(&var->floor, value));
     else if (ft_strcmp(key, "C") == 0)
-        return (set_color(&var->ceiling, value));
+        return (set_color(&var->sky, value));
     return (0);
 }
 
@@ -82,8 +86,6 @@ bool firstArg(char *key)
     else if (ft_strcmp(key, "WE") == 0)
         return (true);
     else if (ft_strcmp(key, "EA") == 0)
-        return (true);
-    else if (ft_strcmp(key, "DO") == 0)
         return (true);
     else if (ft_strcmp(key, "F") == 0)
         return (true);
@@ -125,7 +127,7 @@ int parse_header(t_vars *var)
     char    **tokens;
     int     items_found = 0;
 
-    while (items_found < 7)
+    while (items_found < 6)
     {
         line = get_next_line(var->fd);
         if (!line)

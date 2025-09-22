@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 22:30:24 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/22 09:29:49 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/22 11:12:57 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,6 @@ int main(int ac, char **av)
     init_keys(game);
     mlx_hook(game->win, 02, 1L<<0, key_press, game);
     mlx_hook(game->win, 03, 1L<<1, key_release, game);
-    
-    // mlx_hook(game->win, 02, 1L<<0, shoot, game);
-    
-    // mlx_hook(game->win, 17, 1L << 17, handle_close, game);
     mlx_loop_hook(game->mlx, game_loop, game);
     mlx_hook(game->win, 6, 1L<<6, mouse_move_hook, game);
     mlx_loop(game->mlx);
