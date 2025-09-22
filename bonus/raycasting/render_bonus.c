@@ -6,12 +6,11 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 00:11:36 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/21 18:07:28 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/22 09:35:15 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
-
+#include "../../includes/cub3d.h"
 void clear_image(t_game *game, int color)
 {
     int x, y;

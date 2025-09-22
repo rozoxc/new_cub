@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/22 09:27:20 by selbouka          #+#    #+#             */
-/*   Updated: 2025/09/22 09:38:03 by selbouka         ###   ########.fr       */
+/*   Created: 2025/09/22 09:27:57 by selbouka          #+#    #+#             */
+/*   Updated: 2025/09/22 09:33:17 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,8 +22,6 @@
 #include "../minilibx-linux/mlx_int.h"
 # include <fcntl.h>
 #include <math.h>
-#include <stdbool.h>
-
 
 // x = 100 out of 1000 width = 0.1 (10%)
 // y = 447 out of 800 height = 0.55875 (55.875%)
@@ -48,7 +46,6 @@
 #define MINI_MAP_HEIGHT 50
 #define MINI_MAP_WIDHT 50
 
-
 //<------------------------------>/
 #define MINIMAP_SIZE 100       // Make bigger/smaller
 #define MINIMAP_VIEW_RANGE 12   // Show more/less area around player
@@ -70,8 +67,6 @@ typedef struct s_line_data
 	int	error;
 }	t_line_data;
 
-
-
 typedef struct s_minimap_data
 {
 	int	center_x;
@@ -92,6 +87,7 @@ typedef struct s_minimap_data
 #define ERROR_INIT "faild to initialize the game\n"
 
 #define MOUSE_SENSITIVITY 0.003
+
 typedef struct s_texture
 {
     void    *img;
@@ -102,15 +98,6 @@ typedef struct s_texture
     int     width;
     int     height;
 } t_texture;
-
-// typedef struct s_player{
-//     double plan_x;
-//     double plan_y;
-//     double dir_x;
-//     double dir_y;
-//     double posX;
-//     double posY;
-// } t_player;
 
 typedef struct s_image
 {
@@ -127,6 +114,7 @@ typedef struct s_map
     int width;
     int height;   
 }t_map;
+
 typedef struct s_ray_data
 {
     int     mapX;
@@ -139,6 +127,7 @@ typedef struct s_ray_data
     int     stepY;
     int max_distance;
 }   t_ray_data;
+
 typedef struct s_ray
 {
     double perpWallDist;
@@ -146,7 +135,6 @@ typedef struct s_ray
     int mapX;
     int mapY;
     double wallX;
-    
 } t_ray;
 
 typedef struct s_keys
@@ -159,21 +147,6 @@ typedef struct s_keys
     int right;
     int space;    // Add space key for door interaction
 }t_keys;
-
-
-// typedef struct  s_game
-// {
-//     void        *mlx;
-//     void        *win;
-//     t_texture  *texture;
-//     t_player    *player;
-//     t_map       *map;
-//     t_image     *image;
-//     t_keys      *keys;
-//     int         height;
-//     int         weight;
-//     int         view_mode;
-// } t_game;
 
 typedef struct s_door
 {
@@ -200,20 +173,12 @@ typedef struct s_door_manager
     int max_doors;
 } t_door_manager;
 
-
-
-
-
-
-// --------------------//
-
 typedef struct s_rgb
 {
 	int	r;
 	int	g;
 	int	b;
 }	t_rgb;
-
 
 typedef struct s_textures
 {
@@ -226,7 +191,6 @@ typedef struct s_textures
     char    *shoot0;
     char    *shoot1;
 
-    
     void    *img;
     char    *addr;
     int     bits_per_pixel;
@@ -234,9 +198,7 @@ typedef struct s_textures
     int     endian;
     int     width;
     int     height;
-    
 }	t_textures;
-
 
 typedef struct s_player{
     double plan_x;
@@ -248,7 +210,6 @@ typedef struct s_player{
 	char		player_dir;
 } t_player;
 
-
 typedef struct s_vars
 {
 	t_textures	tex;
@@ -258,18 +219,11 @@ typedef struct s_vars
 	size_t		map_h;	
 	size_t		map_w;	
 	int			fd;
-	
 }	t_vars;
-
-
 
 // Add to the key definitions section
 #define KEY_SPACE 32     // Space key for door interaction
 
-// Add to the t_keys structure (update your existing structure)
-
-
-// Add to the t_game structure (add this member)
 typedef struct  s_game
 {
     void        *mlx;
@@ -306,13 +260,10 @@ int parse_map(t_game *var);
 int is_valid_map_char(char c);
 int is_player_char(char c);
 
-
 // static int		validate_map_walls(t_game *vars);
 // static int	validate_map_walls(t_game *vars);
 
-
 //------------------//
-
 
 void     render_game(t_game *game);
 void draw_rectangle(t_game *game, int start_x, int start_y, int color);
@@ -340,16 +291,7 @@ int	mouse_move_hook(int x, int y, t_game *game);
 int shoot(t_game *game);
 void render_hand_with_transparency(t_texture *image, int start_x, int start_y, t_game *game);
 
-
-
-
-
-
-
-
-
 #define MAX_RAY_DISTANCE 50 
-
 
 int		is_door_at_position(t_game *game, int x, int y);
 int		is_door_open(t_game *game, int x, int y);

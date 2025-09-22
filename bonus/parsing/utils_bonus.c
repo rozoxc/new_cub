@@ -6,11 +6,11 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 02:57:35 by selbouka          #+#    #+#             */
-/*   Updated: 2025/09/19 12:19:53 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/22 09:35:15 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../../includes/cub3d.h"
 
 int is_whitespace_only(char *str)
 {

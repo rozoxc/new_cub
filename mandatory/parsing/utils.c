@@ -6,11 +6,11 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 02:57:35 by selbouka          #+#    #+#             */
-/*   Updated: 2025/09/21 08:24:51 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/22 09:20:44 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../../includes/parsing.h"
 
 int is_whitespace_only(char *str)
 {

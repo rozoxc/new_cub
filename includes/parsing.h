@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:22:47 by student           #+#    #+#             */
-/*   Updated: 2025/09/13 22:17:15 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/09/22 09:21:20 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 # include <stdbool.h>
 # include <stdint.h>
 
-# include "../../libft/libft.h"
-#include "../../libft/get_next_line.h"
+# include "../libft/libft.h"
+#include "../libft/get_next_line.h"
 
-#include "../../includes/cub3d.h"
+#include "cub3d.h"
 
 # define WALL 1
 # define EMPTY 0

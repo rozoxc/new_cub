@@ -6,11 +6,11 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 10:13:54 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/21 18:11:33 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/22 09:35:15 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	draw_sky(t_game *game)
 {

@@ -6,12 +6,11 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:38:20 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/21 09:59:08 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/22 09:35:15 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
-
+#include "../../includes/cub3d.h"
 /* Updated functions for hooks_bonus.c */
 
 void init_keys(t_game * game)

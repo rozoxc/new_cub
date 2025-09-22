@@ -6,11 +6,11 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 01:35:20 by selbouka          #+#    #+#             */
-/*   Updated: 2025/08/17 01:56:22 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/22 09:20:44 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../../includes/parsing.h"
 
 void	err(char *error)
 {

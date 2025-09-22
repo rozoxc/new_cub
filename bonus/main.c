@@ -6,11 +6,11 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 22:30:24 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/21 08:35:19 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/22 09:29:49 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 t_image *init_image(t_game *game)
 {

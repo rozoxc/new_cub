@@ -6,12 +6,11 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 20:29:06 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/21 13:38:00 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/22 09:35:15 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
-
+#include "../../includes/cub3d.h"
 // void	init_ray_data(t_game *game, double rayDirX, double rayDirY, t_ray_data *data)
 // {
 // 	data->mapX = (int)game->player->posX;

@@ -6,12 +6,11 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:15:52 by selbouka          #+#    #+#             */
-/*   Updated: 2025/09/21 13:42:30 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/22 09:35:15 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-
+#include "../../includes/cub3d.h"
 void	init_player_direction(t_player *player, char dir)
 {
 	if (dir == 'N')
