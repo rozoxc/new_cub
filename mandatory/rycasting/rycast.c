@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 10:13:54 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/22 11:06:15 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/09/24 05:11:26 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,6 @@ void	render_3d(t_game *game)
 		cameraX = 2 * x / (double)WINDOW_WIDTH - 1;// x-coordinate in camera space
 		rayDirX = game->player->dir_x + game->player->plan_x * cameraX;//ray direction x
 		rayDirY = game->player->dir_y + game->player->plan_y * cameraX;//ray direction y
-		printf("plan_x %f: \n", game->player->plan_x);
-		printf("plan_y %f: \n", game->player->plan_y);
 		ray = cast_ray(game, rayDirX, rayDirY);//perform DDA and get ray info
 		current_texture = get_wall_texture(game, &ray, rayDirX, rayDirY);
 		texX = calculate_tex_x(&ray, current_texture, rayDirX, rayDirY);//calculate texture x coordinate
