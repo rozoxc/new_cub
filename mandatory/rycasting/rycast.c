@@ -3,130 +3,91 @@
 /*                                                        :::      ::::::::   */
 /*   rycast.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 10:13:54 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/24 05:11:26 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/10/01 06:24:16 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	draw_sky(t_game *game)
+int	calculate_tex_x(t_ray *ray, t_texture *texture, double ray_dirx,
+		double ray_diry)
 {
-	int	i;
-	int	pj;
+	int	tex_x;
 
-	i = 0;
-	while (i < WINDOW_HEIGHT / 2)
-	{
-		pj = 0;
-		while (pj < WINDOW_WIDTH)
-		{
-			my_mlx_pixel_put(game->image, pj, i, game->vars->sky.rgb);
-			pj++;
-		}
-		i++;
-	}
+	tex_x = (int)(ray->wallX * (double)texture->width);
+	if (ray->side == 0 && ray_dirx > 0)
+		tex_x = texture->width - tex_x - 1;
+	if (ray->side == 1 && ray_diry < 0)
+		tex_x = texture->width - tex_x - 1;
+	return (tex_x);
 }
 
-void	draw_floor(t_game *game)
+void	init_wall_draw(t_ray *ray, t_texture *texture, t_draw *draw)
 {
-	int	j;
-	int	pj;
-
-	j = WINDOW_HEIGHT / 2;
-	while (j < WINDOW_HEIGHT)
-	{
-		pj = 0;
-		while (pj < WINDOW_WIDTH)
-		{
-			my_mlx_pixel_put(game->image, pj, j, game->vars->floor.rgb);
-			pj++;
-		}
-		j++;
-	}
+	draw->line_height = (int)(WINDOW_HEIGHT / ray->perpWallDist);
+	draw->step = 1.0 * texture->height / draw->line_height;
+	draw->tex_pos = (draw->draw_start - WINDOW_HEIGHT / 2
+			+ draw->line_height / 2) * draw->step;
 }
 
-void	calculate_wall_bounds(t_ray *ray, int *drawStart, int *drawEnd)
+void	draw_texture_pixel(t_game *game, t_ray *ray, t_draw *draw,
+		t_texture *texture)
 {
-	int	lineHeight;
-
-	lineHeight = (int)(WINDOW_HEIGHT / ray->perpWallDist);
-	*drawStart = -lineHeight / 2 + WINDOW_HEIGHT / 2;
-	if (*drawStart < 0)
-		*drawStart = 0;
-	*drawEnd = lineHeight / 2 + WINDOW_HEIGHT / 2;
-	if (*drawEnd >= WINDOW_HEIGHT)
-		*drawEnd = WINDOW_HEIGHT - 1;
-}
-
-int	calculate_tex_x(t_ray *ray, t_texture *texture, double rayDirX, double rayDirY)
-{
-	int	texX;
-
-	texX = (int)(ray->wallX * (double)texture->width);
-	if (ray->side == 0 && rayDirX > 0)
-		texX = texture->width - texX - 1;
-	if (ray->side == 1 && rayDirY < 0)
-		texX = texture->width - texX - 1;
-	return (texX);
-}
-
-void	draw_wall_column(t_game *game, t_ray *ray, int x, int texX, t_texture *texture)
-{
-	int				y;
-	int				drawStart;
-	int				drawEnd;
-	int				texY;
-	double			step;
-	double			texPos;
 	unsigned int	color;
-	int				lineHeight;
 
-	calculate_wall_bounds(ray, &drawStart, &drawEnd);
-	lineHeight = (int)(WINDOW_HEIGHT / ray->perpWallDist);
-	step = 1.0 * texture->height / lineHeight;
-	texPos = (drawStart - WINDOW_HEIGHT / 2 + lineHeight / 2) * step;
-	y = drawStart;
-	while (y < drawEnd)
+	draw->tex_y = (int)draw->tex_pos;
+	if (draw->tex_y >= texture->height)
+		draw->tex_y = texture->height - 1;
+	if (draw->tex_y < 0)
+		draw->tex_y = 0;
+	draw->tex_pos += draw->step;
+	color = get_texture_pixel(texture, draw->tex_x, draw->tex_y);
+	if (ray->side == 1)
+		color = (color >> 1) & 0x7F7F7F;
+	my_mlx_pixel_put(game->image, draw->x, draw->y, color);
+}
+
+void	draw_wall_column(t_game *game, t_ray *ray, int tex_x,
+		t_texture *texture)
+{
+	t_draw	draw;
+
+	draw.x = game->x_loop;
+	draw.tex_x = tex_x;
+	calculate_wall_bounds(ray, &draw.draw_start, &draw.draw_end);
+	init_wall_draw(ray, texture, &draw);
+	draw.y = draw.draw_start;
+	while (draw.y < draw.draw_end)
 	{
-		texY = (int)texPos;
-		if (texY >= texture->height)
-			texY = texture->height - 1;
-		if (texY < 0)
-			texY = 0;
-		texPos = texPos + step;
-		color = get_texture_pixel(texture, texX, texY);
-		if (ray->side == 1)
-			color = (color >> 1) & 0x7F7F7F;
-		my_mlx_pixel_put(game->image, x, y, color);
-		y++;
+		draw_texture_pixel(game, ray, &draw, texture);
+		draw.y++;
 	}
 }
 
 void	render_3d(t_game *game)
 {
-	int		x;
-	double	cameraX;
-	double	rayDirX;
-	double	rayDirY;
-	int		texX;
-	t_ray	ray;
-	t_texture *current_texture;
+	t_render	render;
 
 	draw_sky(game);
 	draw_floor(game);
-	x = 0;
-	while (x < WINDOW_WIDTH)
+	game->x_loop = 0;
+	while (game->x_loop < WINDOW_WIDTH)
 	{
-		cameraX = 2 * x / (double)WINDOW_WIDTH - 1;// x-coordinate in camera space
-		rayDirX = game->player->dir_x + game->player->plan_x * cameraX;//ray direction x
-		rayDirY = game->player->dir_y + game->player->plan_y * cameraX;//ray direction y
-		ray = cast_ray(game, rayDirX, rayDirY);//perform DDA and get ray info
-		current_texture = get_wall_texture(game, &ray, rayDirX, rayDirY);
-		texX = calculate_tex_x(&ray, current_texture, rayDirX, rayDirY);//calculate texture x coordinate
-		draw_wall_column(game, &ray, x, texX, current_texture);//draw the wall column
-		x++;
+		render.camera_x = 2 * game->x_loop / (double)WINDOW_WIDTH - 1;
+		render.ray_dirx = game->player->dir_x + game->player->plan_x
+			* render.camera_x;
+		render.ray_diry = game->player->dir_y + game->player->plan_y
+			* render.camera_x;
+		render.ray = cast_ray(game, render.ray_dirx, render.ray_diry);
+		render.current_texture = get_wall_texture(game, &render.ray,
+				render.ray_dirx, render.ray_diry);
+		render.tex_x = calculate_tex_x(&render.ray, render.current_texture,
+				render.ray_dirx, render.ray_diry);
+		draw_wall_column(game, &render.ray, render.tex_x,
+			render.current_texture);
+		game->x_loop++;
 	}
 }
