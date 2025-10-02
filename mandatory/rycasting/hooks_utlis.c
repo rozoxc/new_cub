@@ -6,7 +6,7 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 04:25:29 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/10/01 04:37:17 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/10/02 00:20:20 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ int	close_window(void)
 
 int	is_valid_move(t_game *game, double new_x, double new_y)
 {
-	int	map_x;
-	int	map_y;
+	int		map_x;
+	int		map_y;
 	char	cell;
 
 	map_x = (int)new_x;
