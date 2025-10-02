@@ -6,7 +6,7 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 09:27:20 by selbouka          #+#    #+#             */
-/*   Updated: 2025/09/24 05:12:44 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/10/02 08:22:07 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,7 +256,38 @@ typedef struct s_vars
 	
 }	t_vars;
 
+typedef struct s_ray_calc
+{
+	double		ray_dirx;
+	double		ray_diry;
+	int			side;
+	t_ray_data	*data;
+	t_ray		*ray;
+}	t_ray_calc;
 
+typedef struct s_draw
+{
+	int				x;
+	int				y;
+	int				draw_start;
+	int				draw_end;
+	int				tex_x;
+	int				tex_y;
+	int				line_height;
+	double			step;
+	double			tex_pos;
+}	t_draw;
+
+typedef struct s_render
+{
+    double camera_x;
+    double ray_dirx;
+    double ray_diry;
+    t_texture *current_texture;
+    int tex_x;
+    t_ray ray;
+
+}   t_render;
 
 // Add to the key definitions section
 #define KEY_SPACE 32     // Space key for door interaction
@@ -287,6 +318,7 @@ typedef struct  s_game
     int         view_mode;
     t_vars      *vars;
     int weapon;
+    int x_loop;
 } t_game;
 
 int			parser(char *file, t_game *game);
@@ -300,11 +332,11 @@ void	err(char *error);
 int parse_map(t_game *var);
 int is_valid_map_char(char c);
 int is_player_char(char c);
-
-
+void	step_ray_x(t_ray_data *data, int *side);
+void	step_ray_y(t_ray_data *data, int *side);
 // static int		validate_map_walls(t_game *vars);
 // static int	validate_map_walls(t_game *vars);
-
+int	check_wall_hit(t_game *game, t_ray_data *data);
 
 //------------------//
 
@@ -336,12 +368,15 @@ int shoot(t_game *game);
 void render_hand_with_transparency(t_texture *image, int start_x, int start_y, t_game *game);
 
 
+int	is_valid_move(t_game *game, double new_x, double new_y);
 
-
-
-
-
-
+void	calculate_wall_bounds(t_ray *ray, int *drawStart, int *drawEnd);
+void	calc_perp_wall_dist(t_game *game, t_ray_data *data,
+		t_ray *ray, t_ray_calc *calc);
+void	draw_sky(t_game *game);
+void	draw_floor(t_game *game);
+void	step_in_x(t_ray_data *data);
+void	step_in_y(t_ray_data *data);
 
 #define MAX_RAY_DISTANCE 50 
 
@@ -354,15 +389,12 @@ int		perform_dda_with_doors(t_game *game, t_ray_data *data);
 t_ray	cast_ray_with_doors(t_game *game, double rayDirX, double rayDirY);
 t_texture	*get_wall_texture_with_doors(t_game *game, t_ray *ray, double rayDirX, double rayDirY);
 int		is_valid_move_with_doors(t_game *game, double new_x, double new_y);
-
+void	calc_wall_x(t_game *game, t_ray *ray, t_ray_calc *calc);
 // DDA Algorithm functions
 void    init_ray_data(t_game *game, double rayDirX, double rayDirY, t_ray_data *data);
 void    calculate_step_x(t_game *game, double rayDirX, t_ray_data *data);
 void    calculate_step_y(t_game *game, double rayDirY, t_ray_data *data);
 int     perform_dda(t_game *game, t_ray_data *data);
-void    calculate_wall_distance(t_game *game, double rayDirX, double rayDirY,
-                               t_ray_data *data, t_ray *ray, int side);
-
 // Door helper functions  
 int     find_nearest_door(t_game *game, int *door_x, int *door_y);
 void    update_door_system(t_game *game);

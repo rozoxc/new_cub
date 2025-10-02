@@ -8,18 +8,20 @@ INCLUDE = includes/cub3d.h
 # Mandatory part sources
 SRC = mandatory/main.c \
 	  mandatory/rycasting/hooks.c \
-	  mandatory/rycasting/draw.c \
+	  mandatory/rycasting/hooks_utlis.c \
 	  mandatory/rycasting/render.c \
 	  mandatory/rycasting/rycast.c \
 	  mandatory/rycasting/dda_algo.c \
+	  mandatory/rycasting/dda_algo_utlis.c \
 	  mandatory/rycasting/texturs.c \
+	  mandatory/rycasting/utlis.c \
 	  mandatory/rycasting/utlis_rycast.c \
 	  mandatory/parsing/error.c \
 	  mandatory/parsing/get_data.c \
 	  mandatory/parsing/map_process.c \
 	  mandatory/parsing/parse.c \
 	  mandatory/parsing/utils.c \
-	  mandatory/parsing/validate_file.c
+	  mandatory/parsing/validate_file.c 
 
 # Bonus part sources
 BONUS = bonus/main.c \
