@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:34:03 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/06 19:37:24 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/06 21:11:15 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,8 @@ int	perform_dda_with_doors(t_game *game, t_ray_data *data)
 	while (hit == 0)
 	{
 		if (data->sideDistX < data->sideDistY)
-		{
-			data->sideDistX += data->deltaDistX;
-			data->mapX += data->stepX;
-			side = 0;
-		}
+			1 && (data->sideDistX += data->deltaDistX, \
+				data->mapX += data->stepX, side = 0);
 		else
 		{
 			data->sideDistY += data->deltaDistY;

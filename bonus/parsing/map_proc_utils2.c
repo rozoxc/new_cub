@@ -6,17 +6,32 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:30:31 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/06 19:30:44 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/06 21:31:27 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	process_map_content(t_game *vars)
+static int process_map_cell(t_game *vars, size_t x, size_t y, int *player_count)
 {
-	size_t	x;
-	size_t	y;
-	int		player_count;
+	char c;
+
+	c = vars->vars->map[y][x];
+	if (c == '\0')
+		return (err("Map contains null character.\n"), 0);
+	if (c == '\n')
+		return (err("Map contains newline character.\n"), 0);
+	if (!is_valid_map_char(c))
+		return (err("Invalid character in map.\n"), 0);
+	if (is_player_char(c))
+		if (!handle_player_position(vars, x, y, player_count))
+			return (0);
+	return (1);
+}
+
+int process_map_content(t_game *vars)
+{
+	size_t	x; size_t	y; int player_count;
 
 	player_count = 0;
 	y = 0;
@@ -25,20 +40,13 @@ int	process_map_content(t_game *vars)
 		x = 0;
 		while (x < vars->vars->map_w)
 		{
-			if (vars->vars->map[y][x] == '\0')
-				return (err("Map contains null character.\n"), 0);
-			if (vars->vars->map[y][x] == '\n')
-				return (err("Map contains newline character.\n"), 0);
 			if (vars->vars->map[y][x] == ' ')
 			{
 				x++;
 				continue ;
 			}
-			if (!is_valid_map_char(vars->vars->map[y][x]))
-				return (err("Invalid character in map.\n"), 0);
-			if (is_player_char(vars->vars->map[y][x]))
-				if (!handle_player_position(vars, x, y, &player_count))
-					return (0);
+			if (!process_map_cell(vars, x, y, &player_count))
+				return (0);
 			x++;
 		}
 		y++;

@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:28:23 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/06 19:28:56 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/06 20:01:33 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,34 +33,46 @@ int	process_line(char *line, char **lines, size_t *count, size_t *max)
 	return (1);
 }
 
-char	**read_map_lines(t_vars *vars, size_t *line_count, \
-	size_t *max_width)
+bool	read_loop(t_vars *vars, char **lines, \
+	size_t *l_count, size_t *max_width)
 {
 	char	*line;
-	char	**lines;
+	int		validation;
 	size_t	capacity;
-	int		status;
 
 	capacity = 16;
 	lines = ft_malloc(sizeof(char *) * capacity, 1);
+	line = get_next_line(vars->fd);
+	while (line != NULL)
+	{
+		validation = process_line(line, lines, l_count, max_width);
+		if (validation == 0)
+		{
+			line = get_next_line(vars->fd);
+			continue ;
+		}
+		if (validation == -1)
+			return (false);
+		if (*l_count >= capacity)
+			lines = resize_and_copy(lines, &capacity, *l_count);
+		if (!lines)
+			return (NULL);
+		line = get_next_line(vars->fd);
+	}
+	return (true);
+}
+
+char	**read_map_lines(t_vars *vars, size_t *line_count, \
+	size_t *max_width)
+{
+	char	**lines;
+
 	if (!lines)
 		return (err("Memory allocation failed\n"), NULL);
 	*line_count = 0;
 	*max_width = 0;
-	while ((line = get_next_line(vars->fd)) != NULL)
-	{
-		status = process_line(line, lines, line_count, max_width);
-		if (status == -1)
-			return (NULL);
-		if (status == 0)
-			continue ;
-		if (*line_count >= capacity)
-		{
-			lines = resize_and_copy(lines, &capacity, *line_count);
-			if (!lines)
-				return (NULL);
-		}
-	}
+	if (!read_loop(vars, lines, line_count, max_width))
+		return (NULL);
 	if (*line_count == 0)
 		return (err("Map not found in file\n"), ft_malloc(0, 0), NULL);
 	return (lines);

@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:15:52 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/06 19:30:29 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/06 21:06:56 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,12 @@ int	validate_map_walls_optimized(t_game *game)
 	return (1);
 }
 
-int	validate_door_placement(char **map, int x, int y, \
-	int map_w, int map_h)
+int	validate_door_placement(char **map, int x, int y, t_vars *vars)
 {
 	int	horizontal_walls;
 	int	vertical_walls;
 
-	if (x <= 0 || x >= map_w - 1 || y <= 0 || y >= map_h - 1)
+	if (x <= 0 || x >= vars->map_w - 1 || y <= 0 || y >= vars->map_h - 1)
 		return (0);
 	horizontal_walls = (map[y][x - 1] == '1' && map[y][x + 1] == '1');
 	vertical_walls = (map[y - 1][x] == '1' && map[y + 1][x] == '1');
@@ -91,8 +90,7 @@ int	validate_all_doors(t_game *game)
 			cell = game->vars->map[y][x];
 			if (cell == 'D' || cell == 'd')
 			{
-				if (!validate_door_placement(game->vars->map, x, y,
-						game->vars->map_w, game->vars->map_h))
+				if (!validate_door_placement(game->vars->map, x, y, game->vars))
 					return (0);
 			}
 			x++;

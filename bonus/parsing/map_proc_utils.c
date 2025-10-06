@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:26:43 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/06 19:26:44 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/06 21:12:30 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,8 @@ void	init_player_direction(t_player *player, char dir)
 		player->plan_y = 0.66;
 	}
 	else if (dir == 'W')
-	{
-		player->dir_x = -1;
-		player->dir_y = 0;
-		player->plan_x = 0;
-		player->plan_y = -0.66;
-	}
+		1 && (player->dir_x = -1, player->dir_y = 0, \
+			player->plan_x = 0, player->plan_y = -0.66);
 }
 
 int	ft_end_with_one(t_vars *vars)
