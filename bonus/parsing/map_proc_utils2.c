@@ -6,15 +6,16 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:30:31 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/06 21:35:09 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/06 21:41:37 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int process_map_cell(t_game *vars, size_t x, size_t y, int *player_count)
+static int	process_map_cell(t_game *vars, size_t x, \
+	size_t y, int *player_count)
 {
-	char c;
+	char	c;
 
 	c = vars->vars->map[y][x];
 	if (c == '\0')
@@ -24,14 +25,18 @@ static int process_map_cell(t_game *vars, size_t x, size_t y, int *player_count)
 	if (!is_valid_map_char(c))
 		return (err("Invalid character in map.\n"), 0);
 	if (is_player_char(c))
+	{
 		if (!handle_player_position(vars, x, y, player_count))
 			return (0);
+	}
 	return (1);
 }
 
-int process_map_content(t_game *vars)
+int	process_map_content(t_game *vars)
 {
-	size_t	x; size_t	y; int player_count;
+	size_t	x;
+	size_t	y;
+	int		player_count;
 
 	player_count = 0;
 	y = 0;
