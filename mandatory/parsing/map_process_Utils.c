@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 17:03:04 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/03 17:05:57 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/06 13:54:55 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	is_player_char(char c)
 	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }
 
-static int	create_padded_map(t_vars *vars, char **tmp_lines)
+int	create_padded_map(t_vars *vars, char **tmp_lines)
 {
 	size_t	i;
 
@@ -45,7 +45,7 @@ static int	create_padded_map(t_vars *vars, char **tmp_lines)
 	return (1);
 }
 
-static int	ft_only_ones(char *str)
+int	ft_only_ones(char *str)
 {
 	int	i;
 
@@ -59,7 +59,7 @@ static int	ft_only_ones(char *str)
 	return (1);
 }
 
-static int	ft_start_with_one(t_vars *vars)
+int	ft_start_with_one(t_vars *vars)
 {
 	char	**map;
 	int		i;

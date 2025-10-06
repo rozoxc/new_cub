@@ -23,7 +23,10 @@ SRC = mandatory/main.c \
 	  mandatory/parsing/utils.c \
 	  mandatory/parsing/getData_Utils.c\
 	  mandatory/parsing/map_process_Utils.c\
-	  mandatory/parsing/map_process_Utils2.c
+	  mandatory/parsing/map_process_Utils2.c\
+	  mandatory/parsing/validate_file.c\
+	  mandatory/parsing/read_map.c
+
 
 # Bonus part sources
 BONUS = bonus/main.c \

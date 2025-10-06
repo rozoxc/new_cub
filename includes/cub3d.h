@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 09:27:20 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/02 08:22:07 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/10/06 14:33:01 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -321,6 +321,15 @@ typedef struct  s_game
     int x_loop;
 } t_game;
 
+
+typedef struct s_map_reader
+{
+	char	**lines;
+	size_t	capacity;
+	size_t	*line_count;
+	size_t	*max_width;
+}	t_map_reader;
+
 int			parser(char *file, t_game *game);
 int validate_path_and_open(char *path, t_vars *var);
 int parse_header(t_vars *var);
@@ -399,4 +408,26 @@ int     perform_dda(t_game *game, t_ray_data *data);
 int     find_nearest_door(t_game *game, int *door_x, int *door_y);
 void    update_door_system(t_game *game);
 void rgb_to_mlx_color(t_rgb *rgb);
+
+
+
+
+// utils
+
+int	process_map_content(t_game *vars);
+int	is_valid_map_char(char c);
+int	is_player_char(char c);
+int	create_padded_map(t_vars *vars, char **tmp_lines);
+int	ft_only_ones(char *str);
+int	ft_start_with_one(t_vars *vars);
+
+void	rgb_to_mlx_color(t_rgb *rgb);
+int	set_color(t_rgb *color, char *rgb);
+int	set_item(t_vars *var, char *key, char *value);
+int	set_texture(char **texture_ptr, char *path);
+bool	firstarg(char *key);
+char	**read_map_lines(t_vars *vars, size_t *line_count, size_t *max_width);
+int	validate_path_and_open(char *path, t_vars *var);
+
+
 #endif
