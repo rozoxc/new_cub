@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 09:27:20 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/06 14:33:01 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/06 19:38:16 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -430,4 +430,59 @@ char	**read_map_lines(t_vars *vars, size_t *line_count, size_t *max_width);
 int	validate_path_and_open(char *path, t_vars *var);
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+// bns
+
+int	is_valid_map_char(char c);
+
+void	calculate_wall_distance_b(t_game *game, double rayDirX, double rayDirY,
+	t_ray_data *data, t_ray *ray, int side);
+
+// map process
+void	init_player_direction(t_player *player, char dir);
+int	ft_end_with_one(t_vars *vars);
+int	ft_check_zero_surroundings(char **map, int i, int j, t_vars *vars);
+int	is_player_char(char c);
+char	**resize_and_copy(char **lines, size_t *capacity, size_t count);
+
+
+int	process_line(char *line, char **lines, size_t *count, size_t *max);
+char	**read_map_lines(t_vars *vars, size_t *line_count, \
+	size_t *max_width);
+int	create_padded_map(t_vars *vars, char **tmp_lines);
+int	handle_player_position(t_game *vars, size_t x, size_t y, \
+	int *player_count);
+
+
+int	process_map_content(t_game *vars);
+int	ft_only_ones(char *str);
+int	ft_start_with_one(t_vars *vars);
+
+
+
+// doors
+
+int	is_door_open(t_game *game, int x, int y);
+void	toggle_door(t_game *game, int x, int y);
+int	check_door_in_ray(t_game *game, double *ray_x, double *ray_y,
+	int *door_coords);
+int	find_nearest_door(t_game *game, int *door_x, int *door_y);
+
+
+int	is_door_at_position(t_game *game, int x, int y);
+int	can_close_door(t_game *game, int door_x, int door_y);
+void	handle_door_interaction(t_game *game);
+t_texture	*select_wall_texture(t_game *game, t_ray *ray,
+	double rayDirX, double rayDirY);
 #endif

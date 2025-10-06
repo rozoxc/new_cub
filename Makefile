@@ -43,7 +43,17 @@ BONUS = bonus/main.c \
 		bonus/parsing/get_data_bonus.c \
 		bonus/parsing/parse_bonus.c \
 		bonus/parsing/validate_file_bonus.c \
-		bonus/parsing/doors.c
+		bonus/parsing/doors.c\
+		bonus/parsing/get_data_utils.c\
+		bonus/parsing/map_proc_utils.c\
+		bonus/parsing/map_proc_utils1.c\
+		bonus/parsing/map_proc_utils2.c\
+		bonus/parsing/doors_utils.c\
+		bonus/parsing/doors_utils1.c\
+
+
+
+
 
 HEADER = includes/cub3d.h get_next_line/get_next_line.h
 OBJ = $(SRC:.c=.o)

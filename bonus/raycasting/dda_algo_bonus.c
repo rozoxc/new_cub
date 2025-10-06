@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 20:29:06 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/22 09:35:15 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/06 15:44:50 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ int	perform_dda(t_game *game, t_ray_data *data)
 	return (side);
 }
 
-void	calculate_wall_distance(t_game *game, double rayDirX, double rayDirY,
+void	calculate_wall_distance_b(t_game *game, double rayDirX, double rayDirY,
 	t_ray_data *data, t_ray *ray, int side)
 {
 	// Calculate perpendicular wall distance
@@ -262,8 +262,7 @@ t_ray	cast_ray(t_game *game, double rayDirX, double rayDirY)
 	// Perform DDA algorithm
 	side = perform_dda(game, &data);
 	
-	// Calculate final wall distance and texture coordinates
-	calculate_wall_distance(game, rayDirX, rayDirY, &data, &ray, side);
+	calculate_wall_distance_b(game, rayDirX, rayDirY, &data, &ray, side);
 	
 	// Set ray properties
 	ray.side = side;
