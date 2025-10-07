@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:22:05 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/06 19:23:27 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/07 10:55:05 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	set_texture(char **texture_ptr, char *path)
 {
 	int	fd;
 
+	printf ("%s\n", path);
 	if (*texture_ptr != NULL)
 		return (0);
 	fd = open(path, O_RDONLY);

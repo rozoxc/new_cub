@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 17:11:43 by selbouka          #+#    #+#             */
-/*   Updated: 2025/02/08 18:46:20 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/07 11:05:09 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ size_t	ft_strlen(const char *str)
 {
 	size_t	i;
 
+	if (!str || !*str)
+		return (0);
 	i = 0;
 	while (str[i])
 		i++;
