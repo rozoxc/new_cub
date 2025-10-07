@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:26:43 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/06 21:12:30 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/07 13:33:55 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,6 @@ int	ft_check_zero_surroundings(char **map, int i, int j, t_vars *vars)
 	return (1);
 }
 
-int	is_player_char(char c)
-{
-	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
-}
-
 char	**resize_and_copy(char **lines, size_t *capacity, size_t count)
 {
 	char	**new_lines;
@@ -97,4 +92,18 @@ char	**resize_and_copy(char **lines, size_t *capacity, size_t count)
 		i++;
 	}
 	return (new_lines);
+}
+
+int	handle_player_position(t_game *vars, size_t x, size_t y, \
+	int *player_count)
+{
+	if (*player_count > 0)
+		return (err("Multiple player positions found.\n"), 0);
+	vars->player->posX = x + 0.5;
+	vars->player->posY = y + 0.5;
+	init_player_direction(vars->player, vars->vars->map[y][x]);
+	vars->player->player_dir = vars->vars->map[y][x];
+	*player_count = 1;
+	vars->vars->map[y][x] = '0';
+	return (1);
 }

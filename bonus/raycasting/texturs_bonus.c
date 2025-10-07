@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 20:53:42 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/10/07 13:03:01 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/07 13:56:33 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ t_texture	*load_single_texture(t_game *game, char *filename)
 {
 	t_texture	*texture;
 
-	printf ("filename  = %s\n",filename);
 	texture = ft_malloc(sizeof(*texture), 1);
 	if (!texture)
 		return (NULL);
@@ -45,8 +44,6 @@ t_texture	*load_single_texture(t_game *game, char *filename)
 
 int	load_all_textures(t_game *game)
 {
-// 	printf ("-------------------->%s\n", game->vars->tex.north);
-// 	exit (0);
 	game->tex_north = load_single_texture(game, game->vars->tex.north);
 	if (!game->tex_north)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 03:17:15 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/07 13:03:53 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/07 13:05:24 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ static int	load_extra_textures(t_vars *var)
 		return (err("Invalid or duplicate item"), 0);
 	if (!set_texture(&var->tex.shoot1, "textures/shoot1.xpm"))
 		return (err("Invalid or duplicate item"), 0);
-	// if (!set_texture(&var->tex.door, "textures/doors.xpm"))
-	// 	return (err("Invalid or duplicate item door"), 0);
 	return (1);
 }
 

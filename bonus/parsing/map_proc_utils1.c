@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:28:23 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/07 12:17:06 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/07 13:52:58 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,105 +33,65 @@ int	process_line(char *line, char **lines, size_t *count, size_t *max)
 	return (1);
 }
 
-bool read_loop(t_vars *vars, char ***lines, \
-    size_t *l_count, size_t *max_width)
+bool	read_helper(int *validation, size_t *l_count, \
+	size_t *capacity, char ***lines)
 {
-    char    *line;
-    int     validation;
-    size_t  capacity;
+	if (*validation == -1)
+		return (false);
+	if (*l_count >= *capacity)
+	{
+		*lines = resize_and_copy(*lines, capacity, *l_count);
+		if (!*lines)
+			return (err("Memory allocation failed\n"), false);
+	}
+	return (true);
+}
 
-    capacity = 16;
-    *lines = ft_malloc(sizeof(char *) * capacity, 1);
-    if (!*lines)
-        return (err("Memory allocation failed\n"), false);
-    line = get_next_line(vars->fd);
-    while (line != NULL)
-    {
-		// printf ("-->%s| -->%d\n", line, vars->fd);
-        validation = process_line(line, *lines, l_count, max_width);
-        if (validation == 0)
-        {
+bool	read_loop(t_vars *vars, char ***lines, \
+	size_t *l_count, size_t *max_width)
+{
+	char	*line;
+	int		validation;
+	size_t	capacity;
+
+	capacity = 16;
+	*lines = ft_malloc(sizeof(char *) * capacity, 1);
+	if (!*lines)
+		return (err("Memory allocation failed\n"), false);
+	line = get_next_line(vars->fd);
+	while (line != NULL)
+	{
+		validation = process_line(line, *lines, l_count, max_width);
+		if (validation == 0)
+		{
 			line = NULL;
-            line = get_next_line(vars->fd);
-            continue ;
-        }
-        if (validation == -1)
-            return (false);
-        if (*l_count >= capacity)
-        {
-            *lines = resize_and_copy(*lines, &capacity, *l_count);
-            if (!*lines)
-                return (err("Memory allocation failed\n"), false);
-        }
-		
-        line = get_next_line(vars->fd);
-    }
-    return (true);
+			line = get_next_line(vars->fd);
+			continue ;
+		}
+		if (!read_helper(&validation, l_count, &capacity, lines))
+			return (false);
+		line = get_next_line(vars->fd);
+	}
+	return (true);
 }
 
-
-char **read_map_lines(t_vars *vars, size_t *line_count, \
-    size_t *max_width)
+char	**read_map_lines(t_vars *vars, size_t *line_count, \
+	size_t *max_width)
 {
-    char    **lines;
+	char	**lines;
 
-    lines = NULL;
-    *line_count = 0;
-    *max_width = 0;
-    if (!read_loop(vars, &lines, line_count, max_width))
-        return (NULL);
-    if (*line_count == 0)
-    {
-        ft_malloc(0, 0);
-        return (err("Map not found in file\n"), NULL);
-    }
-    return (lines);
+	lines = NULL;
+	*line_count = 0;
+	*max_width = 0;
+	if (!read_loop(vars, &lines, line_count, max_width))
+		return (NULL);
+	if (*line_count == 0)
+	{
+		ft_malloc(0, 0);
+		return (err("Map not found in file\n"), NULL);
+	}
+	return (lines);
 }
-
-// bool	read_loop(t_vars *vars, char **lines, \
-// 	size_t *l_count, size_t *max_width)
-// {
-// 	char	*line;
-// 	int		validation;
-// 	size_t	capacity;
-
-// 	capacity = 16;
-// 	lines = ft_malloc(sizeof(char *) * capacity, 1);
-// 	line = get_next_line(vars->fd);
-// 	while (line != NULL)
-// 	{
-// 		validation = process_line(line, lines, l_count, max_width);
-// 		if (validation == 0)
-// 		{
-// 			line = get_next_line(vars->fd);
-// 			continue ;
-// 		}
-// 		if (validation == -1)
-// 			return (false);
-// 		if (*l_count >= capacity)
-// 			lines = resize_and_copy(lines, &capacity, *l_count);
-// 		if (!lines)
-// 			return (NULL);
-// 		line = get_next_line(vars->fd);
-// 	}
-// 	return (true);
-// }
-
-// char	**read_map_lines(t_vars *vars, size_t *line_count, \
-// 	size_t *max_width)
-// {
-// 	char	**lines;
-
-// 	if (!lines)
-// 		return (err("Memory allocation failed\n"), NULL);
-// 	*line_count = 0;
-// 	*max_width = 0;
-// 	if (!read_loop(vars, lines, line_count, max_width))
-// 		return (NULL);
-// 	if (*line_count == 0)
-// 		return (err("Map not found in file\n"), ft_malloc(0, 0), NULL);
-// 	return (lines);
-// }
 
 int	create_padded_map(t_vars *vars, char **tmp_lines)
 {
@@ -152,19 +112,5 @@ int	create_padded_map(t_vars *vars, char **tmp_lines)
 		i++;
 	}
 	vars->map[i] = NULL;
-	return (1);
-}
-
-int	handle_player_position(t_game *vars, size_t x, size_t y, \
-	int *player_count)
-{
-	if (*player_count > 0)
-		return (err("Multiple player positions found.\n"), 0);
-	vars->player->posX = x + 0.5;
-	vars->player->posY = y + 0.5;
-	init_player_direction(vars->player, vars->vars->map[y][x]);
-	vars->player->player_dir = vars->vars->map[y][x];
-	*player_count = 1;
-	vars->vars->map[y][x] = '0';
 	return (1);
 }

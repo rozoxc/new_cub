@@ -6,11 +6,16 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 01:24:50 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/06 17:52:22 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/07 13:34:33 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+int	is_player_char(char c)
+{
+	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
+}
 
 bool	ends(char *s, char *end)
 {
