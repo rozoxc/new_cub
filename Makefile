@@ -1,4 +1,5 @@
 NAME = cub3d
+NAME_BONUS = cub3d_bonus
 CC = cc 
 FLAGS = -Wall -Werror -Wextra -fsanitize=address
 MLX_DIR = minilibx-linux
@@ -31,12 +32,16 @@ SRC = mandatory/main.c \
 # Bonus part sources
 BONUS = bonus/main.c \
 		bonus/raycasting/hooks_bonus.c \
-		bonus/raycasting/draw_bonus.c \
+		bonus/raycasting/hooks_utlis_bonus.c\
 		bonus/raycasting/render_bonus.c \
+		bonus/raycasting/render_utlis_bonus.c \
 		bonus/raycasting/utlis_bonus.c \
 		bonus/raycasting/rycast_bonus.c \
+		bonus/raycasting/rycast_utlis_bonus.c \
 		bonus/raycasting/dda_algo_bonus.c \
+		bonus/raycasting/dda_algo_utlis_bonus.c\
 		bonus/raycasting/texturs_bonus.c \
+		bonus/raycasting/utlis_bonus_2.c \
 		bonus/parsing/error_bonus.c \
 		bonus/parsing/map_process_bonus.c \
 		bonus/parsing/utils_bonus.c \
@@ -65,7 +70,7 @@ $(NAME): $(OBJ)
 	$(CC) $(FLAGS) $(OBJ) $(MLX_FLAG) libft/libft.a $(MLX_DIR)/libmlx_Linux.a $(MLX_DIR)/libmlx.a -o $(NAME)
 
 bonus: $(OBJ_BONUS)
-	$(CC) $(FLAGS) $(OBJ_BONUS) $(MLX_FLAG) libft/libft.a $(MLX_DIR)/libmlx_Linux.a $(MLX_DIR)/libmlx.a -o $(NAME)
+	$(CC) $(FLAGS) $(OBJ_BONUS) $(MLX_FLAG) libft/libft.a $(MLX_DIR)/libmlx_Linux.a $(MLX_DIR)/libmlx.a -o $(NAME_BONUS)
 
 %.o: %.c $(HEADER)
 	$(CC) $(FLAGS) -Iincludes -c $< -o $@
@@ -74,7 +79,7 @@ clean:
 	rm -f $(OBJ) $(OBJ_BONUS)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(NAME_BONUS)
 
 re: fclean all
 

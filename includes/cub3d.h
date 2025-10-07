@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 09:27:20 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/06 19:38:16 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/07 09:03:44 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,21 +56,18 @@
 #define MINIMAP_OFFSET_X 20     // Move minimap position
 #define MINIMAP_OFFSET_Y 20
 
-typedef struct s_line_data
+#define MINIMAP_DOOR_CLOSED_COLOR 0x8B4513    // Brown for closed doors
+#define MINIMAP_DOOR_OPEN_COLOR 0x90EE90      // Light green for open doors
+typedef struct s_render_data
 {
-	int	end_x;
-	int	end_y;
-	int	dx;
-	int	dy;
-	int	x;
-	int	y;
-	int	n;
-	int	x_inc;
-	int	y_inc;
-	int	error;
-}	t_line_data;
-
-
+	int				x;
+	int				y;
+	int				start_x;
+	int				start_y;
+	unsigned int	pixel_color;
+	unsigned int	transparent_color;
+	int				should_draw;
+}	t_render_data;
 
 typedef struct s_minimap_data
 {
@@ -485,4 +482,52 @@ int	can_close_door(t_game *game, int door_x, int door_y);
 void	handle_door_interaction(t_game *game);
 t_texture	*select_wall_texture(t_game *game, t_ray *ray,
 	double rayDirX, double rayDirY);
+
+
+//bonus function utlis 
+
+void	draw_minimap_player(t_game *game, int center_x, int center_y);
+void	draw_minimap_tile(t_game *game, int screen_x, int screen_y, int color);
+int	is_valid_map_tile(char tile);
+void	draw_minimap_background(t_game *game);
+void	draw_tile_by_type(t_game *game, char map_tile, int screen_x, int screen_y);
+void	process_map_tile(t_game *game, t_minimap_data *mini, int map_x,
+		int map_y);
+
+typedef struct s_wall_draw
+{
+	int		drawStart;
+	int		drawEnd;
+	int		y;
+	int		texY;
+	double	step;
+	double	texPos;
+}	t_wall_draw;
+
+typedef struct s_render_ray
+{
+	double		cameraX;
+	double		rayDirX;
+	double		rayDirY;
+	int			texX;
+	t_ray		ray;
+	t_texture	*current_texture;
+}	t_render_ray;
+
+typedef struct s_wall_params
+{
+	t_ray		*ray;
+	int			x;
+	int			texX;
+	t_texture	*texture;
+}	t_wall_params;
+
+void	init_ray_data_bonus(t_game *game, int x, t_render_ray *r);
+void	init_wall_drawing(t_wall_draw *w, t_ray *ray, t_texture *texture);
+int	calculate_tex_x(t_ray *ray, t_texture *texture, double rayDirX,
+		double rayDirY);
+void	rotate_player_mouse(t_game *game, double angle);
+void	init_mouse_hook(int x, int *prev_x, int *initialized);
+void	move_left_right(t_game *game, int direction);
+void	move_forward_backward(t_game *game, int direction);
 #endif
