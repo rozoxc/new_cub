@@ -6,25 +6,11 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 05:32:57 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/10/02 07:49:45 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/10/07 09:12:40 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-void update_door_system(t_game *game)
-{
-    static int space_cooldown = 0;
-    
-    if (space_cooldown > 0)
-        space_cooldown--;
-
-    if (game->keys->space && space_cooldown == 0)
-    {
-        handle_door_interaction(game);
-        space_cooldown = 10;
-    }
-}
 
 void	init_keys(t_game *game)
 {
@@ -37,6 +23,8 @@ void	init_keys(t_game *game)
 	game->keys->w = 0;
 	game->keys->left = 0;
 	game->keys->right = 0;
+	game->keys->space = 0;
+	game->weapon = 0;
 }
 
 int	key_press(int keycode, t_game *game)
@@ -44,7 +32,7 @@ int	key_press(int keycode, t_game *game)
 	if (keycode == KEY_ESC)
 	{
 		mlx_destroy_window(game->mlx, game->win);
-		ft_malloc (0, 0);
+		ft_malloc(0, 0);
 		exit(0);
 	}
 	else if (keycode == KEY_A)
@@ -59,6 +47,10 @@ int	key_press(int keycode, t_game *game)
 		game->keys->left = 1;
 	else if (keycode == KEY_RIGHT)
 		game->keys->right = 1;
+	else if (keycode == KEY_SPACE)
+		game->keys->space = 1;
+	else if (keycode == 101)
+		game->weapon = 1;
 	return (0);
 }
 
@@ -76,28 +68,39 @@ int	key_release(int keycode, t_game *game)
 		game->keys->left = 0;
 	else if (keycode == KEY_RIGHT)
 		game->keys->right = 0;
+	else if (keycode == KEY_SPACE)
+		game->keys->space = 0;
+	else if (keycode == 101)
+		game->weapon = 0;
 	return (0);
 }
 
-int	close_window(void)
+void	move_forward_backward(t_game *game, int direction)
 {
-	exit(1);
-	return (0);
+	double	new_x;
+	double	new_y;
+
+	new_x = game->player->posX + (direction * game->player->dir_x * MOVE_SPEED);
+	new_y = game->player->posY + (direction * game->player->dir_y * MOVE_SPEED);
+	if (is_valid_move(game, new_x, new_y))
+	{
+		game->player->posX = new_x;
+		game->player->posY = new_y;
+	}
 }
 
-int	is_valid_move(t_game *game, double new_x, double new_y)
+void	move_left_right(t_game *game, int direction)
 {
-	int		map_x;
-	int		map_y;
-	char	cell;
+	double	new_x;
+	double	new_y;
 
-	map_x = (int)new_x;
-	map_y = (int)new_y;
-	if (map_x < 0 || map_x >= (int)game->vars->map_w
-		|| map_y < 0 || map_y >= (int)game->vars->map_h)
-		return (0);
-	cell = game->vars->map[map_y][map_x];
-	if (cell == '1' || cell == 'D')
-		return (0);
-	return (1);
+	new_x = game->player->posX + (direction * game->player->plan_x
+			* MOVE_SPEED);
+	new_y = game->player->posY + (direction * game->player->plan_y
+			* MOVE_SPEED);
+	if (is_valid_move(game, new_x, new_y))
+	{
+		game->player->posX = new_x;
+		game->player->posY = new_y;
+	}
 }
