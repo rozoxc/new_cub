@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doors.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:34:03 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/06 21:11:15 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/09 10:37:10 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,18 @@ t_ray	cast_ray_with_doors(t_game *game, double rayDirX, double rayDirY)
 {
 	t_ray		ray;
 	t_ray_data	data;
+	t_wall_calc	calc;
 	int			side;
 
 	init_ray_data(game, rayDirX, rayDirY, &data);
 	calculate_step_x(game, rayDirX, &data);
 	calculate_step_y(game, rayDirY, &data);
 	side = perform_dda_with_doors(game, &data);
-	calculate_wall_distance_b(game, rayDirX, rayDirY, &data, &ray, side);
+	calc.rayDirX = rayDirX;
+	calc.rayDirY = rayDirY;
+	calc.data = &data;
+	calc.side = side;
+	calculate_wall_distance_b(game, &calc, &ray);
 	ray.side = side;
 	ray.mapX = data.mapX;
 	ray.mapY = data.mapY;

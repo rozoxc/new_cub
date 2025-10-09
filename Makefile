@@ -42,6 +42,7 @@ BONUS = bonus/main.c \
 		bonus/raycasting/dda_algo_utlis_bonus.c\
 		bonus/raycasting/texturs_bonus.c \
 		bonus/raycasting/utlis_bonus_2.c \
+		bonus/raycasting/utlis_bonus_3.c \
 		bonus/parsing/error_bonus.c \
 		bonus/parsing/map_process_bonus.c \
 		bonus/parsing/utils_bonus.c \

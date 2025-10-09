@@ -6,7 +6,7 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 09:27:20 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/07 09:03:44 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/10/09 10:30:46 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -442,10 +442,6 @@ int	validate_path_and_open(char *path, t_vars *var);
 // bns
 
 int	is_valid_map_char(char c);
-
-void	calculate_wall_distance_b(t_game *game, double rayDirX, double rayDirY,
-	t_ray_data *data, t_ray *ray, int side);
-
 // map process
 void	init_player_direction(t_player *player, char dir);
 int	ft_end_with_one(t_vars *vars);
@@ -522,6 +518,14 @@ typedef struct s_wall_params
 	t_texture	*texture;
 }	t_wall_params;
 
+typedef struct s_wall_calc
+{
+	double		rayDirX;
+	double		rayDirY;
+	t_ray_data	*data;
+	int			side;
+}	t_wall_calc;
+
 void	init_ray_data_bonus(t_game *game, int x, t_render_ray *r);
 void	init_wall_drawing(t_wall_draw *w, t_ray *ray, t_texture *texture);
 int	calculate_tex_x(t_ray *ray, t_texture *texture, double rayDirX,
@@ -530,4 +534,6 @@ void	rotate_player_mouse(t_game *game, double angle);
 void	init_mouse_hook(int x, int *prev_x, int *initialized);
 void	move_left_right(t_game *game, int direction);
 void	move_forward_backward(t_game *game, int direction);
+void	finalize_ray(t_ray *ray, t_ray_data *data, int side);
+void	calculate_wall_distance_b(t_game *game, t_wall_calc *calc, t_ray *ray);
 #endif

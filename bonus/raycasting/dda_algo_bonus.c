@@ -6,7 +6,7 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 20:29:06 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/10/07 08:56:45 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/10/09 10:30:03 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,34 +76,24 @@ int	perform_dda(t_game *game, t_ray_data *data)
 			data->mapY += data->stepY;
 			side = 1;
 		}
-		if (data->mapX >= 0 && data->mapX < game->vars->map_w
-			&& data->mapY >= 0 && data->mapY < game->vars->map_h)
-		{
-			if (game->vars->map[data->mapY][data->mapX] == '1')
-				hit = 1;
-			else if (game->vars->map[data->mapY][data->mapX] == 'D')
-				hit = 1;
-		}
-		else
-			hit = 1;
+		hit = check_wall_hit(game, data);
 		i++;
 	}
 	return (side);
 }
 
-void	calculate_wall_distance_b(t_game *game, double rayDirX, double rayDirY,
-	t_ray_data *data, t_ray *ray, int side)
+void	calculate_wall_distance_b(t_game *game, t_wall_calc *calc, t_ray *ray)
 {
-	if (side == 0)
-		ray->perpWallDist = (data->mapX - game->player->posX
-				+ (1 - data->stepX) / 2) / rayDirX;
+	if (calc->side == 0)
+		ray->perpWallDist = (calc->data->mapX - game->player->posX
+				+ (1 - calc->data->stepX) / 2) / calc->rayDirX;
 	else
-		ray->perpWallDist = (data->mapY - game->player->posY
-				+ (1 - data->stepY) / 2) / rayDirY;
-	if (side == 0)
-		ray->wallX = game->player->posY + ray->perpWallDist * rayDirY;
+		ray->perpWallDist = (calc->data->mapY - game->player->posY
+				+ (1 - calc->data->stepY) / 2) / calc->rayDirY;
+	if (calc->side == 0)
+		ray->wallX = game->player->posY + ray->perpWallDist * calc->rayDirY;
 	else
-		ray->wallX = game->player->posX + ray->perpWallDist * rayDirX;
+		ray->wallX = game->player->posX + ray->perpWallDist * calc->rayDirX;
 	ray->wallX -= floor(ray->wallX);
 }
 
@@ -111,14 +101,17 @@ t_ray	cast_ray(t_game *game, double rayDirX, double rayDirY)
 {
 	t_ray		ray;
 	t_ray_data	data;
+	t_wall_calc	calc;
 	int			side;
 
 	init_ray_data(game, rayDirX, rayDirY, &data);
 	calculate_step_and_side_dist(game, rayDirX, rayDirY, &data);
 	side = perform_dda(game, &data);
-	calculate_wall_distance_b(game, rayDirX, rayDirY, &data, &ray, side);
-	ray.side = side;
-	ray.mapX = data.mapX;
-	ray.mapY = data.mapY;
+	calc.rayDirX = rayDirX;
+	calc.rayDirY = rayDirY;
+	calc.data = &data;
+	calc.side = side;
+	calculate_wall_distance_b(game, &calc, &ray);
+	finalize_ray(&ray, &data, side);
 	return (ray);
 }

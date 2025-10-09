@@ -6,32 +6,31 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 05:19:33 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/10/07 05:39:41 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/10/09 10:05:21 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	draw_wall_column(t_game *game, t_ray *ray, int x, int texX,
-		t_texture *texture)
+void	draw_wall_column(t_game *game, t_wall_params *params)
 {
 	t_wall_draw		w;
 	unsigned int	color;
 
-	calculate_wall_bounds(ray, &w.drawStart, &w.drawEnd);
-	init_wall_drawing(&w, ray, texture);
+	calculate_wall_bounds(params->ray, &w.drawStart, &w.drawEnd);
+	init_wall_drawing(&w, params->ray, params->texture);
 	while (w.y < w.drawEnd)
 	{
 		w.texY = (int)w.texPos;
-		if (w.texY >= texture->height)
-			w.texY = texture->height - 1;
+		if (w.texY >= params->texture->height)
+			w.texY = params->texture->height - 1;
 		if (w.texY < 0)
 			w.texY = 0;
 		w.texPos = w.texPos + w.step;
-		color = get_texture_pixel(texture, texX, w.texY);
-		if (ray->side == 1)
+		color = get_texture_pixel(params->texture, params->texX, w.texY);
+		if (params->ray->side == 1)
 			color = (color >> 1) & 0x7F7F7F;
-		my_mlx_pixel_put(game->image, x, w.y, color);
+		my_mlx_pixel_put(game->image, params->x, w.y, color);
 		w.y++;
 	}
 }
@@ -52,12 +51,17 @@ void	render_walls(t_game *game)
 {
 	int				x;
 	t_render_ray	r;
+	t_wall_params	params;
 
 	x = 0;
 	while (x < WINDOW_WIDTH)
 	{
 		init_ray_data_bonus(game, x, &r);
-		draw_wall_column(game, &r.ray, x, r.texX, r.current_texture);
+		params.ray = &r.ray;
+		params.x = x;
+		params.texX = r.texX;
+		params.texture = r.current_texture;
+		draw_wall_column(game, &params);
 		x++;
 	}
 }
