@@ -6,11 +6,11 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 17:03:04 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/06 13:54:55 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:23:30 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing.h"
+#include "../../includes/cub3d.h"
 
 int	is_valid_map_char(char c)
 {

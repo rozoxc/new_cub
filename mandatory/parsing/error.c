@@ -6,11 +6,11 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 01:35:20 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/03 16:48:44 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:23:30 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing.h"
+#include "../../includes/cub3d.h"
 
 void	err(char *error)
 {

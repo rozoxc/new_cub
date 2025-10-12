@@ -6,11 +6,11 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:15:52 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/06 14:24:31 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:23:30 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing.h"
+#include "../../includes/cub3d.h"
 
 int	ft_end_with_one(t_vars *vars)
 {
