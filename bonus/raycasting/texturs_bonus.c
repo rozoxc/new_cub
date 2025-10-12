@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texturs_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 20:53:42 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/10/07 13:56:33 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:39:04 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	load_all_textures(t_game *game)
 	game->tex_door = load_single_texture(game, game->vars->tex.door);
 	if (!game->tex_door)
 		return (0);
-	game->hands_tex = load_single_texture(game, game->vars->tex.Hands);
+	game->hands_tex = load_single_texture(game, game->vars->tex.hands);
 	if (!game->hands_tex)
 		return (0);
 	game->shoot0_text = load_single_texture(game, game->vars->tex.shoot0);
@@ -72,7 +72,7 @@ int	load_all_textures(t_game *game)
 }
 
 t_texture	*get_wall_texture(t_game *game, t_ray *ray,
-		double rayDirX, double rayDirY)
+		double ray_dirx, double ray_diry)
 {
-	return (get_wall_texture_with_doors(game, ray, rayDirX, rayDirY));
+	return (get_wall_texture_with_doors(game, ray, ray_dirx, ray_diry));
 }

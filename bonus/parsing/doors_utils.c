@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doors_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:34:44 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/06 21:50:37 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:34:07 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ static int	raycast_find_door(t_game *game, double step_x, double step_y,
 	int		i;
 	int		result;
 
-	ray_x = game->player->posX;
-	ray_y = game->player->posY;
+	ray_x = game->player->pos_x;
+	ray_y = game->player->pos_y;
 	i = 0;
 	while (i < 20)
 	{

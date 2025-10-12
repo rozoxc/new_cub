@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 09:27:20 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/12 15:21:09 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:40:16 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -111,24 +110,24 @@ typedef struct s_map
 
 typedef struct s_ray_data
 {
-	int		mapX;
-	int		mapY;
-	double	sideDistX;
-	double	sideDistY;
-	double	deltaDistX;
-	double	deltaDistY;
-	int		stepX;
-	int		stepY;
+	int		map_x;
+	int		map_y;
+	double	sidedist_x;
+	double	sidedist_y;
+	double	deltadist_x;
+	double	deltadist_y;
+	int		step_x;
+	int		step_y;
 	int		max_distance;
 }	t_ray_data;
 
 typedef struct s_ray
 {
-	double	perpWallDist;
+	double	perp_walldist;
 	int		side;
-	int		mapX;
-	int		mapY;
-	double	wallX;
+	int		map_x;
+	int		map_y;
+	double	wall_x;
 }	t_ray;
 
 typedef struct s_keys
@@ -157,7 +156,7 @@ typedef struct s_textures
 	char	*west;
 	char	*east;
 	char	*door;
-	char	*Hands;
+	char	*hands;
 	char	*shoot0;
 	char	*shoot1;
 	void	*img;
@@ -175,8 +174,8 @@ typedef struct s_player
 	double	plan_y;
 	double	dir_x;
 	double	dir_y;
-	double	posX;
-	double	posY;
+	double	pos_x;
+	double	pos_y;
 	char	player_dir;
 }	t_player;
 
@@ -257,20 +256,20 @@ typedef struct s_map_reader
 
 typedef struct s_wall_draw
 {
-	int		drawStart;
-	int		drawEnd;
+	int		draw_start;
+	int		draw_end;
 	int		y;
-	int		texY;
+	int		tex_y;
 	double	step;
-	double	texPos;
+	double	tex_pos;
 }	t_wall_draw;
 
 typedef struct s_render_ray
 {
-	double		cameraX;
-	double		rayDirX;
-	double		rayDirY;
-	int			texX;
+	double		camera_x;
+	double		ray_dirx;
+	double		ray_diry;
+	int			tex_x;
 	t_ray		ray;
 	t_texture	*current_texture;
 }	t_render_ray;
@@ -279,14 +278,14 @@ typedef struct s_wall_params
 {
 	t_ray		*ray;
 	int			x;
-	int			texX;
+	int			tex_x;
 	t_texture	*texture;
 }	t_wall_params;
 
 typedef struct s_wall_calc
 {
-	double		rayDirX;
-	double		rayDirY;
+	double		ray_dirx;
+	double		ray_diry;
 	t_ray_data	*data;
 	int			side;
 }	t_wall_calc;
@@ -332,10 +331,6 @@ int				check_wall_hit(t_game *game, t_ray_data *data);
 void			render_game(t_game *game);
 void			draw_rectangle(t_game *game, int start_x, int start_y,
 					int color);
-void			draw_circle(t_game *game, int center_x, int center_y,
-					int radius, int color);
-void			draw_line(t_game *game, int x0, int y0, int x1, int y1,
-					int color);
 int				key_press(int keycode, t_game *game);
 int				close_window(void);
 void			render_3d(t_game *game);
@@ -343,15 +338,15 @@ void			init_keys(t_game *game);
 int				key_release(int keycode, t_game *game);
 void			player_mouvement(t_game *game);
 int				game_loop(t_game *game);
-t_ray			cast_ray(t_game *game, double ray_dirX, double ray_dirY);
+t_ray			cast_ray(t_game *game, double ray_dirx, double ray_diry);
 t_textures		*load_texture(t_game *game, char *filename);
 int				mouse_hook(int x, int y, t_game *game);
 void			put_textures(t_game *game);
-t_texture		*get_wall_texture(t_game *game, t_ray *ray, double rayDirX,
-					double rayDirY);
+t_texture		*get_wall_texture(t_game *game, t_ray *ray, double ray_dirx,
+					double ray_diry);
 int				load_all_textures(t_game *game);
-int				load_wall_texture(t_game *game, t_ray *ray, double rayDirX,
-					double rayDirY);
+int				load_wall_texture(t_game *game, t_ray *ray, double ray_dirx,
+					double ray_diry);
 unsigned int	get_texture_pixel(t_texture *texture, int x, int y);
 void			my_mlx_pixel_put(t_image *img, int x, int y, int color);
 int				mouse_move_hook(int x, int y, t_game *game);
@@ -359,8 +354,8 @@ int				shoot(t_game *game);
 void			render_hand_with_transparency(t_texture *image, int start_x,
 					int start_y, t_game *game);
 int				is_valid_move(t_game *game, double new_x, double new_y);
-void			calculate_wall_bounds(t_ray *ray, int *drawStart,
-					int *drawEnd);
+void			calculate_wall_bounds(t_ray *ray, int *draw_start,
+					int *draw_end);
 void			calc_perp_wall_dist(t_game *game, t_ray_data *data,
 					t_ray *ray, t_ray_calc *calc);
 void			draw_sky(t_game *game);
@@ -372,18 +367,18 @@ int				is_door_open(t_game *game, int x, int y);
 void			toggle_door(t_game *game, int x, int y);
 void			handle_door_interaction(t_game *game);
 int				perform_dda_with_doors(t_game *game, t_ray_data *data);
-t_ray			cast_ray_with_doors(t_game *game, double rayDirX,
-					double rayDirY);
+t_ray			cast_ray_with_doors(t_game *game, double ray_dirx,
+					double ray_diry);
 t_texture		*get_wall_texture_with_doors(t_game *game, t_ray *ray,
-					double rayDirX, double rayDirY);
+					double ray_dirx, double ray_diry);
 int				is_valid_move_with_doors(t_game *game, double new_x,
 					double new_y);
 void			calc_wall_x(t_game *game, t_ray *ray, t_ray_calc *calc);
-void			init_ray_data(t_game *game, double rayDirX, double rayDirY,
+void			init_ray_data(t_game *game, double ray_dirx, double ray_diry,
 					t_ray_data *data);
-void			calculate_step_x(t_game *game, double rayDirX,
+void			calculate_step_x(t_game *game, double ray_dirx,
 					t_ray_data *data);
-void			calculate_step_y(t_game *game, double rayDirY,
+void			calculate_step_y(t_game *game, double ray_diry,
 					t_ray_data *data);
 int				perform_dda(t_game *game, t_ray_data *data);
 int				find_nearest_door(t_game *game, int *door_x, int *door_y);
@@ -412,8 +407,8 @@ int				handle_player_position(t_game *vars, size_t x, size_t y,
 int				check_door_in_ray(t_game *game, double *ray_x, double *ray_y,
 					int *door_coords);
 int				can_close_door(t_game *game, int door_x, int door_y);
-t_texture		*select_wall_texture(t_game *game, t_ray *ray, double rayDirX,
-					double rayDirY);
+t_texture		*select_wall_texture(t_game *game, t_ray *ray, double ray_dirx,
+					double ray_diry);
 void			draw_minimap_player(t_game *game, int center_x, int center_y);
 void			draw_minimap_tile(t_game *game, int screen_x, int screen_y,
 					int color);
@@ -426,8 +421,8 @@ void			process_map_tile(t_game *game, t_minimap_data *mini,
 void			init_ray_data_bonus(t_game *game, int x, t_render_ray *r);
 void			init_wall_drawing(t_wall_draw *w, t_ray *ray,
 					t_texture *texture);
-int				calculate_tex_x(t_ray *ray, t_texture *texture, double rayDirX,
-					double rayDirY);
+int				calculate_tex_x(t_ray *ray, t_texture *texture, double ray_dirx,
+					double ray_diry);
 void			rotate_player_mouse(t_game *game, double angle);
 void			init_mouse_hook(int x, int *prev_x, int *initialized);
 void			move_left_right(t_game *game, int direction);

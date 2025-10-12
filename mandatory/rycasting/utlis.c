@@ -6,7 +6,7 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 00:14:10 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/10/02 00:22:27 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:32:36 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ int	check_wall_hit(t_game *game, t_ray_data *data)
 {
 	char	cell;
 
-	if (data->mapX < 0 || data->mapX >= game->vars->map_w
-		|| data->mapY < 0 || data->mapY >= game->vars->map_h)
+	if (data->map_x < 0 || data->map_x >= game->vars->map_w
+		|| data->map_y < 0 || data->map_y >= game->vars->map_h)
 		return (1);
-	cell = game->vars->map[data->mapY][data->mapX];
+	cell = game->vars->map[data->map_y][data->map_x];
 	if (cell == '1')
 		return (1);
 	return (0);
@@ -27,12 +27,12 @@ int	check_wall_hit(t_game *game, t_ray_data *data)
 
 void	step_in_x(t_ray_data *data)
 {
-	data->sideDistX += data->deltaDistX;
-	data->mapX += data->stepX;
+	data->sidedist_x += data->deltadist_x;
+	data->map_x += data->step_x;
 }
 
 void	step_in_y(t_ray_data *data)
 {
-	data->sideDistY += data->deltaDistY;
-	data->mapY += data->stepY;
+	data->sidedist_y += data->deltadist_y;
+	data->map_y += data->step_y;
 }

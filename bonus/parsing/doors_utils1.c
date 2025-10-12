@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doors_utils1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:37:13 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/06 19:39:02 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:36:46 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	is_door_at_position(t_game *game, int x, int y)
 
 int	can_close_door(t_game *game, int door_x, int door_y)
 {
-	if ((int)game->player->posX == door_x
-		&& (int)game->player->posY == door_y)
+	if ((int)game->player->pos_x == door_x
+		&& (int)game->player->pos_y == door_y)
 		return (0);
 	return (1);
 }
@@ -47,18 +47,18 @@ void	handle_door_interaction(t_game *game)
 }
 
 t_texture	*select_wall_texture(t_game *game, t_ray *ray,
-	double rayDirX, double rayDirY)
+	double ray_dirx, double ray_diry)
 {
 	if (ray->side == 0)
 	{
-		if (rayDirX > 0)
+		if (ray_dirx > 0)
 			return (game->tex_west);
 		else
 			return (game->tex_east);
 	}
 	else
 	{
-		if (rayDirY > 0)
+		if (ray_diry > 0)
 			return (game->tex_north);
 		else
 			return (game->tex_south);

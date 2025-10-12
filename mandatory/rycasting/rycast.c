@@ -6,7 +6,7 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 10:13:54 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/10/02 08:13:52 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:39:26 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	calculate_tex_x(t_ray *ray, t_texture *texture, double ray_dirx,
 {
 	int	tex_x;
 
-	tex_x = (int)(ray->wallX * (double)texture->width);
+	tex_x = (int)(ray->wall_x * (double)texture->width);
 	if (ray->side == 0 && ray_dirx > 0)
 		tex_x = texture->width - tex_x - 1;
 	if (ray->side == 1 && ray_diry < 0)
@@ -27,7 +27,7 @@ int	calculate_tex_x(t_ray *ray, t_texture *texture, double ray_dirx,
 
 void	init_wall_draw(t_ray *ray, t_texture *texture, t_draw *draw)
 {
-	draw->line_height = (int)(WINDOW_HEIGHT / ray->perpWallDist);
+	draw->line_height = (int)(WINDOW_HEIGHT / ray->perp_walldist);
 	draw->step = 1.0 * texture->height / draw->line_height;
 	draw->tex_pos = (draw->draw_start - WINDOW_HEIGHT / 2
 			+ draw->line_height / 2) * draw->step;

@@ -6,7 +6,7 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 05:32:57 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/10/07 09:12:40 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:52:12 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,14 @@ void	move_forward_backward(t_game *game, int direction)
 	double	new_x;
 	double	new_y;
 
-	new_x = game->player->posX + (direction * game->player->dir_x * MOVE_SPEED);
-	new_y = game->player->posY + (direction * game->player->dir_y * MOVE_SPEED);
+	new_x = game->player->pos_x
+		+ (direction * game->player->dir_x * MOVE_SPEED);
+	new_y = game->player->pos_y
+		+ (direction * game->player->dir_y * MOVE_SPEED);
 	if (is_valid_move(game, new_x, new_y))
 	{
-		game->player->posX = new_x;
-		game->player->posY = new_y;
+		game->player->pos_x = new_x;
+		game->player->pos_y = new_y;
 	}
 }
 
@@ -94,13 +96,13 @@ void	move_left_right(t_game *game, int direction)
 	double	new_x;
 	double	new_y;
 
-	new_x = game->player->posX + (direction * game->player->plan_x
+	new_x = game->player->pos_x + (direction * game->player->plan_x
 			* MOVE_SPEED);
-	new_y = game->player->posY + (direction * game->player->plan_y
+	new_y = game->player->pos_y + (direction * game->player->plan_y
 			* MOVE_SPEED);
 	if (is_valid_move(game, new_x, new_y))
 	{
-		game->player->posX = new_x;
-		game->player->posY = new_y;
+		game->player->pos_x = new_x;
+		game->player->pos_y = new_y;
 	}
 }

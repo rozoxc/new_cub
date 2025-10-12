@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 14:41:47 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/09/24 05:04:56 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:47:24 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ t_image	*init_image(t_game *game)
 	img->addr = mlx_get_data_addr(img->img, &img->bit_per_pixel,
 			&img->len_lenght, &img->endian);
 	return (img);
+}
+
+int	destroy_win(t_game *game)
+{
+	mlx_destroy_window(game->mlx, game->win);
+	ft_malloc (0, 0);
+	exit(0);
 }
 
 int	main(int ac, char **av)
@@ -47,6 +54,7 @@ int	main(int ac, char **av)
 	if (!load_all_textures(game))
 		return (0);
 	init_keys(game);
+	mlx_hook(game->win, 17, 1L << 17, destroy_win, game);
 	mlx_hook(game->win, 02, 1L << 0, key_press, game);
 	mlx_hook(game->win, 03, 1L << 1, key_release, game);
 	mlx_loop_hook(game->mlx, game_loop, game);

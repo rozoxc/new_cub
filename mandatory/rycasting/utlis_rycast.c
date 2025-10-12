@@ -6,7 +6,7 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:51:29 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/10/02 00:25:15 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:39:26 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,15 @@ void	draw_floor(t_game *game)
 	}
 }
 
-void	calculate_wall_bounds(t_ray *ray, int *drawStart, int *drawEnd)
+void	calculate_wall_bounds(t_ray *ray, int *draw_start, int *draw_end)
 {
 	int	line_height;
 
-	line_height = (int)(WINDOW_HEIGHT / ray->perpWallDist);
-	*drawStart = -line_height / 2 + WINDOW_HEIGHT / 2;
-	if (*drawStart < 0)
-		*drawStart = 0;
-	*drawEnd = line_height / 2 + WINDOW_HEIGHT / 2;
-	if (*drawEnd >= WINDOW_HEIGHT)
-		*drawEnd = WINDOW_HEIGHT - 1;
+	line_height = (int)(WINDOW_HEIGHT / ray->perp_walldist);
+	*draw_start = -line_height / 2 + WINDOW_HEIGHT / 2;
+	if (*draw_start < 0)
+		*draw_start = 0;
+	*draw_end = line_height / 2 + WINDOW_HEIGHT / 2;
+	if (*draw_end >= WINDOW_HEIGHT)
+		*draw_end = WINDOW_HEIGHT - 1;
 }

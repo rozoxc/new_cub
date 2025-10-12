@@ -6,7 +6,7 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 05:13:48 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/10/07 09:14:04 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:34:07 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ void	process_map_tile(t_game *game, t_minimap_data *mini, int map_x,
 	int		screen_y;
 	char	map_tile;
 
-	screen_x = mini->center_x + (map_x - (int)game->player->posX)
+	screen_x = mini->center_x + (map_x - (int)game->player->pos_x)
 		* MINIMAP_TILE_SIZE;
-	screen_y = mini->center_y + (map_y - (int)game->player->posY)
+	screen_y = mini->center_y + (map_y - (int)game->player->pos_y)
 		* MINIMAP_TILE_SIZE;
 	if (map_x >= 0 && map_x < game->vars->map_w && map_y >= 0
 		&& map_y < game->vars->map_h)

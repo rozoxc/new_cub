@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 02:57:35 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/06 19:25:25 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:39:04 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	init_vars(t_vars *var)
 	var->tex.west = NULL;
 	var->tex.east = NULL;
 	var->tex.door = NULL;
-	var->tex.Hands = NULL;
+	var->tex.hands = NULL;
 	var->tex.shoot0 = NULL;
 	var->tex.shoot1 = NULL;
 	var->floor.r = -1;

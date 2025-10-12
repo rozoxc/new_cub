@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_data_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 03:17:15 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/07 13:05:24 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:39:04 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	**split_arg(char *line)
 
 static int	load_extra_textures(t_vars *var)
 {
-	if (!set_texture(&var->tex.Hands, "textures/hands.xpm"))
+	if (!set_texture(&var->tex.hands, "textures/hands.xpm"))
 		return (err("Invalid or duplicate item"), 0);
 	if (!set_texture(&var->tex.shoot0, "textures/shoot0.xpm"))
 		return (err("Invalid or duplicate item"), 0);

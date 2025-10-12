@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_proc_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:26:43 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/07 13:33:55 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:34:07 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ int	handle_player_position(t_game *vars, size_t x, size_t y, \
 {
 	if (*player_count > 0)
 		return (err("Multiple player positions found.\n"), 0);
-	vars->player->posX = x + 0.5;
-	vars->player->posY = y + 0.5;
+	vars->player->pos_x = x + 0.5;
+	vars->player->pos_y = y + 0.5;
 	init_player_direction(vars->player, vars->vars->map[y][x]);
 	vars->player->player_dir = vars->vars->map[y][x];
 	*player_count = 1;

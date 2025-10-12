@@ -6,7 +6,7 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:38:20 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/10/01 04:30:57 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:34:07 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ void	move_forward_backward(t_game *game, int direction)
 	double	margin;
 
 	move_step = MOVE_SPEED * direction;
-	new_x = game->player->posX + (game->player->dir_x * move_step);
-	new_y = game->player->posY + (game->player->dir_y * move_step);
+	new_x = game->player->pos_x + (game->player->dir_x * move_step);
+	new_y = game->player->pos_y + (game->player->dir_y * move_step);
 	margin = 0.1;
 	if (is_valid_move(game, new_x + margin, new_y + margin)
 		&& is_valid_move(game, new_x - margin, new_y + margin)
 		&& is_valid_move(game, new_x + margin, new_y - margin)
 		&& is_valid_move(game, new_x - margin, new_y - margin))
 	{
-		game->player->posX = new_x;
-		game->player->posY = new_y;
+		game->player->pos_x = new_x;
+		game->player->pos_y = new_y;
 	}
 }
 
@@ -41,16 +41,16 @@ void	move_left_right(t_game *game, int direction)
 	double	margin;
 
 	move_step = MOVE_SPEED * direction;
-	new_x = game->player->posX + (game->player->plan_x * move_step);
-	new_y = game->player->posY + (game->player->plan_y * move_step);
+	new_x = game->player->pos_x + (game->player->plan_x * move_step);
+	new_y = game->player->pos_y + (game->player->plan_y * move_step);
 	margin = 0.1;
 	if (is_valid_move(game, new_x + margin, new_y + margin)
 		&& is_valid_move(game, new_x - margin, new_y + margin)
 		&& is_valid_move(game, new_x + margin, new_y - margin)
 		&& is_valid_move(game, new_x - margin, new_y - margin))
 	{
-		game->player->posX = new_x;
-		game->player->posY = new_y;
+		game->player->pos_x = new_x;
+		game->player->pos_y = new_y;
 	}
 }
 
