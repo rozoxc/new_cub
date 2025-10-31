@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:30:31 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/31 22:28:31 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/11/01 00:03:13 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static int	process_map_cell(t_game *vars, int x, \
 
 int	process_map_content(t_game *vars)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 	int		player_count;
 
 	player_count = 0;

@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 03:17:15 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/12 15:23:30 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/31 22:38:23 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	**splitarg(char *line)
 	tokens[0] = ft_malloc(len + 1, 1);
 	ft_strlcpy(tokens[0], line + start, len + 1);
 	if (!firstarg(tokens[0]))
-		return (write(2, "Invalid line format", 20), NULL);
+		return (err("Invalid line format\n"), NULL);
 	while (line[i] && line[i] == ' ')
 		i++;
 	tokens[1] = ft_strtrim(line + i);
@@ -91,7 +91,7 @@ int	parse_header(t_vars *var)
 		}
 		tokens = splitarg(line);
 		if (!tokens || !tokens[0] || !tokens[1] || tokens[2])
-			return (err("Invalid line format"), 0);
+			return (err("Invalid line format\n"), 0);
 		if (set_item(var, tokens[0], tokens[1]))
 			items_found++;
 		else

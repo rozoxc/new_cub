@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:26:43 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/31 22:28:31 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/11/01 00:03:02 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,12 @@ int	ft_check_zero_surroundings(char **map, int i, int j, t_vars *vars)
 char	**resize_and_copy(char **lines, int *capacity, int count)
 {
 	char	**new_lines;
-	int	i;
+	int		i;
 
 	*capacity *= 2;
 	new_lines = ft_malloc(sizeof(char *) * (*capacity), 1);
 	if (!new_lines)
-	{
-		ft_malloc(0, 0);
 		return (err("Memory reallocation failed\n"), NULL);
-	}
 	i = 0;
 	while (i < count)
 	{

@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:15:52 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/12 15:23:30 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/11/01 00:04:35 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ bool	check_map(t_game *game, char **map)
 	return (true);
 }
 
-int	validate_map_walls_optimized(t_game *game)
+int	validate_map_walls(t_game *game)
 {
 	char	**map;
 	int		i;
@@ -91,11 +91,12 @@ int	parse_map(t_game *game)
 	&game->vars->map_w);
 	if (!tmp_lines)
 		return (0);
+	close(game->vars->fd);
 	if (!create_padded_map(game->vars, tmp_lines))
 		return (err("Map creation failed.\n"), 0);
 	if (!process_map_content(game))
 		return (0);
-	if (!validate_map_walls_optimized(game))
+	if (!validate_map_walls(game))
 		return (0);
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_data_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 03:17:15 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/12 15:39:04 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/10/31 23:42:58 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ char	**split_arg(char *line)
 static int	load_extra_textures(t_vars *var)
 {
 	if (!set_texture(&var->tex.hands, "textures/hands.xpm"))
-		return (err("Invalid or duplicate item"), 0);
+		return (close(var->fd), err("Invalid or duplicate item"), 0);
 	if (!set_texture(&var->tex.shoot0, "textures/shoot0.xpm"))
-		return (err("Invalid or duplicate item"), 0);
+		return (close(var->fd), err("Invalid or duplicate item"), 0);
 	if (!set_texture(&var->tex.shoot1, "textures/shoot1.xpm"))
-		return (err("Invalid or duplicate item"), 0);
+		return (close(var->fd), err("Invalid or duplicate item"), 0);
 	return (1);
 }
 
@@ -82,16 +82,16 @@ int	parse_header(t_vars *var)
 		line = NULL;
 		line = get_next_line(var->fd);
 		if (!line)
-			return (err("Missing header items"), 0);
+			return (close(var->fd), err("Missing header items"), 0);
 		if (ft_strlen(line) == 0 || is_whitespace_only(line))
 			continue ;
 		tokens = split_arg(line);
 		if (!tokens || !tokens[0] || !tokens[1] || tokens[2])
-			return (err("Invalid line format"), 0);
+			return (close(var->fd), err("Invalid line format"), 0);
 		if (set_item(var, tokens[0], tokens[1]))
 			items_found++;
 		else
-			return (err("Invalid or duplicate item"), 0);
+			return (close(var->fd), err("Invalid or duplicate item"), 0);
 	}
 	if (!load_extra_textures(var))
 		return (0);

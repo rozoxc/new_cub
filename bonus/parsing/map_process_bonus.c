@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:15:52 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/06 21:06:56 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/31 23:57:58 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ int	check_inner_cells(t_game *game)
 		while (j < game->vars->map_w)
 		{
 			cell = map[i][j];
-			if (cell == '0' || is_player_char(cell) || cell == 'D'
-				|| cell == 'd')
+			if (cell == '0' || is_player_char(cell) || cell == 'D')
 			{
 				if (!ft_check_zero_surroundings(map, i, j, game->vars))
 					return (err("Map is not properly enclosed by walls.\n"), 0);
@@ -40,7 +39,7 @@ int	check_inner_cells(t_game *game)
 	return (1);
 }
 
-int	validate_map_walls_optimized(t_game *game)
+int	validate_map_walls(t_game *game)
 {
 	char	**map;
 
@@ -88,7 +87,7 @@ int	validate_all_doors(t_game *game)
 		while (x < game->vars->map_w)
 		{
 			cell = game->vars->map[y][x];
-			if (cell == 'D' || cell == 'd')
+			if (cell == 'D')
 			{
 				if (!validate_door_placement(game->vars->map, x, y, game->vars))
 					return (0);
@@ -109,10 +108,11 @@ int	parse_map(t_game *game)
 	if (!tmp_lines)
 		return (0);
 	if (!create_padded_map(game->vars, tmp_lines))
-		return (err("Map creation failed.\n"), 0);
+		return (close(game->vars->fd), err("Map creation failed.\n"), 0);
+	close(game->vars->fd);
 	if (!process_map_content(game))
 		return (0);
-	if (!validate_map_walls_optimized(game))
+	if (!validate_map_walls(game))
 		return (0);
 	if (!validate_all_doors(game))
 		return (err("Invalid door placement detected.\n"), 0);

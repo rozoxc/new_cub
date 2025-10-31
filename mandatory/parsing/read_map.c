@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 14:05:16 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/31 22:28:31 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/11/01 00:05:41 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@ char	**resize_lines_array(char **lines, int *capacity, \
 	int line_count)
 {
 	char	**new_lines;
-	int	i;
+	int		i;
 
 	*capacity *= 2;
 	new_lines = ft_malloc(sizeof(char *) * (*capacity), 1);
 	if (!new_lines)
 	{
-		ft_malloc(0, 0);
 		return (err("Memory reallocation failed\n"), NULL);
 	}
 	i = 0;
@@ -40,7 +39,6 @@ int	process_line_validation(char *line, int line_count)
 		return (0);
 	if (line_count > 0 && (is_whitespace_only(line) || *line == '\n'))
 	{
-		ft_malloc(0, 0);
 		err("Empty line inside map is forbidden\n");
 		return (-1);
 	}
@@ -98,14 +96,20 @@ char	**read_map_lines(t_vars *vars, int *line_count, \
 	reader.capacity = 16;
 	reader.lines = ft_malloc(sizeof(char *) * reader.capacity, 1);
 	if (!reader.lines)
+	{
+		close(vars->fd);
 		return (err("Memory allocation failed\n"), NULL);
+	}
 	reader.line_count = line_count;
 	reader.max_width = max_width;
 	1 && (*line_count = 0, *max_width = 0);
 	reader.lines = process_map_lines(vars, &reader);
 	if (!reader.lines)
-		return (NULL);
+	{
+		close(vars->fd);
+		return (err("Read map failed\n"), NULL);
+	}
 	if (*line_count == 0)
-		return (err("Map not found in file\n"), ft_malloc(0, 0), NULL);
+		return (close(vars->fd), err("Map not found in file\n"), NULL);
 	return (reader.lines);
 }

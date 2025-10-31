@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 00:14:10 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/10/31 22:22:41 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/11/01 00:05:28 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@ int	check_wall_hit(t_game *game, t_ray_data *data)
 {
 	char	cell;
 
-	//check
-
-	
 	if (data->map_x < 0 || data->map_x >= game->vars->map_w
 		|| data->map_y < 0 || data->map_y >= game->vars->map_h)
 		return (1);

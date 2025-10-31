@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:28:23 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/31 22:28:31 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/31 23:52:51 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ int	process_line(char *line, char **lines, int *count, int *max)
 		return (0);
 	if (*count > 0 && (is_whitespace_only(line) || *line == '\n'))
 	{
-		ft_malloc(0, 0);
-		return (err("Empty line inside map is forbidden\n"), -1);
+		return (-1);
 	}
 	len = ft_strlen(line);
 	if (len > 0 && line[len - 1] == '\n')
@@ -52,24 +51,26 @@ bool	read_loop(t_vars *vars, char ***lines, \
 {
 	char	*line;
 	int		validation;
-	int	capacity;
+	int		capacity;
 
 	capacity = 16;
 	*lines = ft_malloc(sizeof(char *) * capacity, 1);
 	if (!*lines)
-		return (err("Memory allocation failed\n"), false);
+		return (close(vars->fd), err("Memory allocation failed\n"), false);
 	line = get_next_line(vars->fd);
 	while (line != NULL)
 	{
 		validation = process_line(line, *lines, l_count, max_width);
+		if (validation == -1)
+			return (close(vars->fd), \
+			err("Empty line inside map is forbidden\n"), false);
 		if (validation == 0)
 		{
-			line = NULL;
 			line = get_next_line(vars->fd);
 			continue ;
 		}
 		if (!read_helper(&validation, l_count, &capacity, lines))
-			return (false);
+			return (close(vars->fd), false);
 		line = get_next_line(vars->fd);
 	}
 	return (true);
@@ -87,8 +88,7 @@ char	**read_map_lines(t_vars *vars, int *line_count, \
 		return (NULL);
 	if (*line_count == 0)
 	{
-		ft_malloc(0, 0);
-		return (err("Map not found in file\n"), NULL);
+		return (close(vars->fd), err("Map not found in file\n"), NULL);
 	}
 	return (lines);
 }
