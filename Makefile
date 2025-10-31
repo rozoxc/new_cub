@@ -1,11 +1,16 @@
 NAME = cub3d
 NAME_BONUS = cub3d_bonus
 CC = cc 
-FLAGS = -Wall -Werror -Wextra -fsanitize=address
+FLAGS = -Wall -Werror -Wextra
 MLX_DIR = minilibx-linux
+LIBFT = libft/libft.a
+HEADER = libft/libft.h libft/get_next_line.h includes/cub3d.h 
+
 MLX_FLAG = -L$(MLX_DIR) -lXext -lX11 -lm
 INCLUDE = includes/cub3d.h
 
+SRCLIB = libft/ft_lstadd_back_bonus.c libft/ft_lstsize_bonus.c libft/ft_strjoin.c libft/ft_atoi.c libft/ft_lstadd_front_bonus.c  libft/ft_strcmp.c libft/ft_strcpy.c libft/ft_memcpy.c libft/ft_memset.c libft/ft_strtrim.c \
+			libft/ft_lstlast_bonus.c libft/ft_lstnew_bonus.c libft/ft_split.c libft/ft_strdup.c libft/ft_strlen.c libft/ft_isdigit.c libft/get_next_line.c libft/get_next_line_utils.c libft/grb_coll.c libft/ft_strlcpy.c
 # Mandatory part sources
 SRC = mandatory/main.c \
 	  mandatory/rycasting/hooks.c \
@@ -61,26 +66,31 @@ BONUS = bonus/main.c \
 
 
 
-HEADER = includes/cub3d.h get_next_line/get_next_line.h
+
 OBJ = $(SRC:.c=.o)
 OBJ_BONUS = $(BONUS:.c=.o)
 
-all: $(NAME)
+all: $(LIBFT) $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(FLAGS) $(OBJ) $(MLX_FLAG) libft/libft.a $(MLX_DIR)/libmlx_Linux.a $(MLX_DIR)/libmlx.a -o $(NAME)
+$(NAME): $(OBJ) $(LIBFT) 
+	$(CC) $(FLAGS) $(OBJ) $(MLX_FLAG) $(LIBFT) $(MLX_DIR)/libmlx_Linux.a $(MLX_DIR)/libmlx.a -o $(NAME)
 
-bonus: $(OBJ_BONUS)
-	$(CC) $(FLAGS) $(OBJ_BONUS) $(MLX_FLAG) libft/libft.a $(MLX_DIR)/libmlx_Linux.a $(MLX_DIR)/libmlx.a -o $(NAME_BONUS)
+bonus: $(OBJ_BONUS) $(LIBFT) 
+	$(CC) $(FLAGS) $(OBJ_BONUS) $(MLX_FLAG) $(LIBFT) $(MLX_DIR)/libmlx_Linux.a $(MLX_DIR)/libmlx.a -o $(NAME_BONUS)
 
 %.o: %.c $(HEADER)
 	$(CC) $(FLAGS) -Iincludes -c $< -o $@
 
+$(LIBFT): $(SRCLIB) $(HEADER)
+	make -C libft/ 
+
 clean:
 	rm -f $(OBJ) $(OBJ_BONUS)
+	make -C libft clean
 
 fclean: clean
 	rm -f $(NAME) $(NAME_BONUS)
+	make -C libft/ fclean
 
 re: fclean all
 

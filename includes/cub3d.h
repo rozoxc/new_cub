@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 09:27:20 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/12 15:40:16 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/10/31 22:31:40 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,8 +185,8 @@ typedef struct s_vars
 	t_rgb		floor;
 	t_rgb		sky;
 	char		**map;
-	size_t		map_h;
-	size_t		map_w;
+	int		map_h;
+	int		map_w;
 	int			fd;
 }	t_vars;
 
@@ -249,9 +249,9 @@ typedef struct s_game
 typedef struct s_map_reader
 {
 	char	**lines;
-	size_t	capacity;
-	size_t	*line_count;
-	size_t	*max_width;
+	int	capacity;
+	int	*line_count;
+	int	*max_width;
 }	t_map_reader;
 
 typedef struct s_wall_draw
@@ -392,17 +392,17 @@ int				set_color(t_rgb *color, char *rgb);
 int				set_item(t_vars *var, char *key, char *value);
 int				set_texture(char **texture_ptr, char *path);
 bool			firstarg(char *key);
-char			**read_map_lines(t_vars *vars, size_t *line_count,
-					size_t *max_width);
+char			**read_map_lines(t_vars *vars, int *line_count,
+					int *max_width);
 void			init_player_direction(t_player *player, char dir);
 int				ft_end_with_one(t_vars *vars);
 int				ft_check_zero_surroundings(char **map, int i, int j,
 					t_vars *vars);
-char			**resize_and_copy(char **lines, size_t *capacity,
-					size_t count);
-int				process_line(char *line, char **lines, size_t *count,
-					size_t *max);
-int				handle_player_position(t_game *vars, size_t x, size_t y,
+char			**resize_and_copy(char **lines, int *capacity,
+					int count);
+int				process_line(char *line, char **lines, int *count,
+					int *max);
+int				handle_player_position(t_game *vars, int x, int y,
 					int *player_count);
 int				check_door_in_ray(t_game *game, double *ray_x, double *ray_y,
 					int *door_coords);

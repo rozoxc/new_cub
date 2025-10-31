@@ -6,15 +6,15 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 17:11:43 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/07 11:05:09 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/31 22:28:31 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
+int	ft_strlen(const char *str)
 {
-	size_t	i;
+	int	i;
 
 	if (!str || !*str)
 		return (0);

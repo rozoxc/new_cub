@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 01:35:20 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/12 15:23:30 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/31 21:12:46 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 void	err(char *error)
 {
 	printf ("%s\n", error);
+	ft_malloc(0, 0);
 	exit (0);
 }

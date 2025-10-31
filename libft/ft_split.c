@@ -6,12 +6,11 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 20:55:45 by selbouka          #+#    #+#             */
-/*   Updated: 2025/02/17 09:15:13 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/31 22:07:22 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
 
 static int	counter(const char *s, char n)
 {
@@ -47,8 +46,8 @@ static char	*ft_strndup(const char *str, char n)
 	while (str[len] != n && str[len])
 		len++;
 	s = ft_malloc(len + 1, 1);
-	// if (s == NULL)
-		// err(25);
+	if (s == NULL)
+		err("Allocation failed\n");
 	while (i < len)
 	{
 		s[i] = str[i];
@@ -74,7 +73,7 @@ static char	**loop(const char *s, char **array, int c)
 		{
 			tmp = ft_strndup(s + j, c);
 			if (!tmp)
-				return NULL;// err(25);
+				return (err("Allocation failed\n"), NULL);
 			else
 				array[i++] = tmp;
 		}
@@ -91,7 +90,7 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	array = (char **)ft_malloc(sizeof(char *) * (counter(s, c) + 1), 1);
-	// if (!array)
-		// err(25);
+	if (!array)
+		err("Allocation failed\n");
 	return (loop(s, array, c));
 }

@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:54:51 by selbouka          #+#    #+#             */
-/*   Updated: 2025/08/16 03:01:19 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/31 22:28:31 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ char	*joining(char const *s1, char const *s2);
 char	*search(const char *str, int c);
 int		len(const char *str);
 char	*duplicate(const char *src);
-void	*ft_malloc(size_t size, int mode);
+void	*ft_malloc(int size, int mode);
 
 #endif

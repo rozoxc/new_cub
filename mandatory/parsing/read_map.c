@@ -6,17 +6,17 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 14:05:16 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/06 14:36:08 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/31 22:28:31 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-char	**resize_lines_array(char **lines, size_t *capacity, \
-	size_t line_count)
+char	**resize_lines_array(char **lines, int *capacity, \
+	int line_count)
 {
 	char	**new_lines;
-	size_t	i;
+	int	i;
 
 	*capacity *= 2;
 	new_lines = ft_malloc(sizeof(char *) * (*capacity), 1);
@@ -34,7 +34,7 @@ char	**resize_lines_array(char **lines, size_t *capacity, \
 	return (new_lines);
 }
 
-int	process_line_validation(char *line, size_t line_count)
+int	process_line_validation(char *line, int line_count)
 {
 	if (line_count == 0 && (is_whitespace_only(line) || *line == '\n'))
 		return (0);
@@ -48,9 +48,9 @@ int	process_line_validation(char *line, size_t line_count)
 }
 
 char	*process_and_store_line(char *line, char **lines, \
-	size_t *line_count, size_t *max_width)
+	int *line_count, int *max_width)
 {
-	size_t	len;
+	int	len;
 
 	len = ft_strlen(line);
 	if (len > 0 && line[len - 1] == '\n')
@@ -90,8 +90,8 @@ char	**process_map_lines(t_vars *vars, t_map_reader *reader)
 	return (reader->lines);
 }
 
-char	**read_map_lines(t_vars *vars, size_t *line_count, \
-	size_t *max_width)
+char	**read_map_lines(t_vars *vars, int *line_count, \
+	int *max_width)
 {
 	t_map_reader	reader;
 

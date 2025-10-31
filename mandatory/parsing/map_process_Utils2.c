@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_process_Utils2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 17:08:44 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/12 15:34:07 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/10/31 22:28:31 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ int	fill_player_info__check_char(t_game *vars, int *player_count, int x, int y)
 
 int	process_map_content(t_game *vars)
 {
-	size_t	x;
-	size_t	y;
+	int	x;
+	int	y;
 	int		player_count;
 
 	player_count = 0;

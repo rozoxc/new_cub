@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utlis_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:51:29 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/10/07 08:48:26 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/10/31 22:30:45 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int	mouse_move_hook(int x, int y, t_game *game)
 
 int	handle_close(t_game	*game)
 {
+	// check 
+	(void)game;
 	ft_malloc(0, 0);
 	exit(1);
 	return (0);

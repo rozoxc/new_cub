@@ -6,15 +6,15 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:28:23 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/07 13:52:58 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/31 22:28:31 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	process_line(char *line, char **lines, size_t *count, size_t *max)
+int	process_line(char *line, char **lines, int *count, int *max)
 {
-	size_t	len;
+	int	len;
 
 	if (*count == 0 && (is_whitespace_only(line) || *line == '\n'))
 		return (0);
@@ -33,8 +33,8 @@ int	process_line(char *line, char **lines, size_t *count, size_t *max)
 	return (1);
 }
 
-bool	read_helper(int *validation, size_t *l_count, \
-	size_t *capacity, char ***lines)
+bool	read_helper(int *validation, int *l_count, \
+	int *capacity, char ***lines)
 {
 	if (*validation == -1)
 		return (false);
@@ -48,11 +48,11 @@ bool	read_helper(int *validation, size_t *l_count, \
 }
 
 bool	read_loop(t_vars *vars, char ***lines, \
-	size_t *l_count, size_t *max_width)
+	int *l_count, int *max_width)
 {
 	char	*line;
 	int		validation;
-	size_t	capacity;
+	int	capacity;
 
 	capacity = 16;
 	*lines = ft_malloc(sizeof(char *) * capacity, 1);
@@ -75,8 +75,8 @@ bool	read_loop(t_vars *vars, char ***lines, \
 	return (true);
 }
 
-char	**read_map_lines(t_vars *vars, size_t *line_count, \
-	size_t *max_width)
+char	**read_map_lines(t_vars *vars, int *line_count, \
+	int *max_width)
 {
 	char	**lines;
 
@@ -95,7 +95,7 @@ char	**read_map_lines(t_vars *vars, size_t *line_count, \
 
 int	create_padded_map(t_vars *vars, char **tmp_lines)
 {
-	size_t	i;
+	int	i;
 
 	vars->map = ft_malloc(sizeof(char *) * (vars->map_h + 1), 1);
 	if (!vars->map)

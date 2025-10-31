@@ -6,14 +6,14 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:30:31 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/06 21:41:37 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/31 22:28:31 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int	process_map_cell(t_game *vars, size_t x, \
-	size_t y, int *player_count)
+static int	process_map_cell(t_game *vars, int x, \
+	int y, int *player_count)
 {
 	char	c;
 
@@ -34,8 +34,8 @@ static int	process_map_cell(t_game *vars, size_t x, \
 
 int	process_map_content(t_game *vars)
 {
-	size_t	x;
-	size_t	y;
+	int	x;
+	int	y;
 	int		player_count;
 
 	player_count = 0;

@@ -6,12 +6,11 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 16:32:10 by selbouka          #+#    #+#             */
-/*   Updated: 2025/09/21 08:54:12 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/31 22:28:31 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
 
 void	free_all(t_collect **head)
 {
@@ -31,62 +30,31 @@ void	free_all(t_collect **head)
 	*head = NULL;
 }
 
-void	*ft_malloc(size_t size, int mode)
+void	*ft_malloc(int size, int mode)
 {
 	static t_collect	*head;
 	void				*data;
 	t_collect			*node;
 
-	data = NULL;
-	node = NULL;
+	1 && (data = NULL, node = NULL);
 	if (mode == 1)
 	{
 		data = malloc(size);
-		// if (!data)
-		// 	err(25);
+		if (!data)
+			err("Allocation failed\n");
 		node = malloc(sizeof(*node));
 		if (!node)
-			free(data);//, err(25));
+		{
+			free(data);
+			err("Allocation failed\n");
+		}
 		node->data = data;
 		node->next = head;
 		head = node;
 	}
 	else if (mode == 0)
 	{
-		free_all(&head);
-		head = NULL;
+		1 && (free_all(&head), head = NULL);
 	}
 	return (data);
 }
-// void	*ft_malloc(size_t size, int mode)
-// {
-// 	static t_collect	*head;
-// 	void				*data;
-// 	t_collect			*node;
-
-// 	data = NULL;
-// 	node = NULL;
-// 	if (mode == 1)
-// 	{
-// 		data = malloc(size);
-// 		if (!data)
-// 			return (NULL);
-		
-// 		node = malloc(sizeof(*node));
-// 		if (!node)
-// 		{
-// 			free(data);
-// 			return (NULL);
-// 		}
-		
-// 		node->data = data;
-// 		node->next = head;
-// 		head = node;
-// 	}
-// 	else if (mode == 0)
-// 	{
-// 		free_all(&head);
-// 		head = NULL;
-// 	}
-// 	return (data);
-// }

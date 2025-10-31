@@ -6,15 +6,15 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 10:15:27 by selbouka          #+#    #+#             */
-/*   Updated: 2024/11/15 16:53:18 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/31 22:28:31 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *str, int c, size_t n)
+void	*ft_memset(void *str, int c, int n)
 {
-	size_t			i;
+	int			i;
 	unsigned char	*ptr;
 
 	ptr = (unsigned char *)str;

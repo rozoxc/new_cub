@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 16:08:28 by selbouka          #+#    #+#             */
-/*   Updated: 2025/02/16 18:12:45 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/31 22:28:31 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	*search(const char *str, int c)
 
 int	len(const char *str)
 {
-	size_t	i;
+	int	i;
 
 	if (!str)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 17:03:04 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/12 15:23:30 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/31 22:28:31 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	is_player_char(char c)
 
 int	create_padded_map(t_vars *vars, char **tmp_lines)
 {
-	size_t	i;
+	int	i;
 
 	vars->map = ft_malloc(sizeof(char *) * (vars->map_h + 1), 1);
 	if (!vars->map)

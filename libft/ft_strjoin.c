@@ -6,7 +6,7 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 17:10:19 by selbouka          #+#    #+#             */
-/*   Updated: 2025/02/17 09:15:38 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/31 22:05:45 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static void	*join(char *s1, char *s2, int len)
 	int		n;
 
 	p = ft_malloc(sizeof(char) * (len + 1), 1);
-	// if (!p)
-	// 	err(25);
+	if (!p)
+		err("Allocation failed\n");
 	i = 0;
 	while (s1[i])
 	{

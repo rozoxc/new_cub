@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texturs.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 20:53:42 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/10/12 15:36:46 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/10/31 22:19:18 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ t_texture	*load_single_texture(t_game *game, char *filename)
 	}
 	texture->addr = mlx_get_data_addr(texture->img, &texture->bits_per_pixel,
 			&texture->line_length, &texture->endian);
-	printf("Loaded texture: %s (%dx%d)\n", filename, texture->width,
-		texture->height);
 	return (texture);
 }
 

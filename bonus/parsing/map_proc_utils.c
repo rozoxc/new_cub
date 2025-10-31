@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_proc_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:26:43 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/12 15:34:07 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/10/31 22:28:31 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ int	ft_check_zero_surroundings(char **map, int i, int j, t_vars *vars)
 	return (1);
 }
 
-char	**resize_and_copy(char **lines, size_t *capacity, size_t count)
+char	**resize_and_copy(char **lines, int *capacity, int count)
 {
 	char	**new_lines;
-	size_t	i;
+	int	i;
 
 	*capacity *= 2;
 	new_lines = ft_malloc(sizeof(char *) * (*capacity), 1);
@@ -94,7 +94,7 @@ char	**resize_and_copy(char **lines, size_t *capacity, size_t count)
 	return (new_lines);
 }
 
-int	handle_player_position(t_game *vars, size_t x, size_t y, \
+int	handle_player_position(t_game *vars, int x, int y, \
 	int *player_count)
 {
 	if (*player_count > 0)

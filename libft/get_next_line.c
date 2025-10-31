@@ -6,18 +6,18 @@
 /*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 09:32:49 by selbouka          #+#    #+#             */
-/*   Updated: 2025/08/16 03:01:47 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/10/31 22:30:25 by selbouka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*reading(int fd, char *buffer, ssize_t *counter)
+char	*reading(int fd, char *buffer, int *counter)
 {
 	*counter = read(fd, buffer, BUFFER_SIZE);
-	// if (*counter == -1)
-	// 	err(25);
-	// else
+	if (*counter == -1)
+		err("Reading Error\n");
+	else
 		buffer[*counter] = '\0';
 	return (buffer);
 }
@@ -35,8 +35,8 @@ char	*outline(char *saveline, int i)
 	if (saveline[i] == '\n')
 		i++;
 	str = ft_malloc (i + 1, 1);
-	// if (!str)
-	// 	err(25);
+	if (!str)
+		err("Reading Error\n");
 	while (saveline[j] && saveline[j] != '\n')
 	{
 		str[j] = saveline[j];
@@ -63,8 +63,8 @@ char	*cleaning(char *saveline)
 	if (saveline[j] == '\n')
 		j++;
 	str = ft_malloc (sizeof(char) * (len(saveline) - j + 1), 1);
-	// if (!str)
-	// 	err(25);
+	if (!str)
+		err("Reading Error\n");
 	while (saveline[j])
 		str[i++] = saveline[j++];
 	str[i] = '\0';
@@ -73,14 +73,14 @@ char	*cleaning(char *saveline)
 
 char	*looping(char *saveline, int fd)
 {
-	ssize_t			counter;
+	int			counter;
 	char			*tmp;
 	char			*buffer;
 
 	counter = 0;
-	buffer = ft_malloc ((size_t)BUFFER_SIZE + 1, 1);
-	// if (!buffer)
-	// 	err(25);
+	buffer = ft_malloc ((int)BUFFER_SIZE + 1, 1);
+	if (!buffer)
+		err("Reading Error\n");
 	while (1)
 	{
 		buffer = reading(fd, buffer, &counter);
@@ -104,11 +104,11 @@ char	*get_next_line(int fd)
 
 	if (fd < 0)
 		return (NULL);
-	if (read(fd, 0, 0) < 0 )
-		return NULL;// err(25); // directory ;0
+	if (read(fd, 0, 0) < 0)
+		return (err("Reading Error\n"), NULL);
 	saveline = looping(saveline, fd);
-	// if (!saveline)
-	// 	err(25);
+	if (!saveline)
+		err("Reading Error\n");
 	i = 0;
 	output = outline(saveline, i);
 	saveline = cleaning(saveline);
