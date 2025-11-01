@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda_algo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 20:29:06 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/10/31 22:20:48 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/11/01 16:05:12 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	perform_dda(t_game *game, t_ray_data *data)
 	hit = 0;
 	i = 0;
 	side = 0;
-	while (hit == 0 && i < 1000)
+	while (hit == 0)
 	{
 		if (data->sidedist_x < data->sidedist_y)
 			step_ray_x(data, &side);
@@ -80,10 +80,8 @@ int	perform_dda(t_game *game, t_ray_data *data)
 void	calculate_wall_distance(t_game *game, double ray_dirx,
 		double ray_diry, t_ray_calc *calc)
 {
-	// check 
 	(void)ray_dirx;
 	(void)ray_diry;
-
 	calc_perp_wall_dist(game, calc->data, calc->ray, calc);
 	calc_wall_x(game, calc->ray, calc);
 }

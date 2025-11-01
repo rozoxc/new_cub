@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utlis_rycast.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:51:29 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/10/31 22:25:42 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/11/01 15:59:16 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	my_mlx_pixel_put(t_image *img, int x, int y, int color)
 
 int	handle_close(t_game *game)
 {
-	//check
-	
 	(void)game;
 	ft_malloc(0, 0);
 	exit(1);

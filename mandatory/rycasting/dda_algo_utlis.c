@@ -6,7 +6,7 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 23:39:18 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/11/01 15:53:34 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/11/01 15:58:53 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	calc_perp_wall_dist(t_game *game, t_ray_data *data,
 	if (calc->side == 0)
 		ray->perp_walldist = data->sidedist_x - data->deltadist_x;
 	else if (calc->side)
-		ray->perp_walldist = data->sidedist_y - data->deltadist_y;		
+		ray->perp_walldist = data->sidedist_y - data->deltadist_y;
 }
 
 void	calc_wall_x(t_game *game, t_ray *ray, t_ray_calc *calc)

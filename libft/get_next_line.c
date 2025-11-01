@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 09:32:49 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/31 22:30:25 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/11/01 16:01:29 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	*cleaning(char *saveline)
 
 char	*looping(char *saveline, int fd)
 {
-	int			counter;
+	int				counter;
 	char			*tmp;
 	char			*buffer;
 

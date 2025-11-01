@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 09:27:20 by selbouka          #+#    #+#             */
-/*   Updated: 2025/10/31 22:31:40 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/11/01 16:04:03 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,8 +185,8 @@ typedef struct s_vars
 	t_rgb		floor;
 	t_rgb		sky;
 	char		**map;
-	int		map_h;
-	int		map_w;
+	int			map_h;
+	int			map_w;
 	int			fd;
 }	t_vars;
 
@@ -249,9 +249,9 @@ typedef struct s_game
 typedef struct s_map_reader
 {
 	char	**lines;
-	int	capacity;
-	int	*line_count;
-	int	*max_width;
+	int		capacity;
+	int		*line_count;
+	int		*max_width;
 }	t_map_reader;
 
 typedef struct s_wall_draw
