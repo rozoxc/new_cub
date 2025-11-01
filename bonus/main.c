@@ -6,7 +6,7 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 22:30:24 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/10/12 15:46:39 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/11/01 18:34:18 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_image	*init_image(t_game *game)
 
 int	destroy_win_bonus(t_game *game)
 {
-	mlx_destroy_window(game->mlx, game->win);
+	cleanup_game(game);
 	ft_malloc (0, 0);
 	exit(0);
 }

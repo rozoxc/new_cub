@@ -1,7 +1,7 @@
 NAME = cub3d
 NAME_BONUS = cub3d_bonus
 CC = cc 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra #-fsanitize=address
 MLX_DIR = minilibx-linux
 LIBFT = libft/libft.a
 HEADER = libft/libft.h libft/get_next_line.h includes/cub3d.h 
@@ -22,6 +22,7 @@ SRC = mandatory/main.c \
 	  mandatory/rycasting/texturs.c \
 	  mandatory/rycasting/utlis.c \
 	  mandatory/rycasting/utlis_rycast.c \
+	  mandatory/rycasting/clean.c \
 	  mandatory/parsing/error.c \
 	  mandatory/parsing/get_data.c \
 	  mandatory/parsing/map_process.c \
@@ -48,6 +49,7 @@ BONUS = bonus/main.c \
 		bonus/raycasting/texturs_bonus.c \
 		bonus/raycasting/utlis_bonus_2.c \
 		bonus/raycasting/utlis_bonus_3.c \
+		bonus/raycasting/clean_bonus.c \
 		bonus/parsing/error_bonus.c \
 		bonus/parsing/map_process_bonus.c \
 		bonus/parsing/utils_bonus.c \

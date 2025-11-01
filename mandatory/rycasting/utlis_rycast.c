@@ -6,7 +6,7 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:51:29 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/11/01 15:59:16 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/11/01 17:00:18 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,6 @@ void	my_mlx_pixel_put(t_image *img, int x, int y, int color)
 		dst = img->addr + (y * img->len_lenght + x * (img->bit_per_pixel / 8));
 		*(unsigned int *)dst = color;
 	}
-}
-
-int	handle_close(t_game *game)
-{
-	(void)game;
-	ft_malloc(0, 0);
-	exit(1);
-	return (0);
 }
 
 void	draw_sky(t_game *game)

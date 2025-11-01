@@ -6,19 +6,11 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 23:39:18 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/11/01 15:58:53 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/11/01 16:20:57 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-void	go_next_square(t_ray_data *data)
-{
-	if (data->sidedist_x < data->sidedist_y)
-		step_in_x(data);
-	else
-		step_in_y(data);
-}
 
 void	calc_perp_wall_dist(t_game *game, t_ray_data *data,
 		t_ray *ray, t_ray_calc *calc)

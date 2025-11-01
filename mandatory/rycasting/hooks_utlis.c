@@ -6,7 +6,7 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 04:25:29 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/10/02 00:20:20 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/11/01 18:22:43 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	key_press(int keycode, t_game *game)
 {
 	if (keycode == KEY_ESC)
 	{
-		mlx_destroy_window(game->mlx, game->win);
+		cleanup_game(game);
 		ft_malloc (0, 0);
 		exit(0);
 	}

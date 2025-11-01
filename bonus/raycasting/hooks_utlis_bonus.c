@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks_utlis_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selbouka <selbouka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 05:32:57 by ababdoul          #+#    #+#             */
-/*   Updated: 2025/10/31 22:31:48 by selbouka         ###   ########.fr       */
+/*   Updated: 2025/11/01 18:21:40 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	key_press(int keycode, t_game *game)
 {
 	if (keycode == KEY_ESC)
 	{
-		mlx_destroy_window(game->mlx, game->win);
+		cleanup_game(game);
 		ft_malloc(0, 0);
 		exit(0);
 	}

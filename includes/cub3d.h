@@ -6,7 +6,7 @@
 /*   By: ababdoul <ababdoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 09:27:20 by selbouka          #+#    #+#             */
-/*   Updated: 2025/11/01 16:04:03 by ababdoul         ###   ########.fr       */
+/*   Updated: 2025/11/01 17:01:43 by ababdoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -430,5 +430,5 @@ void			move_forward_backward(t_game *game, int direction);
 void			finalize_ray(t_ray *ray, t_ray_data *data, int side);
 void			calculate_wall_distance_b(t_game *game, t_wall_calc *calc,
 					t_ray *ray);
-
+void			cleanup_game(t_game *game);
 #endif
